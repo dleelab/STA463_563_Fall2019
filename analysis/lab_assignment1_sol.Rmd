@@ -8,61 +8,61 @@ editor_options:
 ---
 
 
-1. Assign a vector of 0.2,0.4,0.6,0.8 and 1 to object x. (There are several ways to answer this question.)
+**1. Assign a vector of 0.2,0.4,0.6,0.8 and 1 to object x. (There are several ways to answer this question.)**
 ```{r p1}
 x=seq(0.2,1,0.2)
 x
 ```
 
-2. Extract the 3rd and 5th elements of x.
+**2. Extract the 3rd and 5th elements of x.**
 ```{r p2}
 x[c(3,5)]
 ```
 
-3. Extract all but the 2nd and 4th element of x.
+**3. Extract all but the 2nd and 4th element of x.**
 ```{r p3}
 x[c(-2,-4)]
 ```
 
-4. Assign 0 to the 1st element of x, what is the new x?
+**4. Assign 0 to the 1st element of x, what is the new x?**
 ```{r p4}
 x[1]=0
 x
 ```
 
-Refer to the vector “video” in the Lab 1 material and answer questions 5-9: video=c(47, 63, 58, 53, 53, 63, 53, 39, 58, 50)
+**Refer to the vector “video” in the Lab 1 material and answer questions 5-9: video=c(47, 63, 58, 53, 53, 63, 53, 39, 58, 50)**
 
-5. let R return video game score less than 52.
+**5. let R return video game score less than 52.**
 ```{r p5}
 video=c(47,63, 58, 53, 53, 63, 53, 39, 58, 50)
 video[video<52]
 ```
 
-6. Let R return video game score less than or equal to 53.
+**6. Let R return video game score less than or equal to 53.**
 ```{r p6}
 video[video<=53]
 ```
 
-7. Let R check if the mean of video game score is greater than 50.
+**7. Let R check if the mean of video game score is greater than 50.**
 ```{r p7}
 mean(video)>50
 ```
 
-8. Another 9 students also played the video game and their scores are as follows: c(47, 57, 47, 50, 55, 69, 26, 33, 56).
-Suppose that if a score is higher than 58, then the student will receive a gift. How many of the total 19 students will receive a gift?
+**8. Another 9 students also played the video game and their scores are as follows: c(47, 57, 47, 50, 55, 69, 26, 33, 56).**
+**Suppose that if a score is higher than 58, then the student will receive a gift. How many of the total 19 students will receive a gift?**
 ```{r p8}
 video2=c(47, 57, 47, 50, 55, 69, 26, 33, 56)
 videot=c(video,video2)
 sum(videot>58)
 ```
 
-9. For all the 19 students, find the variance of the video scores, for those with a video score below 53.
+**9. For all the 19 students, find the variance of the video scores, for those with a video score below 53.**
 ```{r p9}
 var(videot[videot<53])
 ```
 
-10. The 19 students’ favorite flavor of ice cream information is also collected (vanilla, chocolate or strawberry). Use “V”, “C” and “S” to represent the three flavors respectively. Find the proportion of students who like strawberry ice cream the most.
-flavor=c(“C”,“V”, “S”, “S”, “V”, “V”, “V”, “V”, “V”, “V”, “V”, “V”, “S”, “V”, “V”, “V”, “S”, “C”, “V”)
+**10. The 19 students’ favorite flavor of ice cream information is also collected (vanilla, chocolate or strawberry). Use “V”, “C” and “S” to represent the three flavors respectively. Find the proportion of students who like strawberry ice cream the most.**
+**flavor=c(“C”,“V”, “S”, “S”, “V”, “V”, “V”, “V”, “V”, “V”, “V”, “V”, “S”, “V”, “V”, “V”, “S”, “C”, “V”)**
 ```{r p10}
 flavor=c("C","V", "S", "S", "V", "V", "V", "V", "V", "V", "V", "V", "S", "V", "V", "V", "S", "C", "V")
 sum(flavor=="S")/length(flavor)
