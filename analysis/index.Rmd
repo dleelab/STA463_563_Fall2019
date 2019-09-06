@@ -15,7 +15,7 @@ editor_options:
 * [In-class practice](lab2_inclass_prac.html)
 
 #### Lab 3
-
+* [test](testLb2.Rmd)
 #### Lab 4
 
 #### Lab 5
