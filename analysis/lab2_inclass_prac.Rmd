@@ -1,0 +1,272 @@
+---
+title: "Lab 2 Practice"
+author: "Donghyung Lee"
+date: "2019-09-05"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+<br />
+**An Intro to R data programming** <br />
+
+**Base R tools:** <br />
+* classes   <br />
+* numeric summaries <br />
+* basic plots <br />
+<br />
+**New R tools:** <br />
+* tidyverse (is a collection of R packages) <br />
+* ggplot2 package: advanced graphics <br />
+* dplyr package: data manipulation, working with data frames <br />
+<br />
+
+### Part 1: Object Type
+```{r read_data}
+icecream <- read.table("data/icecream.txt")
+dim(icecream)
+copier <- read.table("data/CH01PR20.txt")
+dim(copier)
+```
+
+**Understand Dataframe**
+```{r dataframe}
+class(icecream)
+class(copier)
+head(icecream)
+head(copier)
+colnames(copier)=c("minutes","number")
+head(copier)
+
+#alternative way
+copier <- setNames(copier,c("minutes","number"))
+head(copier)
+
+dim(icecream)
+names(icecream)
+class(icecream$video)
+head(iris)
+class(iris$Species)
+class(iris$Sepal.Length)
+```
+
+**Class type can be changed**
+```{r classtype}
+class(icecream$video)
+x=as.numeric(icecream$video)
+class(x)
+```
+
+**Check the difference of the following to different types**
+```{r typediff}
+x
+y=as.factor(x)
+class(y)
+y
+z=as.character(x)
+class(z)
+z
+```
+
+**Change the variable ice_cream to factor**
+```{r factor}
+icecream$ice_cream
+class(icecream$ice_cream)
+icecream$ice_cream=as.factor(icecream$ice_cream)
+icecream$ice_cream
+class(icecream$ice_cream)
+```
+
+### Part 2: Exploratory Data Analysis
+
+**(1) Numerical summaries:** <br />
+**-mean, median, five number summary, standard deviation, IQR, correlation, etc.** <br />
+
+**Traditional R**
+```{r tradR}
+mean(icecream$video)
+median(icecream$video)
+sd(icecream$video)
+var(icecream$video)
+summary(icecream$video)
+IQR(icecream$video)
+cor(copier$minutes,copier$number)
+
+summary(icecream)
+summary(copier)
+```
+
+**Advanced summary statistics (tidyverse)** <br />
+“tibbles” instead of R’s traditional data.frame. 
+Tibbles are data frames, but they tweak some older behaviours to make life a little easier. 
+
+**Install and load R package "dplyr"**
+```{r dplyr}
+#install.packages("dplyr")
+library(dplyr)
+```
+
+
+**Average and standard deviation by icecream flavor** <br />
+Use %>%(pipe). You can read it as a series of imperative statements: group, then summarise, then filter.A good way to pronounce %>% when reading code is “then”.
+```{r pipe}
+icecream %>% group_by(ice_cream) %>% 
+  summarise(Mean=mean(puzzle),Variance=var(puzzle))
+puzzle.summary <-icecream %>% group_by(ice_cream) %>% 
+  summarise(Mean=mean(puzzle), Variance=var(puzzle) )
+puzzle.summary
+class(puzzle.summary)
+
+puzzle.summary <-icecream %>% group_by(ice_cream) %>% 
+  summarise(Mean=mean(puzzle),
+            Variance=var(puzzle) )%>%as.data.frame()
+puzzle.summary
+class(puzzle.summary)
+```
+
+Behind the scenes, x %>% f(y) turns into f(x, y), and x %>% f(y) %>% g(z) turns into g(f(x, y), z) and so on. You can use the pipe to rewrite multiple operations in 
+a way that you can read left-to-right, top-to-bottom.
+
+
+**Graphical plots:** <br />
+- 1 variable: boxplots, histograms, etc. <br />
+- 2 variables: scatterplot <br />
+- more variables: scatterplot matrix <br />
+
+**Traditional R plotting** <br />
+Density plot, boxplot
+```{r trad_plot}
+plot(density(copier$minutes),xlab="minutes")#,ylab="density")
+plot(density(icecream$puzzle),xlab="puzzle score")
+boxplot(video~ice_cream, data=icecream)
+```
+Scatter plot
+```{r scatter}
+plot(x=copier$number,y=copier$minutes)
+plot(puzzle~video, data=icecream)#response againt predictors
+# by default, it's x axis first, then y axis. or you can specify
+```
+Correlation matrix
+```{r corr}
+head(iris)
+cor(iris[,1:3])
+pairs(iris[,1:3])
+```
+
+
+**Advanced ploting - ggplot2**
+```{r adv_plot}
+#install.packages("ggplot2")
+library(ggplot2)
+```
+
+Density plot <br />
+Run the first layer, then add extra layers, use + to add extra layers
+```{r density}
+p <- ggplot(data=copier, mapping=aes(x=minutes)) + 
+  geom_density() +
+  xlab("Minutes used") +
+  ggtitle("This is a density plot of minutes") +
+  theme(plot.title = element_text(hjust = 0.5))
+p
+```
+
+Add mean line(vertical line)
+```{r mean_line}
+p + geom_vline(aes(xintercept=mean(minutes)),
+              color="red", linetype="dashed", size=2) #change dotted, or size 
+```
+A geom is the geometrical object that a plot uses to represent data. People often describe plots by the type of geom that the plot uses. For example, bar charts use bar geoms, line charts use line geoms, boxplots use boxplot geoms, and so on. Scatterplots break the trend; they use the point geom. As we see above, you can use different geoms to plot the same data. <br />
+
+Boxplot
+```{r boxplot}
+p <- ggplot(icecream, aes(x=ice_cream, y=puzzle)) + 
+  geom_boxplot()
+p
+```
+
+Similar method
+```{r sim}
+q <- ggplot(icecream) + 
+  geom_boxplot(aes(x=ice_cream, y=puzzle) )
+q
+```
+
+Add summary stats
+```{r summ}
+q + geom_point(data=puzzle.summary,aes(x=ice_cream, y=Mean), shape=18, col="blue", size=3)
+p + stat_summary(fun.y=mean, geom="point", shape=7,col="red", size=4)
+q + stat_summary(aes(x=ice_cream, y=puzzle),fun.y=mean, geom="point", shape=7,col="red", size=4)
+#a little bit different, q don't have the aes settings, just different ways to do the calculation. 
+```
+
+Scatter plot - copier data
+```{r scat_copy}
+p <- ggplot(copier,aes(x=number, y=minutes)) + 
+  geom_point()
+p
+```
+
+Change theme
+```{r theme}
+p + theme_bw()
+p + theme_classic()
+```
+
+Scatter plot - icecream data
+```{r scat_ice}
+p <- ggplot(icecream,aes(x=video, y=puzzle, col=ice_cream,shape=ice_cream)) +
+  geom_point()
+p
+```
+
+How about mark it by gender
+```{r gender}
+icecream$female=as.factor(icecream$female)
+
+p <- ggplot(icecream,aes(x=video, y=puzzle, col=female,shape=female)) +
+  geom_point()
+p
+
+p <- ggplot(icecream,aes(x=ice_cream, y=puzzle, col=female,shape=female)) +
+  geom_point()
+p
+```
+
+Many other ways to customize the plot
+```{r cust}
+p <- ggplot(icecream, aes(x=ice_cream, y=puzzle,fill=ice_cream)) + 
+  geom_boxplot()
+p
+
+p <- ggplot(icecream, aes(x=ice_cream, y=puzzle,fill=female)) + 
+  geom_boxplot()
+p
+
+p+scale_fill_hue(l=70, c=80) #many other ways to change the color/theme/type, etc
+```
+
+### Part 3: Simple Linear Regression
+```{r slr, eval=TRUE, echo=TRUE}
+copier.fit <- lm(minutes~number,data=copier)
+copier.fit
+class(copier.fit)
+str(copier.fit)
+summary(copier.fit)
+plot(minutes~number, data=copier)
+abline(-0.5802,15.0352)#by definition of the line abline(intercept, slope)
+#The following are alternative ways to draw the fitted regression line.
+lines(copier$number,-0.5802+15.0352*copier$number)#other way
+abline(copier.fit)#simple way
+
+#ggplot2
+fitted(copier.fit)
+copier$fitted=fitted(copier.fit)
+p <- ggplot(copier,aes(x=number, y=minutes)) + 
+  geom_point()
+p
+  #geom_line(aes(x=number,y=minutes)) try this and show
+  #the function of geom_line
+p <- p + geom_line(aes(x=number,y=fitted))
+p
+```
