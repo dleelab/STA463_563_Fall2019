@@ -1,5 +1,5 @@
 ---
-title: "Home"
+title: "STA 463 & 563 Lab Sessions"
 site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
@@ -8,4 +8,29 @@ editor_options:
   chunk_output_type: console
 ---
 
-Welcome to my research website.
+### Lab 1
+* [Lab Assignment 1 Solution](lab_assignment1_sol.html)
+
+### Lab 2
+* [In-class practice](lab2_inclass_prac.html)
+
+### Lab 3
+
+### Lab 4
+
+### Lab 5
+
+### Lab 6
+
+### Lab 7
+
+### Lab 8
+
+### Lab 9
+
+### Lab 10
+
+### Lab 11
+
+
+
