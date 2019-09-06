@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Donghyung Lee" />
+
+<meta name="date" content="2019-09-05" />
+
+<title>Lab 2 Practice</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">STA 463/563 Fall 2019</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="https://github.com/statslee/STA463_563_Fall2019">GitHub</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Lab 2 Practice</h1>
+<h4 class="author">Donghyung Lee</h4>
+<h4 class="date">2019-09-05</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#part-1-object-type">Part 1: Object Type</a></li>
+<li><a href="#part-2-exploratory-data-analysis">Part 2: Exploratory Data Analysis</a></li>
+<li><a href="#part-3-simple-linear-regression">Part 3: Simple Linear Regression</a></li>
+</ul>
+</div>
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2019-09-06
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>STA_463_563_Fall2019/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.4.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20190905code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20190905)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20190905code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20190905)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstatsleeSTA463563Fall2019tree5c642d94c6e1f4dcdefce9c9cdbf5e6449788193targetblank5c642d9a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/statslee/STA463_563_Fall2019/tree/5c642d94c6e1f4dcdefce9c9cdbf5e6449788193" target="_blank">5c642d9</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomstatsleeSTA463563Fall2019tree5c642d94c6e1f4dcdefce9c9cdbf5e6449788193targetblank5c642d9a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rproj.user/
+
+Untracked files:
+    Untracked:  docs/figure/
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/statslee/STA463_563_Fall2019/blob/5c642d94c6e1f4dcdefce9c9cdbf5e6449788193/analysis/lab2_inclass_prac.Rmd" target="_blank">5c642d9</a>
+</td>
+<td>
+statslee
+</td>
+<td>
+2019-09-06
+</td>
+<td>
+created
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<p><br /> <strong>An Intro to R data programming</strong> <br /></p>
+<p><strong>Base R tools:</strong> <br /> * classes <br /> * numeric summaries <br /> * basic plots <br /> <br /> <strong>New R tools:</strong> <br /> * tidyverse (is a collection of R packages) <br /> * ggplot2 package: advanced graphics <br /> * dplyr package: data manipulation, working with data frames <br /> <br /></p>
+<div id="part-1-object-type" class="section level3">
+<h3>Part 1: Object Type</h3>
+<pre class="r"><code>icecream &lt;- read.table(&quot;data/icecream.txt&quot;)
+dim(icecream)</code></pre>
+<pre><code>[1] 200   5</code></pre>
+<pre class="r"><code>copier &lt;- read.table(&quot;data/CH01PR20.txt&quot;)
+dim(copier)</code></pre>
+<pre><code>[1] 45  2</code></pre>
+<p><strong>Understand Dataframe</strong></p>
+<pre class="r"><code>class(icecream)</code></pre>
+<pre><code>[1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code>class(copier)</code></pre>
+<pre><code>[1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code>head(icecream)</code></pre>
+<pre><code>   id female ice_cream video puzzle
+1  70      0         2    47     57
+2 121      1         1    63     61
+3  86      0         3    58     31
+4 141      0         3    53     56
+5 172      0         1    53     61
+6 113      0         1    63     61</code></pre>
+<pre class="r"><code>head(copier)</code></pre>
+<pre><code>   V1 V2
+1  20  2
+2  60  4
+3  46  3
+4  41  2
+5  12  1
+6 137 10</code></pre>
+<pre class="r"><code>colnames(copier)=c(&quot;minutes&quot;,&quot;number&quot;)
+head(copier)</code></pre>
+<pre><code>  minutes number
+1      20      2
+2      60      4
+3      46      3
+4      41      2
+5      12      1
+6     137     10</code></pre>
+<pre class="r"><code>#alternative way
+copier &lt;- setNames(copier,c(&quot;minutes&quot;,&quot;number&quot;))
+head(copier)</code></pre>
+<pre><code>  minutes number
+1      20      2
+2      60      4
+3      46      3
+4      41      2
+5      12      1
+6     137     10</code></pre>
+<pre class="r"><code>dim(icecream)</code></pre>
+<pre><code>[1] 200   5</code></pre>
+<pre class="r"><code>names(icecream)</code></pre>
+<pre><code>[1] &quot;id&quot;        &quot;female&quot;    &quot;ice_cream&quot; &quot;video&quot;     &quot;puzzle&quot;   </code></pre>
+<pre class="r"><code>class(icecream$video)</code></pre>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<pre class="r"><code>head(iris)</code></pre>
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<pre class="r"><code>class(iris$Species)</code></pre>
+<pre><code>[1] &quot;factor&quot;</code></pre>
+<pre class="r"><code>class(iris$Sepal.Length)</code></pre>
+<pre><code>[1] &quot;numeric&quot;</code></pre>
+<p><strong>Class type can be changed</strong></p>
+<pre class="r"><code>class(icecream$video)</code></pre>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<pre class="r"><code>x=as.numeric(icecream$video)
+class(x)</code></pre>
+<pre><code>[1] &quot;numeric&quot;</code></pre>
+<p><strong>Check the difference of the following to different types</strong></p>
+<pre class="r"><code>x</code></pre>
+<pre><code>  [1] 47 63 58 53 53 63 53 39 58 50 53 63 61 55 31 50 50 58 55 53 66 72 55
+ [24] 61 39 39 61 58 39 55 47 64 66 72 61 61 66 66 36 39 42 58 55 50 63 69
+ [47] 49 63 53 47 57 47 50 55 69 26 33 56 58 44 58 69 34 36 36 50 55 42 65
+ [70] 44 39 58 63 74 58 45 49 63 39 42 55 61 66 63 44 63 53 42 34 61 47 66
+ [93] 69 44 47 63 66 69 39 61 69 66 33 50 61 42 50 51 50 58 61 39 46 59 55
+[116] 42 55 58 58 39 50 50 39 48 34 58 44 50 47 29 50 54 50 47 44 67 58 44
+[139] 42 44 44 50 39 44 53 48 55 44 40 34 42 58 50 53 58 55 54 47 42 61 53
+[162] 51 63 61 55 40 61 47 55 53 50 47 31 61 35 54 55 53 58 56 50 39 63 50
+[185] 66 58 53 42 55 53 42 50 55 34 50 42 36 55 58 53</code></pre>
+<pre class="r"><code>y=as.factor(x)
+class(y)</code></pre>
+<pre><code>[1] &quot;factor&quot;</code></pre>
+<pre class="r"><code>y</code></pre>
+<pre><code>  [1] 47 63 58 53 53 63 53 39 58 50 53 63 61 55 31 50 50 58 55 53 66 72 55
+ [24] 61 39 39 61 58 39 55 47 64 66 72 61 61 66 66 36 39 42 58 55 50 63 69
+ [47] 49 63 53 47 57 47 50 55 69 26 33 56 58 44 58 69 34 36 36 50 55 42 65
+ [70] 44 39 58 63 74 58 45 49 63 39 42 55 61 66 63 44 63 53 42 34 61 47 66
+ [93] 69 44 47 63 66 69 39 61 69 66 33 50 61 42 50 51 50 58 61 39 46 59 55
+[116] 42 55 58 58 39 50 50 39 48 34 58 44 50 47 29 50 54 50 47 44 67 58 44
+[139] 42 44 44 50 39 44 53 48 55 44 40 34 42 58 50 53 58 55 54 47 42 61 53
+[162] 51 63 61 55 40 61 47 55 53 50 47 31 61 35 54 55 53 58 56 50 39 63 50
+[185] 66 58 53 42 55 53 42 50 55 34 50 42 36 55 58 53
+34 Levels: 26 29 31 33 34 35 36 39 40 42 44 45 46 47 48 49 50 51 53 ... 74</code></pre>
+<pre class="r"><code>z=as.character(x)
+class(z)</code></pre>
+<pre><code>[1] &quot;character&quot;</code></pre>
+<pre class="r"><code>z</code></pre>
+<pre><code>  [1] &quot;47&quot; &quot;63&quot; &quot;58&quot; &quot;53&quot; &quot;53&quot; &quot;63&quot; &quot;53&quot; &quot;39&quot; &quot;58&quot; &quot;50&quot; &quot;53&quot; &quot;63&quot; &quot;61&quot; &quot;55&quot;
+ [15] &quot;31&quot; &quot;50&quot; &quot;50&quot; &quot;58&quot; &quot;55&quot; &quot;53&quot; &quot;66&quot; &quot;72&quot; &quot;55&quot; &quot;61&quot; &quot;39&quot; &quot;39&quot; &quot;61&quot; &quot;58&quot;
+ [29] &quot;39&quot; &quot;55&quot; &quot;47&quot; &quot;64&quot; &quot;66&quot; &quot;72&quot; &quot;61&quot; &quot;61&quot; &quot;66&quot; &quot;66&quot; &quot;36&quot; &quot;39&quot; &quot;42&quot; &quot;58&quot;
+ [43] &quot;55&quot; &quot;50&quot; &quot;63&quot; &quot;69&quot; &quot;49&quot; &quot;63&quot; &quot;53&quot; &quot;47&quot; &quot;57&quot; &quot;47&quot; &quot;50&quot; &quot;55&quot; &quot;69&quot; &quot;26&quot;
+ [57] &quot;33&quot; &quot;56&quot; &quot;58&quot; &quot;44&quot; &quot;58&quot; &quot;69&quot; &quot;34&quot; &quot;36&quot; &quot;36&quot; &quot;50&quot; &quot;55&quot; &quot;42&quot; &quot;65&quot; &quot;44&quot;
+ [71] &quot;39&quot; &quot;58&quot; &quot;63&quot; &quot;74&quot; &quot;58&quot; &quot;45&quot; &quot;49&quot; &quot;63&quot; &quot;39&quot; &quot;42&quot; &quot;55&quot; &quot;61&quot; &quot;66&quot; &quot;63&quot;
+ [85] &quot;44&quot; &quot;63&quot; &quot;53&quot; &quot;42&quot; &quot;34&quot; &quot;61&quot; &quot;47&quot; &quot;66&quot; &quot;69&quot; &quot;44&quot; &quot;47&quot; &quot;63&quot; &quot;66&quot; &quot;69&quot;
+ [99] &quot;39&quot; &quot;61&quot; &quot;69&quot; &quot;66&quot; &quot;33&quot; &quot;50&quot; &quot;61&quot; &quot;42&quot; &quot;50&quot; &quot;51&quot; &quot;50&quot; &quot;58&quot; &quot;61&quot; &quot;39&quot;
+[113] &quot;46&quot; &quot;59&quot; &quot;55&quot; &quot;42&quot; &quot;55&quot; &quot;58&quot; &quot;58&quot; &quot;39&quot; &quot;50&quot; &quot;50&quot; &quot;39&quot; &quot;48&quot; &quot;34&quot; &quot;58&quot;
+[127] &quot;44&quot; &quot;50&quot; &quot;47&quot; &quot;29&quot; &quot;50&quot; &quot;54&quot; &quot;50&quot; &quot;47&quot; &quot;44&quot; &quot;67&quot; &quot;58&quot; &quot;44&quot; &quot;42&quot; &quot;44&quot;
+[141] &quot;44&quot; &quot;50&quot; &quot;39&quot; &quot;44&quot; &quot;53&quot; &quot;48&quot; &quot;55&quot; &quot;44&quot; &quot;40&quot; &quot;34&quot; &quot;42&quot; &quot;58&quot; &quot;50&quot; &quot;53&quot;
+[155] &quot;58&quot; &quot;55&quot; &quot;54&quot; &quot;47&quot; &quot;42&quot; &quot;61&quot; &quot;53&quot; &quot;51&quot; &quot;63&quot; &quot;61&quot; &quot;55&quot; &quot;40&quot; &quot;61&quot; &quot;47&quot;
+[169] &quot;55&quot; &quot;53&quot; &quot;50&quot; &quot;47&quot; &quot;31&quot; &quot;61&quot; &quot;35&quot; &quot;54&quot; &quot;55&quot; &quot;53&quot; &quot;58&quot; &quot;56&quot; &quot;50&quot; &quot;39&quot;
+[183] &quot;63&quot; &quot;50&quot; &quot;66&quot; &quot;58&quot; &quot;53&quot; &quot;42&quot; &quot;55&quot; &quot;53&quot; &quot;42&quot; &quot;50&quot; &quot;55&quot; &quot;34&quot; &quot;50&quot; &quot;42&quot;
+[197] &quot;36&quot; &quot;55&quot; &quot;58&quot; &quot;53&quot;</code></pre>
+<p><strong>Change the variable ice_cream to factor</strong></p>
+<pre class="r"><code>icecream$ice_cream</code></pre>
+<pre><code>  [1] 2 1 3 3 1 1 1 1 1 1 1 1 3 3 2 2 3 1 3 1 1 1 1 3 1 1 3 1 3 2 1 3 3 1 3
+ [36] 3 1 3 2 1 1 1 1 2 3 2 3 1 1 1 1 3 1 1 1 3 2 1 1 1 1 3 2 1 3 1 1 2 2 1
+ [71] 1 3 1 1 1 2 3 3 1 3 3 2 1 2 1 3 3 3 1 3 1 2 3 2 2 2 1 3 2 3 3 3 2 3 1
+[106] 1 3 2 2 3 1 2 3 2 3 1 3 3 2 2 2 1 1 1 2 3 1 1 3 2 1 2 1 1 2 3 1 1 1 1
+[141] 2 3 1 1 1 3 1 1 2 2 2 3 1 1 1 1 1 1 1 3 2 1 3 2 1 2 1 2 1 2 2 1 3 3 2
+[176] 2 1 1 3 2 1 1 3 1 3 2 1 1 3 2 2 3 1 3 1 1 1 1 1 3</code></pre>
+<pre class="r"><code>class(icecream$ice_cream)</code></pre>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<pre class="r"><code>icecream$ice_cream=as.factor(icecream$ice_cream)
+icecream$ice_cream</code></pre>
+<pre><code>  [1] 2 1 3 3 1 1 1 1 1 1 1 1 3 3 2 2 3 1 3 1 1 1 1 3 1 1 3 1 3 2 1 3 3 1 3
+ [36] 3 1 3 2 1 1 1 1 2 3 2 3 1 1 1 1 3 1 1 1 3 2 1 1 1 1 3 2 1 3 1 1 2 2 1
+ [71] 1 3 1 1 1 2 3 3 1 3 3 2 1 2 1 3 3 3 1 3 1 2 3 2 2 2 1 3 2 3 3 3 2 3 1
+[106] 1 3 2 2 3 1 2 3 2 3 1 3 3 2 2 2 1 1 1 2 3 1 1 3 2 1 2 1 1 2 3 1 1 1 1
+[141] 2 3 1 1 1 3 1 1 2 2 2 3 1 1 1 1 1 1 1 3 2 1 3 2 1 2 1 2 1 2 2 1 3 3 2
+[176] 2 1 1 3 2 1 1 3 1 3 2 1 1 3 2 2 3 1 3 1 1 1 1 1 3
+Levels: 1 2 3</code></pre>
+<pre class="r"><code>class(icecream$ice_cream)</code></pre>
+<pre><code>[1] &quot;factor&quot;</code></pre>
+</div>
+<div id="part-2-exploratory-data-analysis" class="section level3">
+<h3>Part 2: Exploratory Data Analysis</h3>
+<p><strong>(1) Numerical summaries:</strong> <br /> <strong>-mean, median, five number summary, standard deviation, IQR, correlation, etc.</strong> <br /></p>
+<p><strong>Traditional R</strong></p>
+<pre class="r"><code>mean(icecream$video)</code></pre>
+<pre><code>[1] 51.85</code></pre>
+<pre class="r"><code>median(icecream$video)</code></pre>
+<pre><code>[1] 53</code></pre>
+<pre class="r"><code>sd(icecream$video)</code></pre>
+<pre><code>[1] 9.900891</code></pre>
+<pre class="r"><code>var(icecream$video)</code></pre>
+<pre><code>[1] 98.02764</code></pre>
+<pre class="r"><code>summary(icecream$video)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  26.00   44.00   53.00   51.85   58.00   74.00 </code></pre>
+<pre class="r"><code>IQR(icecream$video)</code></pre>
+<pre><code>[1] 14</code></pre>
+<pre class="r"><code>cor(copier$minutes,copier$number)</code></pre>
+<pre><code>[1] 0.978517</code></pre>
+<pre class="r"><code>summary(icecream)</code></pre>
+<pre><code>       id             female      ice_cream     video      
+ Min.   :  1.00   Min.   :0.000   1:95      Min.   :26.00  
+ 1st Qu.: 50.75   1st Qu.:0.000   2:47      1st Qu.:44.00  
+ Median :100.50   Median :1.000   3:58      Median :53.00  
+ Mean   :100.50   Mean   :0.545             Mean   :51.85  
+ 3rd Qu.:150.25   3rd Qu.:1.000             3rd Qu.:58.00  
+ Max.   :200.00   Max.   :1.000             Max.   :74.00  
+     puzzle     
+ Min.   :26.00  
+ 1st Qu.:46.00  
+ Median :52.00  
+ Mean   :52.41  
+ 3rd Qu.:61.00  
+ Max.   :71.00  </code></pre>
+<pre class="r"><code>summary(copier)</code></pre>
+<pre><code>    minutes           number      
+ Min.   :  3.00   Min.   : 1.000  
+ 1st Qu.: 36.00   1st Qu.: 2.000  
+ Median : 74.00   Median : 5.000  
+ Mean   : 76.27   Mean   : 5.111  
+ 3rd Qu.:111.00   3rd Qu.: 7.000  
+ Max.   :156.00   Max.   :10.000  </code></pre>
+<p><strong>Advanced summary statistics (tidyverse)</strong> <br /> “tibbles” instead of R’s traditional data.frame. Tibbles are data frames, but they tweak some older behaviours to make life a little easier.</p>
+<p><strong>Install and load R package “dplyr”</strong></p>
+<pre class="r"><code>#install.packages(&quot;dplyr&quot;)
+library(dplyr)</code></pre>
+<pre><code>
+Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:stats&#39;:
+
+    filter, lag</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    intersect, setdiff, setequal, union</code></pre>
+<p><strong>Average and standard deviation by icecream flavor</strong> <br /> Use %&gt;%(pipe). You can read it as a series of imperative statements: group, then summarise, then filter.A good way to pronounce %&gt;% when reading code is “then”.</p>
+<pre class="r"><code>icecream %&gt;% group_by(ice_cream) %&gt;% 
+  summarise(Mean=mean(puzzle),Variance=var(puzzle))</code></pre>
+<pre><code># A tibble: 3 x 3
+  ice_cream  Mean Variance
+  &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 1          52.0     99.5
+2 2          47.3    117. 
+3 3          57.1     99.2</code></pre>
+<pre class="r"><code>puzzle.summary &lt;-icecream %&gt;% group_by(ice_cream) %&gt;% 
+  summarise(Mean=mean(puzzle), Variance=var(puzzle) )
+puzzle.summary</code></pre>
+<pre><code># A tibble: 3 x 3
+  ice_cream  Mean Variance
+  &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 1          52.0     99.5
+2 2          47.3    117. 
+3 3          57.1     99.2</code></pre>
+<pre class="r"><code>class(puzzle.summary)</code></pre>
+<pre><code>[1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<pre class="r"><code>puzzle.summary &lt;-icecream %&gt;% group_by(ice_cream) %&gt;% 
+  summarise(Mean=mean(puzzle),
+            Variance=var(puzzle) )%&gt;%as.data.frame()
+puzzle.summary</code></pre>
+<pre><code>  ice_cream     Mean  Variance
+1         1 52.03158  99.45644
+2         2 47.31915 117.43941
+3         3 57.13793  99.24380</code></pre>
+<pre class="r"><code>class(puzzle.summary)</code></pre>
+<pre><code>[1] &quot;data.frame&quot;</code></pre>
+<p>Behind the scenes, x %&gt;% f(y) turns into f(x, y), and x %&gt;% f(y) %&gt;% g(z) turns into g(f(x, y), z) and so on. You can use the pipe to rewrite multiple operations in a way that you can read left-to-right, top-to-bottom.</p>
+<p><strong>Graphical plots:</strong> <br /> - 1 variable: boxplots, histograms, etc. <br /> - 2 variables: scatterplot <br /> - more variables: scatterplot matrix <br /></p>
+<p><strong>Traditional R plotting</strong> <br /> Density plot, boxplot</p>
+<pre class="r"><code>plot(density(copier$minutes),xlab=&quot;minutes&quot;)#,ylab=&quot;density&quot;)</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/trad_plot-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot(density(icecream$puzzle),xlab=&quot;puzzle score&quot;)</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/trad_plot-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>boxplot(video~ice_cream, data=icecream)</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/trad_plot-3.png" width="672" style="display: block; margin: auto;" /> Scatter plot</p>
+<pre class="r"><code>plot(x=copier$number,y=copier$minutes)</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/scatter-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot(puzzle~video, data=icecream)#response againt predictors</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/scatter-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># by default, it&#39;s x axis first, then y axis. or you can specify</code></pre>
+<p>Correlation matrix</p>
+<pre class="r"><code>head(iris)</code></pre>
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<pre class="r"><code>cor(iris[,1:3])</code></pre>
+<pre><code>             Sepal.Length Sepal.Width Petal.Length
+Sepal.Length    1.0000000  -0.1175698    0.8717538
+Sepal.Width    -0.1175698   1.0000000   -0.4284401
+Petal.Length    0.8717538  -0.4284401    1.0000000</code></pre>
+<pre class="r"><code>pairs(iris[,1:3])</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/corr-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><strong>Advanced ploting - ggplot2</strong></p>
+<pre class="r"><code>#install.packages(&quot;ggplot2&quot;)
+library(ggplot2)</code></pre>
+<p>Density plot <br /> Run the first layer, then add extra layers, use + to add extra layers</p>
+<pre class="r"><code>p &lt;- ggplot(data=copier, mapping=aes(x=minutes)) + 
+  geom_density() +
+  xlab(&quot;Minutes used&quot;) +
+  ggtitle(&quot;This is a density plot of minutes&quot;) +
+  theme(plot.title = element_text(hjust = 0.5))
+p</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/density-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Add mean line(vertical line)</p>
+<pre class="r"><code>p + geom_vline(aes(xintercept=mean(minutes)),
+              color=&quot;red&quot;, linetype=&quot;dashed&quot;, size=2) #change dotted, or size </code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/mean_line-1.png" width="672" style="display: block; margin: auto;" /> A geom is the geometrical object that a plot uses to represent data. People often describe plots by the type of geom that the plot uses. For example, bar charts use bar geoms, line charts use line geoms, boxplots use boxplot geoms, and so on. Scatterplots break the trend; they use the point geom. As we see above, you can use different geoms to plot the same data. <br /></p>
+<p>Boxplot</p>
+<pre class="r"><code>p &lt;- ggplot(icecream, aes(x=ice_cream, y=puzzle)) + 
+  geom_boxplot()
+p</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/boxplot-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Similar method</p>
+<pre class="r"><code>q &lt;- ggplot(icecream) + 
+  geom_boxplot(aes(x=ice_cream, y=puzzle) )
+q</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/sim-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Add summary stats</p>
+<pre class="r"><code>q + geom_point(data=puzzle.summary,aes(x=ice_cream, y=Mean), shape=18, col=&quot;blue&quot;, size=3)</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/summ-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>p + stat_summary(fun.y=mean, geom=&quot;point&quot;, shape=7,col=&quot;red&quot;, size=4)</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/summ-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>q + stat_summary(aes(x=ice_cream, y=puzzle),fun.y=mean, geom=&quot;point&quot;, shape=7,col=&quot;red&quot;, size=4)</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/summ-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#a little bit different, q don&#39;t have the aes settings, just different ways to do the calculation. </code></pre>
+<p>Scatter plot - copier data</p>
+<pre class="r"><code>p &lt;- ggplot(copier,aes(x=number, y=minutes)) + 
+  geom_point()
+p</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/scat_copy-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Change theme</p>
+<pre class="r"><code>p + theme_bw()</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/theme-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>p + theme_classic()</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/theme-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Scatter plot - icecream data</p>
+<pre class="r"><code>p &lt;- ggplot(icecream,aes(x=video, y=puzzle, col=ice_cream,shape=ice_cream)) +
+  geom_point()
+p</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/scat_ice-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>How about mark it by gender</p>
+<pre class="r"><code>icecream$female=as.factor(icecream$female)
+
+p &lt;- ggplot(icecream,aes(x=video, y=puzzle, col=female,shape=female)) +
+  geom_point()
+p</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/gender-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>p &lt;- ggplot(icecream,aes(x=ice_cream, y=puzzle, col=female,shape=female)) +
+  geom_point()
+p</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/gender-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Many other ways to customize the plot</p>
+<pre class="r"><code>p &lt;- ggplot(icecream, aes(x=ice_cream, y=puzzle,fill=ice_cream)) + 
+  geom_boxplot()
+p</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/cust-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>p &lt;- ggplot(icecream, aes(x=ice_cream, y=puzzle,fill=female)) + 
+  geom_boxplot()
+p</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/cust-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>p+scale_fill_hue(l=70, c=80) #many other ways to change the color/theme/type, etc</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/cust-3.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="part-3-simple-linear-regression" class="section level3">
+<h3>Part 3: Simple Linear Regression</h3>
+<pre class="r"><code>copier.fit &lt;- lm(minutes~number,data=copier)
+copier.fit</code></pre>
+<pre><code>
+Call:
+lm(formula = minutes ~ number, data = copier)
+
+Coefficients:
+(Intercept)       number  
+    -0.5802      15.0352  </code></pre>
+<pre class="r"><code>class(copier.fit)</code></pre>
+<pre><code>[1] &quot;lm&quot;</code></pre>
+<pre class="r"><code>str(copier.fit)</code></pre>
+<pre><code>List of 12
+ $ coefficients : Named num [1:2] -0.58 15.04
+  ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;(Intercept)&quot; &quot;number&quot;
+ $ residuals    : Named num [1:45] -9.49 0.439 1.474 11.51 -2.455 ...
+  ..- attr(*, &quot;names&quot;)= chr [1:45] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
+ $ effects      : Named num [1:45] -511.61 277.42 2.56 12.5 -1.55 ...
+  ..- attr(*, &quot;names&quot;)= chr [1:45] &quot;(Intercept)&quot; &quot;number&quot; &quot;&quot; &quot;&quot; ...
+ $ rank         : int 2
+ $ fitted.values: Named num [1:45] 29.5 59.6 44.5 29.5 14.5 ...
+  ..- attr(*, &quot;names&quot;)= chr [1:45] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
+ $ assign       : int [1:2] 0 1
+ $ qr           :List of 5
+  ..$ qr   : num [1:45, 1:2] -6.708 0.149 0.149 0.149 0.149 ...
+  .. ..- attr(*, &quot;dimnames&quot;)=List of 2
+  .. .. ..$ : chr [1:45] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
+  .. .. ..$ : chr [1:2] &quot;(Intercept)&quot; &quot;number&quot;
+  .. ..- attr(*, &quot;assign&quot;)= int [1:2] 0 1
+  ..$ qraux: num [1:2] 1.15 1.04
+  ..$ pivot: int [1:2] 1 2
+  ..$ tol  : num 1e-07
+  ..$ rank : int 2
+  ..- attr(*, &quot;class&quot;)= chr &quot;qr&quot;
+ $ df.residual  : int 43
+ $ xlevels      : Named list()
+ $ call         : language lm(formula = minutes ~ number, data = copier)
+ $ terms        :Classes &#39;terms&#39;, &#39;formula&#39;  language minutes ~ number
+  .. ..- attr(*, &quot;variables&quot;)= language list(minutes, number)
+  .. ..- attr(*, &quot;factors&quot;)= int [1:2, 1] 0 1
+  .. .. ..- attr(*, &quot;dimnames&quot;)=List of 2
+  .. .. .. ..$ : chr [1:2] &quot;minutes&quot; &quot;number&quot;
+  .. .. .. ..$ : chr &quot;number&quot;
+  .. ..- attr(*, &quot;term.labels&quot;)= chr &quot;number&quot;
+  .. ..- attr(*, &quot;order&quot;)= int 1
+  .. ..- attr(*, &quot;intercept&quot;)= int 1
+  .. ..- attr(*, &quot;response&quot;)= int 1
+  .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_GlobalEnv&gt; 
+  .. ..- attr(*, &quot;predvars&quot;)= language list(minutes, number)
+  .. ..- attr(*, &quot;dataClasses&quot;)= Named chr [1:2] &quot;numeric&quot; &quot;numeric&quot;
+  .. .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;minutes&quot; &quot;number&quot;
+ $ model        :&#39;data.frame&#39;:  45 obs. of  2 variables:
+  ..$ minutes: int [1:45] 20 60 46 41 12 137 68 89 4 32 ...
+  ..$ number : int [1:45] 2 4 3 2 1 10 5 5 1 2 ...
+  ..- attr(*, &quot;terms&quot;)=Classes &#39;terms&#39;, &#39;formula&#39;  language minutes ~ number
+  .. .. ..- attr(*, &quot;variables&quot;)= language list(minutes, number)
+  .. .. ..- attr(*, &quot;factors&quot;)= int [1:2, 1] 0 1
+  .. .. .. ..- attr(*, &quot;dimnames&quot;)=List of 2
+  .. .. .. .. ..$ : chr [1:2] &quot;minutes&quot; &quot;number&quot;
+  .. .. .. .. ..$ : chr &quot;number&quot;
+  .. .. ..- attr(*, &quot;term.labels&quot;)= chr &quot;number&quot;
+  .. .. ..- attr(*, &quot;order&quot;)= int 1
+  .. .. ..- attr(*, &quot;intercept&quot;)= int 1
+  .. .. ..- attr(*, &quot;response&quot;)= int 1
+  .. .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_GlobalEnv&gt; 
+  .. .. ..- attr(*, &quot;predvars&quot;)= language list(minutes, number)
+  .. .. ..- attr(*, &quot;dataClasses&quot;)= Named chr [1:2] &quot;numeric&quot; &quot;numeric&quot;
+  .. .. .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;minutes&quot; &quot;number&quot;
+ - attr(*, &quot;class&quot;)= chr &quot;lm&quot;</code></pre>
+<pre class="r"><code>summary(copier.fit)</code></pre>
+<pre><code>
+Call:
+lm(formula = minutes ~ number, data = copier)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-22.7723  -3.7371   0.3334   6.3334  15.4039 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  -0.5802     2.8039  -0.207    0.837    
+number       15.0352     0.4831  31.123   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 8.914 on 43 degrees of freedom
+Multiple R-squared:  0.9575,    Adjusted R-squared:  0.9565 
+F-statistic: 968.7 on 1 and 43 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>plot(minutes~number, data=copier)
+abline(-0.5802,15.0352)#by definition of the line abline(intercept, slope)
+#The following are alternative ways to draw the fitted regression line.
+lines(copier$number,-0.5802+15.0352*copier$number)#other way
+abline(copier.fit)#simple way</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/slr-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#ggplot2
+fitted(copier.fit)</code></pre>
+<pre><code>        1         2         3         4         5         6         7 
+ 29.49034  59.56084  44.52559  29.49034  14.45509 149.77232  74.59608 
+        8         9        10        11        12        13        14 
+ 74.59608  14.45509  29.49034 134.73708 149.77232  89.63133  44.52559 
+       15        16        17        18        19        20        21 
+ 59.56084 119.70183 104.66658 119.70183 149.77232  59.56084  74.59608 
+       22        23        24        25        26        27        28 
+104.66658 104.66658  74.59608 134.73708 104.66658  29.49034  74.59608 
+       29        30        31        32        33        34        35 
+104.66658  89.63133 119.70183  74.59608  29.49034  29.49034  14.45509 
+       36        37        38        39        40        41        42 
+ 59.56084  74.59608 134.73708 104.66658  14.45509 134.73708  29.49034 
+       43        44        45 
+ 29.49034  59.56084  74.59608 </code></pre>
+<pre class="r"><code>copier$fitted=fitted(copier.fit)
+p &lt;- ggplot(copier,aes(x=number, y=minutes)) + 
+  geom_point()
+p</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/slr-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>  #geom_line(aes(x=number,y=minutes)) try this and show
+  #the function of geom_line
+p &lt;- p + geom_line(aes(x=number,y=fitted))
+p</code></pre>
+<p><img src="figure/lab2_inclass_prac.Rmd/slr-3.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.6.1 (2019-07-05)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS Mojave 10.14.6
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] ggplot2_3.2.1   dplyr_0.8.3     workflowr_1.4.0
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.2       pillar_1.4.2     compiler_3.6.1   git2r_0.26.1    
+ [5] tools_3.6.1      zeallot_0.1.0    digest_0.6.20    evaluate_0.14   
+ [9] tibble_2.1.3     gtable_0.3.0     pkgconfig_2.0.2  rlang_0.4.0     
+[13] cli_1.1.0        yaml_2.2.0       xfun_0.9         withr_2.1.2     
+[17] stringr_1.4.0    knitr_1.24       fs_1.3.1         vctrs_0.2.0     
+[21] rprojroot_1.3-2  grid_3.6.1       tidyselect_0.2.5 glue_1.3.1      
+[25] R6_2.4.0         fansi_0.4.0      rmarkdown_1.15   purrr_0.3.2     
+[29] magrittr_1.5     whisker_0.3-2    backports_1.1.4  scales_1.0.0    
+[33] htmltools_0.3.6  assertthat_0.2.1 colorspace_1.4-1 labeling_0.3    
+[37] utf8_1.1.4       stringi_1.4.3    lazyeval_0.2.2   munsell_0.5.0   
+[41] crayon_1.3.4    </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
