@@ -6,7 +6,7 @@ navbar:
   - text: Home
     href: index.html
   - text: GitHub
-    href: https://github.com/statslee/STA_463_563_Fall2019
+    href: https://github.com/statslee/STA463_563_Fall2019
 output:
   workflowr::wflow_html:
     toc: yes
