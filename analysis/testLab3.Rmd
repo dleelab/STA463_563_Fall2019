@@ -1,0 +1,17 @@
+---
+title: "testLab3"
+author: "statslee"
+date: "2019-09-06"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+this is a practice
+```{r}
+x <- c(1,2,3,4)
+y <- c(2,4,6,8)
+plot(x,y)
+```
+
