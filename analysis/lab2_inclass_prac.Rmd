@@ -106,23 +106,8 @@ Tibbles are data frames, but they tweak some older behaviours to make life a lit
 library(dplyr)
 ```
 
-**Average and standard deviation by icecream flavor** <br />
-Use %>%(pipe). You can read it as a series of imperative statements: group, then summarise, then filter. A good way to pronounce %>% when reading code is “then”.
-```{r pipe}
-icecream %>% group_by(ice_cream) %>% 
-  summarise(Mean=mean(puzzle),Variance=var(puzzle))
-puzzle.summary <-icecream %>% group_by(ice_cream) %>% 
-  summarise(Mean=mean(puzzle), Variance=var(puzzle) )
-puzzle.summary
-class(puzzle.summary)
-
-puzzle.summary <- icecream %>% group_by(ice_cream) %>% 
-  summarise(Mean=mean(puzzle),
-            Variance=var(puzzle) )%>%as.data.frame()
-puzzle.summary
-class(puzzle.summary)
-```
-Behind the scenes, x %>% f(y) turns into f(x, y), and x %>% f(y) %>% g(z) turns into g(f(x, y), z) and so on. You can use the pipe to rewrite multiple operations in 
+**pipe** <br />
+Use %>%(pipe). You can read it as a series of imperative statements: group, then summarise, then filter. A good way to pronounce %>% when reading code is “then”.Behind the scenes, x %>% f(y) turns into f(x, y), and x %>% f(y) %>% g(z) turns into g(f(x, y), z) and so on. You can use the pipe to rewrite multiple operations in 
 a way that you can read left-to-right, top-to-bottom.
 
 **dplyr verbs** <br />
@@ -174,8 +159,25 @@ puzzle.summary <- icecream %>% group_by(ice_cream) %>% summarise(Mean=mean(puzzl
 
 iris %>% group_by(Species) %>% summarise(Mean=mean(Sepal.Length), Median=median(Sepal.Length), Variance=var(Sepal.Length))
 
-# Question: 1) group by Species 2) calculate mean, median, var, min, max for each group 3) sort data in descending order of mean 3) convert to a data frame  4) assign the output to "iris_new"
+# Question: 1) group by Species 2) calculate mean, median, var, min, max of Sepal.Length for each group 3) sort data in descending order of mean 3) convert to a data frame  4) assign the output to "iris_new"
 ```
+
+**Average and standard deviation by icecream flavor** <br />
+```{r pipe}
+icecream %>% group_by(ice_cream) %>% 
+  summarise(Mean=mean(puzzle),Variance=var(puzzle))
+puzzle.summary <-icecream %>% group_by(ice_cream) %>% 
+  summarise(Mean=mean(puzzle), Variance=var(puzzle) )
+puzzle.summary
+class(puzzle.summary)
+
+puzzle.summary <- icecream %>% group_by(ice_cream) %>% 
+  summarise(Mean=mean(puzzle),
+            Variance=var(puzzle) )%>%as.data.frame()
+puzzle.summary
+class(puzzle.summary)
+```
+
 
 
 **Graphical plots:** <br />
