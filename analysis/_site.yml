@@ -1,15 +1,15 @@
-name: "STA 463/563 Fall 2019"
+name: "STA463/563 Fall 2019"
 output_dir: ../docs
 navbar:
-  title: "STA 463/563 Fall 2019"
+  title: "STA463/563 Fall 2019"
   left:
   - text: Home
     href: index.html
   - text: GitHub
-    href: https://github.com/statslee/STA463_563_Fall2019
+    href: https://github.com/dleelab/STA463_563_Fall2019
 output:
   workflowr::wflow_html:
     toc: yes
     toc_float: false
-    theme: united
+    theme: cerulean
     highlight: textmate
