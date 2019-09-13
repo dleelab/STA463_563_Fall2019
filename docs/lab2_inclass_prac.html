@@ -423,10 +423,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019tree95b04a6ab91c6deddd347ada377748d3fcbcd188targetblank95b04a6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dleelab/STA463_563_Fall2019/tree/95b04a6ab91c6deddd347ada377748d3fcbcd188" target="_blank">95b04a6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019tree420b3f5158f91c6b8ab2bbf8dc2a8a88a575d09atargetblank420b3f5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dleelab/STA463_563_Fall2019/tree/420b3f5158f91c6b8ab2bbf8dc2a8a88a575d09a" target="_blank">420b3f5</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019tree95b04a6ab91c6deddd347ada377748d3fcbcd188targetblank95b04a6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019tree420b3f5158f91c6b8ab2bbf8dc2a8a88a575d09atargetblank420b3f5a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -435,9 +435,6 @@ Great! You are using Git for version control. Tracking code development and conn
 Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rproj.user/
-
-Unstaged changes:
-    Modified:   README.md
 
 </code></pre>
 <p>
@@ -476,6 +473,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/420b3f5158f91c6b8ab2bbf8dc2a8a88a575d09a/analysis/lab2_inclass_prac.Rmd" target="_blank">420b3f5</a>
+</td>
+<td>
+dleelab
+</td>
+<td>
+2019-09-13
+</td>
+<td>
+pipe moved
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/8fe2e84d7a7b7dd66b799f593bc538d1f41bfc09/docs/lab2_inclass_prac.html" target="_blank">8fe2e84</a>
+</td>
+<td>
+dleelab
+</td>
+<td>
+2019-09-13
+</td>
+<td>
+add
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -745,37 +776,7 @@ Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>The following objects are masked from &#39;package:base&#39;:
 
     intersect, setdiff, setequal, union</code></pre>
-<p><strong>Average and standard deviation by icecream flavor</strong> <br /> Use %&gt;%(pipe). You can read it as a series of imperative statements: group, then summarise, then filter. A good way to pronounce %&gt;% when reading code is “then”.</p>
-<pre class="r"><code>icecream %&gt;% group_by(ice_cream) %&gt;% 
-  summarise(Mean=mean(puzzle),Variance=var(puzzle))</code></pre>
-<pre><code># A tibble: 3 x 3
-  ice_cream  Mean Variance
-  &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-1 1          52.0     99.5
-2 2          47.3    117. 
-3 3          57.1     99.2</code></pre>
-<pre class="r"><code>puzzle.summary &lt;-icecream %&gt;% group_by(ice_cream) %&gt;% 
-  summarise(Mean=mean(puzzle), Variance=var(puzzle) )
-puzzle.summary</code></pre>
-<pre><code># A tibble: 3 x 3
-  ice_cream  Mean Variance
-  &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-1 1          52.0     99.5
-2 2          47.3    117. 
-3 3          57.1     99.2</code></pre>
-<pre class="r"><code>class(puzzle.summary)</code></pre>
-<pre><code>[1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
-<pre class="r"><code>puzzle.summary &lt;- icecream %&gt;% group_by(ice_cream) %&gt;% 
-  summarise(Mean=mean(puzzle),
-            Variance=var(puzzle) )%&gt;%as.data.frame()
-puzzle.summary</code></pre>
-<pre><code>  ice_cream     Mean  Variance
-1         1 52.03158  99.45644
-2         2 47.31915 117.43941
-3         3 57.13793  99.24380</code></pre>
-<pre class="r"><code>class(puzzle.summary)</code></pre>
-<pre><code>[1] &quot;data.frame&quot;</code></pre>
-<p>Behind the scenes, x %&gt;% f(y) turns into f(x, y), and x %&gt;% f(y) %&gt;% g(z) turns into g(f(x, y), z) and so on. You can use the pipe to rewrite multiple operations in a way that you can read left-to-right, top-to-bottom.</p>
+<p><strong>pipe</strong> <br /> Use %&gt;%(pipe). You can read it as a series of imperative statements: group, then summarise, then filter. A good way to pronounce %&gt;% when reading code is “then”.Behind the scenes, x %&gt;% f(y) turns into f(x, y), and x %&gt;% f(y) %&gt;% g(z) turns into g(f(x, y), z) and so on. You can use the pipe to rewrite multiple operations in a way that you can read left-to-right, top-to-bottom.</p>
 <p><strong>dplyr verbs</strong> <br /> ‘filter’,‘arrange’,‘mutate’,‘summarise’,‘group_by’</p>
 <p><strong>filter: select cases based on their values</strong></p>
 <pre class="r"><code>head(icecream)</code></pre>
@@ -948,7 +949,37 @@ iris %&gt;% group_by(Species) %&gt;% summarise(Mean=mean(Sepal.Length), Median=m
 1 setosa      5.01    5      0.124
 2 versicolor  5.94    5.9    0.266
 3 virginica   6.59    6.5    0.404</code></pre>
-<pre class="r"><code># Question: 1) group by Species 2) calculate mean, median, var, min, max for each group 3) sort data in descending order of mean 3) convert to a data frame  4) assign the output to &quot;iris_new&quot;</code></pre>
+<pre class="r"><code># Question: 1) group by Species 2) calculate mean, median, var, min, max of Sepal.Length for each group 3) sort data in descending order of mean 3) convert to a data frame  4) assign the output to &quot;iris_new&quot;</code></pre>
+<p><strong>Average and standard deviation by icecream flavor</strong> <br /></p>
+<pre class="r"><code>icecream %&gt;% group_by(ice_cream) %&gt;% 
+  summarise(Mean=mean(puzzle),Variance=var(puzzle))</code></pre>
+<pre><code># A tibble: 3 x 3
+  ice_cream  Mean Variance
+  &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 1          52.0     99.5
+2 2          47.3    117. 
+3 3          57.1     99.2</code></pre>
+<pre class="r"><code>puzzle.summary &lt;-icecream %&gt;% group_by(ice_cream) %&gt;% 
+  summarise(Mean=mean(puzzle), Variance=var(puzzle) )
+puzzle.summary</code></pre>
+<pre><code># A tibble: 3 x 3
+  ice_cream  Mean Variance
+  &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 1          52.0     99.5
+2 2          47.3    117. 
+3 3          57.1     99.2</code></pre>
+<pre class="r"><code>class(puzzle.summary)</code></pre>
+<pre><code>[1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<pre class="r"><code>puzzle.summary &lt;- icecream %&gt;% group_by(ice_cream) %&gt;% 
+  summarise(Mean=mean(puzzle),
+            Variance=var(puzzle) )%&gt;%as.data.frame()
+puzzle.summary</code></pre>
+<pre><code>  ice_cream     Mean  Variance
+1         1 52.03158  99.45644
+2         2 47.31915 117.43941
+3         3 57.13793  99.24380</code></pre>
+<pre class="r"><code>class(puzzle.summary)</code></pre>
+<pre><code>[1] &quot;data.frame&quot;</code></pre>
 <p><strong>Graphical plots:</strong> <br /> - 1 variable: boxplots, histograms, etc. <br /> - 2 variables: scatterplot <br /> - more variables: scatterplot matrix <br /></p>
 <p><strong>Traditional R plotting</strong> <br /> Density plot, boxplot</p>
 <pre class="r"><code>plot(density(copier$minutes),xlab=&quot;minutes&quot;)#,ylab=&quot;density&quot;)</code></pre>
