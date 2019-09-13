@@ -23,10 +23,6 @@ editor_options:
 
 ### Part 1: Object Type
 ```{r read_data}
-icecream <- read.table("/Users/leed13/Desktop/STA463/icecream.txt")
-copier <- read.table("/Users/leed13/Desktop/STA463/CH01PR20.txt")
-
-
 icecream <- read.table("data/icecream.txt")
 dim(icecream)
 copier <- read.table("data/CH01PR20.txt")
