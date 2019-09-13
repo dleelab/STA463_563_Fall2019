@@ -15,22 +15,9 @@ editor_options:
 * [In-class practice](lab2_inclass_prac.html)
 
 #### Lab 3
-* [test](testLab2.html)
-
 #### Lab 4
-* [test](testLab3.html)
-
 #### Lab 5
 
-#### Lab 6
-
-#### Lab 7
-
-#### Lab 8
-
-#### Lab 9
-
-#### Lab 10
 
 
 
