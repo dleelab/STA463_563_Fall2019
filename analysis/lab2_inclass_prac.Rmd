@@ -106,9 +106,8 @@ Tibbles are data frames, but they tweak some older behaviours to make life a lit
 library(dplyr)
 ```
 
-
 **Average and standard deviation by icecream flavor** <br />
-Use %>%(pipe). You can read it as a series of imperative statements: group, then summarise, then filter.A good way to pronounce %>% when reading code is “then”.
+Use %>%(pipe). You can read it as a series of imperative statements: group, then summarise, then filter. A good way to pronounce %>% when reading code is “then”.
 ```{r pipe}
 icecream %>% group_by(ice_cream) %>% 
   summarise(Mean=mean(puzzle),Variance=var(puzzle))
@@ -117,15 +116,66 @@ puzzle.summary <-icecream %>% group_by(ice_cream) %>%
 puzzle.summary
 class(puzzle.summary)
 
-puzzle.summary <-icecream %>% group_by(ice_cream) %>% 
+puzzle.summary <- icecream %>% group_by(ice_cream) %>% 
   summarise(Mean=mean(puzzle),
             Variance=var(puzzle) )%>%as.data.frame()
 puzzle.summary
 class(puzzle.summary)
 ```
-
 Behind the scenes, x %>% f(y) turns into f(x, y), and x %>% f(y) %>% g(z) turns into g(f(x, y), z) and so on. You can use the pipe to rewrite multiple operations in 
 a way that you can read left-to-right, top-to-bottom.
+
+**dplyr verbs** <br />
+'filter','arrange','mutate','summarise','group_by'
+
+**filter: select cases based on their values**
+```{r filter}
+head(icecream)
+icecream <- as_tibble(icecream)
+icecream
+
+icecream %>% filter(female==0)
+icecream %>% filter(female==1, video<50)
+
+iris %>% filter(Species=="setosa", Sepal.Width>4)
+iris %>% filter(Species=="versicolor", Petal.Length<4)
+
+# Question: filter iris dataset for Species equal to "setosa" or "virginica"
+```
+
+**arrange: reorder cases**
+```{r arrange}
+icecream %>% arrange(video) # order 'video' column in ascending order
+icecream %>% arrange(desc(puzzle)) # order 'puzzle' column in descending order
+
+as_tibble(iris) %>% arrange(Petal.Length)
+as_tibble(iris) %>% arrange(desc(Sepal.Length))
+
+# Question: 1) filter iris dataset for Species equal to "setosa" and 2) sort  in descending order of Sepal.Width  
+```
+
+**mutate: add new variables that are functions of existing variables** 
+```{r mutate}
+icecream_new <- icecream %>% mutate(puzzle100 = puzzle*100)
+icecream_new
+
+# Question: 1) filter icecream dataset for ice_cream equal to 1, 2) create video1000 (video*1000) column, 3) sort in descending order of video1000, 4) assign the dataset to icecream_new2
+```
+
+**summarise: condense multiple values to a single value** 
+```{r summarise}
+icecream %>% summarise(Mean_video=mean(video), SD_video=sd(video), SD_median=median(video))
+```
+
+**group_by: break down a dataset into specified groups of rows**
+```{r group_by}
+puzzle.summary <- icecream %>% group_by(ice_cream) %>% summarise(Mean=mean(puzzle),
+            Variance=var(puzzle))%>%as.data.frame()
+
+iris %>% group_by(Species) %>% summarise(Mean=mean(Sepal.Length), Median=median(Sepal.Length), Variance=var(Sepal.Length))
+
+# Question: 1) group by Species 2) calculate mean, median, var, min, max for each group 3) sort data in descending order of mean 3) convert to a data frame  4) assign the output to "iris_new"
+```
 
 
 **Graphical plots:** <br />
