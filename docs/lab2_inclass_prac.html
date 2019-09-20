@@ -23,6 +23,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -247,6 +248,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -296,6 +300,14 @@ div.section {
 
 <div class="fluid-row" id="header">
 
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Lab 2 Practice</h1>
@@ -304,13 +316,6 @@ div.section {
 
 </div>
 
-<div id="TOC">
-<ul>
-<li><a href="#part-1-object-type">Part 1: Object Type</a></li>
-<li><a href="#part-2-exploratory-data-analysis">Part 2: Exploratory Data Analysis</a></li>
-<li><a href="#part-3-simple-linear-regression">Part 3: Simple Linear Regression</a></li>
-</ul>
-</div>
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
@@ -332,7 +337,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-09-13
+<strong>Last updated:</strong> 2019-09-20
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -423,10 +428,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019tree420b3f5158f91c6b8ab2bbf8dc2a8a88a575d09atargetblank420b3f5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dleelab/STA463_563_Fall2019/tree/420b3f5158f91c6b8ab2bbf8dc2a8a88a575d09a" target="_blank">420b3f5</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019treef1923b8970cbd9a644dce6f6f764df858340eb4ctargetblankf1923b8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dleelab/STA463_563_Fall2019/tree/f1923b8970cbd9a644dce6f6f764df858340eb4c" target="_blank">f1923b8</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019tree420b3f5158f91c6b8ab2bbf8dc2a8a88a575d09atargetblank420b3f5a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019treef1923b8970cbd9a644dce6f6f764df858340eb4ctargetblankf1923b8a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -434,6 +439,7 @@ Great! You are using Git for version control. Tracking code development and conn
 <pre><code>
 Ignored files:
     Ignored:    .DS_Store
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
 </code></pre>
@@ -473,6 +479,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/f1923b8970cbd9a644dce6f6f764df858340eb4c/analysis/lab2_inclass_prac.Rmd" target="_blank">f1923b8</a>
+</td>
+<td>
+dleelab
+</td>
+<td>
+2019-09-20
+</td>
+<td>
+c
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/21682d9c0bc717bdf6ac2e10583cd7680d2f5d00/docs/lab2_inclass_prac.html" target="_blank">21682d9</a>
+</td>
+<td>
+dleelab
+</td>
+<td>
+2019-09-13
+</td>
+<td>
+pipe moved
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -980,1155 +1020,6 @@ puzzle.summary</code></pre>
 3         3 57.13793  99.24380</code></pre>
 <pre class="r"><code>class(puzzle.summary)</code></pre>
 <pre><code>[1] &quot;data.frame&quot;</code></pre>
-<p><strong>Graphical plots:</strong> <br /> - 1 variable: boxplots, histograms, etc. <br /> - 2 variables: scatterplot <br /> - more variables: scatterplot matrix <br /></p>
-<p><strong>Traditional R plotting</strong> <br /> Density plot, boxplot</p>
-<pre class="r"><code>plot(density(copier$minutes),xlab=&quot;minutes&quot;)#,ylab=&quot;density&quot;)</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/trad_plot-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-trad_plot-1">
-Past versions of trad_plot-1.png
-</button>
-</p>
-<div id="fig-trad_plot-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/trad_plot-1.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>plot(density(icecream$puzzle),xlab=&quot;puzzle score&quot;)</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/trad_plot-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-trad_plot-2">
-Past versions of trad_plot-2.png
-</button>
-</p>
-<div id="fig-trad_plot-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/trad_plot-2.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>boxplot(video~ice_cream, data=icecream)</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/trad_plot-3.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-trad_plot-3">
-Past versions of trad_plot-3.png
-</button>
-</p>
-<div id="fig-trad_plot-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/trad_plot-3.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Scatter plot</p>
-<pre class="r"><code>plot(x=copier$number,y=copier$minutes)</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/scatter-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-scatter-1">
-Past versions of scatter-1.png
-</button>
-</p>
-<div id="fig-scatter-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/scatter-1.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>plot(puzzle~video, data=icecream)#response againt predictors</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/scatter-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-scatter-2">
-Past versions of scatter-2.png
-</button>
-</p>
-<div id="fig-scatter-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/scatter-2.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code># by default, it&#39;s x axis first, then y axis. or you can specify</code></pre>
-<p>Correlation matrix</p>
-<pre class="r"><code>head(iris)</code></pre>
-<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-1          5.1         3.5          1.4         0.2  setosa
-2          4.9         3.0          1.4         0.2  setosa
-3          4.7         3.2          1.3         0.2  setosa
-4          4.6         3.1          1.5         0.2  setosa
-5          5.0         3.6          1.4         0.2  setosa
-6          5.4         3.9          1.7         0.4  setosa</code></pre>
-<pre class="r"><code>cor(iris[,1:3])</code></pre>
-<pre><code>             Sepal.Length Sepal.Width Petal.Length
-Sepal.Length    1.0000000  -0.1175698    0.8717538
-Sepal.Width    -0.1175698   1.0000000   -0.4284401
-Petal.Length    0.8717538  -0.4284401    1.0000000</code></pre>
-<pre class="r"><code>pairs(iris[,1:3])</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/corr-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-corr-1">
-Past versions of corr-1.png
-</button>
-</p>
-<div id="fig-corr-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/corr-1.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><strong>Advanced ploting - ggplot2</strong></p>
-<pre class="r"><code>#install.packages(&quot;ggplot2&quot;)
-library(ggplot2)</code></pre>
-<p>Density plot <br /> Run the first layer, then add extra layers, use + to add extra layers</p>
-<pre class="r"><code>p &lt;- ggplot(data=copier, mapping=aes(x=minutes)) + 
-  geom_density() +
-  xlab(&quot;Minutes used&quot;) +
-  ggtitle(&quot;This is a density plot of minutes&quot;) +
-  theme(plot.title = element_text(hjust = 0.5))
-p</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/density-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-density-1">
-Past versions of density-1.png
-</button>
-</p>
-<div id="fig-density-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/density-1.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Add mean line(vertical line)</p>
-<pre class="r"><code>p + geom_vline(aes(xintercept=mean(minutes)),
-              color=&quot;red&quot;, linetype=&quot;dashed&quot;, size=2) #change dotted, or size </code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/mean_line-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-mean_line-1">
-Past versions of mean_line-1.png
-</button>
-</p>
-<div id="fig-mean_line-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/mean_line-1.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>A geom is the geometrical object that a plot uses to represent data. People often describe plots by the type of geom that the plot uses. For example, bar charts use bar geoms, line charts use line geoms, boxplots use boxplot geoms, and so on. Scatterplots break the trend; they use the point geom. As we see above, you can use different geoms to plot the same data. <br /></p>
-<p>Boxplot</p>
-<pre class="r"><code>p &lt;- ggplot(icecream, aes(x=ice_cream, y=puzzle)) + 
-  geom_boxplot()
-p</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/boxplot-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-boxplot-1">
-Past versions of boxplot-1.png
-</button>
-</p>
-<div id="fig-boxplot-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/boxplot-1.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Similar method</p>
-<pre class="r"><code>q &lt;- ggplot(icecream) + 
-  geom_boxplot(aes(x=ice_cream, y=puzzle) )
-q</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/sim-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-sim-1">
-Past versions of sim-1.png
-</button>
-</p>
-<div id="fig-sim-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/sim-1.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Add summary stats</p>
-<pre class="r"><code>q + geom_point(data=puzzle.summary,aes(x=ice_cream, y=Mean), shape=18, col=&quot;blue&quot;, size=3)</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/summ-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-summ-1">
-Past versions of summ-1.png
-</button>
-</p>
-<div id="fig-summ-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/summ-1.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>p + stat_summary(fun.y=mean, geom=&quot;point&quot;, shape=7,col=&quot;red&quot;, size=4)</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/summ-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-summ-2">
-Past versions of summ-2.png
-</button>
-</p>
-<div id="fig-summ-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/summ-2.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>q + stat_summary(aes(x=ice_cream, y=puzzle),fun.y=mean, geom=&quot;point&quot;, shape=7,col=&quot;red&quot;, size=4)</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/summ-3.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-summ-3">
-Past versions of summ-3.png
-</button>
-</p>
-<div id="fig-summ-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/summ-3.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>#a little bit different, q don&#39;t have the aes settings, just different ways to do the calculation. </code></pre>
-<p>Scatter plot - copier data</p>
-<pre class="r"><code>p &lt;- ggplot(copier,aes(x=number, y=minutes)) + 
-  geom_point()
-p</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/scat_copy-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-scat_copy-1">
-Past versions of scat_copy-1.png
-</button>
-</p>
-<div id="fig-scat_copy-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/scat_copy-1.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Change theme</p>
-<pre class="r"><code>p + theme_bw()</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/theme-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-theme-1">
-Past versions of theme-1.png
-</button>
-</p>
-<div id="fig-theme-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/theme-1.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>p + theme_classic()</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/theme-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-theme-2">
-Past versions of theme-2.png
-</button>
-</p>
-<div id="fig-theme-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/theme-2.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Scatter plot - icecream data</p>
-<pre class="r"><code>p &lt;- ggplot(icecream,aes(x=video, y=puzzle, col=ice_cream,shape=ice_cream)) +
-  geom_point()
-p</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/scat_ice-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-scat_ice-1">
-Past versions of scat_ice-1.png
-</button>
-</p>
-<div id="fig-scat_ice-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/scat_ice-1.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>How about mark it by gender</p>
-<pre class="r"><code>icecream$female=as.factor(icecream$female)
-
-p &lt;- ggplot(icecream,aes(x=video, y=puzzle, col=female,shape=female)) +
-  geom_point()
-p</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/gender-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-gender-1">
-Past versions of gender-1.png
-</button>
-</p>
-<div id="fig-gender-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/gender-1.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>p &lt;- ggplot(icecream,aes(x=ice_cream, y=puzzle, col=female,shape=female)) +
-  geom_point()
-p</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/gender-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-gender-2">
-Past versions of gender-2.png
-</button>
-</p>
-<div id="fig-gender-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/gender-2.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Many other ways to customize the plot</p>
-<pre class="r"><code>p &lt;- ggplot(icecream, aes(x=ice_cream, y=puzzle,fill=ice_cream)) + 
-  geom_boxplot()
-p</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/cust-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cust-1">
-Past versions of cust-1.png
-</button>
-</p>
-<div id="fig-cust-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/cust-1.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>p &lt;- ggplot(icecream, aes(x=ice_cream, y=puzzle,fill=female)) + 
-  geom_boxplot()
-p</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/cust-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cust-2">
-Past versions of cust-2.png
-</button>
-</p>
-<div id="fig-cust-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/cust-2.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>p+scale_fill_hue(l=70, c=80) #many other ways to change the color/theme/type, etc</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/cust-3.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cust-3">
-Past versions of cust-3.png
-</button>
-</p>
-<div id="fig-cust-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/cust-3.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div id="part-3-simple-linear-regression" class="section level3">
-<h3>Part 3: Simple Linear Regression</h3>
-<pre class="r"><code>copier.fit &lt;- lm(minutes~number,data=copier)
-copier.fit</code></pre>
-<pre><code>
-Call:
-lm(formula = minutes ~ number, data = copier)
-
-Coefficients:
-(Intercept)       number  
-    -0.5802      15.0352  </code></pre>
-<pre class="r"><code>class(copier.fit)</code></pre>
-<pre><code>[1] &quot;lm&quot;</code></pre>
-<pre class="r"><code>str(copier.fit)</code></pre>
-<pre><code>List of 12
- $ coefficients : Named num [1:2] -0.58 15.04
-  ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;(Intercept)&quot; &quot;number&quot;
- $ residuals    : Named num [1:45] -9.49 0.439 1.474 11.51 -2.455 ...
-  ..- attr(*, &quot;names&quot;)= chr [1:45] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
- $ effects      : Named num [1:45] -511.61 277.42 2.56 12.5 -1.55 ...
-  ..- attr(*, &quot;names&quot;)= chr [1:45] &quot;(Intercept)&quot; &quot;number&quot; &quot;&quot; &quot;&quot; ...
- $ rank         : int 2
- $ fitted.values: Named num [1:45] 29.5 59.6 44.5 29.5 14.5 ...
-  ..- attr(*, &quot;names&quot;)= chr [1:45] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
- $ assign       : int [1:2] 0 1
- $ qr           :List of 5
-  ..$ qr   : num [1:45, 1:2] -6.708 0.149 0.149 0.149 0.149 ...
-  .. ..- attr(*, &quot;dimnames&quot;)=List of 2
-  .. .. ..$ : chr [1:45] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
-  .. .. ..$ : chr [1:2] &quot;(Intercept)&quot; &quot;number&quot;
-  .. ..- attr(*, &quot;assign&quot;)= int [1:2] 0 1
-  ..$ qraux: num [1:2] 1.15 1.04
-  ..$ pivot: int [1:2] 1 2
-  ..$ tol  : num 1e-07
-  ..$ rank : int 2
-  ..- attr(*, &quot;class&quot;)= chr &quot;qr&quot;
- $ df.residual  : int 43
- $ xlevels      : Named list()
- $ call         : language lm(formula = minutes ~ number, data = copier)
- $ terms        :Classes &#39;terms&#39;, &#39;formula&#39;  language minutes ~ number
-  .. ..- attr(*, &quot;variables&quot;)= language list(minutes, number)
-  .. ..- attr(*, &quot;factors&quot;)= int [1:2, 1] 0 1
-  .. .. ..- attr(*, &quot;dimnames&quot;)=List of 2
-  .. .. .. ..$ : chr [1:2] &quot;minutes&quot; &quot;number&quot;
-  .. .. .. ..$ : chr &quot;number&quot;
-  .. ..- attr(*, &quot;term.labels&quot;)= chr &quot;number&quot;
-  .. ..- attr(*, &quot;order&quot;)= int 1
-  .. ..- attr(*, &quot;intercept&quot;)= int 1
-  .. ..- attr(*, &quot;response&quot;)= int 1
-  .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_GlobalEnv&gt; 
-  .. ..- attr(*, &quot;predvars&quot;)= language list(minutes, number)
-  .. ..- attr(*, &quot;dataClasses&quot;)= Named chr [1:2] &quot;numeric&quot; &quot;numeric&quot;
-  .. .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;minutes&quot; &quot;number&quot;
- $ model        :&#39;data.frame&#39;:  45 obs. of  2 variables:
-  ..$ minutes: int [1:45] 20 60 46 41 12 137 68 89 4 32 ...
-  ..$ number : int [1:45] 2 4 3 2 1 10 5 5 1 2 ...
-  ..- attr(*, &quot;terms&quot;)=Classes &#39;terms&#39;, &#39;formula&#39;  language minutes ~ number
-  .. .. ..- attr(*, &quot;variables&quot;)= language list(minutes, number)
-  .. .. ..- attr(*, &quot;factors&quot;)= int [1:2, 1] 0 1
-  .. .. .. ..- attr(*, &quot;dimnames&quot;)=List of 2
-  .. .. .. .. ..$ : chr [1:2] &quot;minutes&quot; &quot;number&quot;
-  .. .. .. .. ..$ : chr &quot;number&quot;
-  .. .. ..- attr(*, &quot;term.labels&quot;)= chr &quot;number&quot;
-  .. .. ..- attr(*, &quot;order&quot;)= int 1
-  .. .. ..- attr(*, &quot;intercept&quot;)= int 1
-  .. .. ..- attr(*, &quot;response&quot;)= int 1
-  .. .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_GlobalEnv&gt; 
-  .. .. ..- attr(*, &quot;predvars&quot;)= language list(minutes, number)
-  .. .. ..- attr(*, &quot;dataClasses&quot;)= Named chr [1:2] &quot;numeric&quot; &quot;numeric&quot;
-  .. .. .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;minutes&quot; &quot;number&quot;
- - attr(*, &quot;class&quot;)= chr &quot;lm&quot;</code></pre>
-<pre class="r"><code>summary(copier.fit)</code></pre>
-<pre><code>
-Call:
-lm(formula = minutes ~ number, data = copier)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--22.7723  -3.7371   0.3334   6.3334  15.4039 
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  -0.5802     2.8039  -0.207    0.837    
-number       15.0352     0.4831  31.123   &lt;2e-16 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-
-Residual standard error: 8.914 on 43 degrees of freedom
-Multiple R-squared:  0.9575,    Adjusted R-squared:  0.9565 
-F-statistic: 968.7 on 1 and 43 DF,  p-value: &lt; 2.2e-16</code></pre>
-<pre class="r"><code>plot(minutes~number, data=copier)
-abline(-0.5802,15.0352)#by definition of the line abline(intercept, slope)
-#The following are alternative ways to draw the fitted regression line.
-lines(copier$number,-0.5802+15.0352*copier$number)#other way
-abline(copier.fit)#simple way</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/slr-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-slr-1">
-Past versions of slr-1.png
-</button>
-</p>
-<div id="fig-slr-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/slr-1.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>#ggplot2
-fitted(copier.fit)</code></pre>
-<pre><code>        1         2         3         4         5         6         7 
- 29.49034  59.56084  44.52559  29.49034  14.45509 149.77232  74.59608 
-        8         9        10        11        12        13        14 
- 74.59608  14.45509  29.49034 134.73708 149.77232  89.63133  44.52559 
-       15        16        17        18        19        20        21 
- 59.56084 119.70183 104.66658 119.70183 149.77232  59.56084  74.59608 
-       22        23        24        25        26        27        28 
-104.66658 104.66658  74.59608 134.73708 104.66658  29.49034  74.59608 
-       29        30        31        32        33        34        35 
-104.66658  89.63133 119.70183  74.59608  29.49034  29.49034  14.45509 
-       36        37        38        39        40        41        42 
- 59.56084  74.59608 134.73708 104.66658  14.45509 134.73708  29.49034 
-       43        44        45 
- 29.49034  59.56084  74.59608 </code></pre>
-<pre class="r"><code>copier$fitted=fitted(copier.fit)
-p &lt;- ggplot(copier,aes(x=number, y=minutes)) + 
-  geom_point()
-p</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/slr-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-slr-2">
-Past versions of slr-2.png
-</button>
-</p>
-<div id="fig-slr-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/slr-2.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>  #geom_line(aes(x=number,y=minutes)) try this and show
-  #the function of geom_line
-p &lt;- p + geom_line(aes(x=number,y=fitted))
-p</code></pre>
-<p><img src="figure/lab2_inclass_prac.Rmd/slr-3.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-slr-3">
-Past versions of slr-3.png
-</button>
-</p>
-<div id="fig-slr-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/69adea19aa2d5e5146e276c34599ebb05dffb5a5/docs/figure/lab2_inclass_prac.Rmd/slr-3.png" target="_blank">69adea1</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -2152,20 +1043,18 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] ggplot2_3.2.1   dplyr_0.8.3     workflowr_1.4.0
+[1] dplyr_0.8.3     workflowr_1.4.0
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.2       pillar_1.4.2     compiler_3.6.1   git2r_0.26.1    
- [5] tools_3.6.1      zeallot_0.1.0    digest_0.6.20    evaluate_0.14   
- [9] tibble_2.1.3     gtable_0.3.0     pkgconfig_2.0.2  rlang_0.4.0     
-[13] cli_1.1.0        yaml_2.2.0       xfun_0.9         withr_2.1.2     
-[17] stringr_1.4.0    knitr_1.24       fs_1.3.1         vctrs_0.2.0     
-[21] rprojroot_1.3-2  grid_3.6.1       tidyselect_0.2.5 glue_1.3.1      
-[25] R6_2.4.0         fansi_0.4.0      rmarkdown_1.15   purrr_0.3.2     
-[29] magrittr_1.5     whisker_0.3-2    backports_1.1.4  scales_1.0.0    
-[33] htmltools_0.3.6  assertthat_0.2.1 colorspace_1.4-1 labeling_0.3    
-[37] utf8_1.1.4       stringi_1.4.3    lazyeval_0.2.2   munsell_0.5.0   
-[41] crayon_1.3.4    </code></pre>
+ [1] Rcpp_1.0.2       knitr_1.24       whisker_0.3-2    magrittr_1.5    
+ [5] tidyselect_0.2.5 R6_2.4.0         rlang_0.4.0      fansi_0.4.0     
+ [9] stringr_1.4.0    tools_3.6.1      xfun_0.9         utf8_1.1.4      
+[13] cli_1.1.0        git2r_0.26.1     htmltools_0.3.6  yaml_2.2.0      
+[17] rprojroot_1.3-2  digest_0.6.20    assertthat_0.2.1 tibble_2.1.3    
+[21] crayon_1.3.4     purrr_0.3.2      vctrs_0.2.0      fs_1.3.1        
+[25] zeallot_0.1.0    glue_1.3.1       evaluate_0.14    rmarkdown_1.15  
+[29] stringi_1.4.3    compiler_3.6.1   pillar_1.4.2     backports_1.1.4 
+[33] pkgconfig_2.0.2 </code></pre>
 </div>
 </div>
 
@@ -2214,6 +1103,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
