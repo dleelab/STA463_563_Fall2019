@@ -3,7 +3,7 @@ title: "STA 463 & 563 Lab Sessions"
 site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
-    toc: false
+    toc: true
 editor_options:
   chunk_output_type: console
 ---
@@ -11,11 +11,15 @@ editor_options:
 #### Lab 1
 * [Lab Assignment 1 Solution](lab_assignment1_sol.html)
 
-#### Lab 2
+#### Lab 2: data type, EDA, dplyr
 * [In-class practice](lab2_inclass_prac.html)
+* [dplyr package](dplyr_prac.html)
 
-#### Lab 3
-#### Lab 4
+#### Lab 3: R basic plots, ggplot2, simple linear regression
+* [basic plots & ggplot2](Rplot_ggplot2_prac.html)
+* [simple linear regression](slr_prac.html)
+
+#### Lab 4:
 #### Lab 5
 
 
