@@ -1,0 +1,125 @@
+---
+title: "Simple Linear Regression Model"
+author: "Donghyung Lee"
+date: "`r Sys.Date()`"
+output: 
+  workflowr::wflow_html:
+    code_folding: show
+editor_options:
+  chunk_output_type: console
+---
+
+### Load data
+```{r prep}
+library(ggplot2)
+copier <- read.table("data/CH01PR20.txt")
+dim(copier)
+colnames(copier)=c("minutes","number")
+```
+
+### Simple Linear Regression
+```{r slr, eval=TRUE, echo=TRUE}
+copier.fit <- lm(minutes~number,data=copier)
+copier.fit
+class(copier.fit)
+str(copier.fit)
+summary(copier.fit)
+```
+### Fitted regression line (traditional R functions)
+```{r plot}
+plot(minutes~number, data=copier)
+abline(-0.5802,15.0352)#by definition of the line abline(intercept, slope)
+
+#The following are alternative ways to draw the fitted regression line.
+lines(copier$number,-0.5802+15.0352*copier$number)#other way
+
+abline(copier.fit)#simple way
+```
+
+### Fitted regression line (ggplot2)
+```{r ggplot}
+fitted(copier.fit)
+copier$fitted=fitted(copier.fit)
+p <- ggplot(copier,aes(x=number, y=minutes)) + 
+  geom_point()
+p
+
+p <- p + geom_line(aes(x=number,y=fitted))
+p
+```
+
+### Results of lm()
+Verify the lm() gives us the correct calculation result <br />
+
+1. Residual standard error=sqrt(MSE)=sqrt(SSE/n-2), n-2 is the degree of freedom. We can verify this later. <br />
+2. It gives a five number summary of the residuals, mean of residuals is? It's 0. We proved this during class. <br />
+3. Since residuals are estimates of errors, under normal error SLR, 
+we expect the residuals are also normally distributed. Are the residuals
+normally distribued? <br />
+<br />
+Question 1. How to get the residuals? <br />
+Question 2. How to get the estimated values? Are there other measures already calculated?
+
+
+### Attributes of fitted model
+```{r attributes}
+attributes(copier.fit)#There're many measures calculated by lm function. 
+```
+
+### Residuals
+```{r residuals}
+#For example, you can look at the residuals.
+#Verify the residual standard error, degree of freedom is correct.
+summary(copier.fit)
+res=copier.fit$residuals
+
+SSE=sum(res^2)
+df=nrow(copier)-2
+MSE=SSE/df
+sqrt(MSE) # Residual standard error
+c(SSE,df,MSE,sqrt(MSE))
+```
+
+### Distribution of residauls 
+```{r dist_res}
+#Have an idea whether the residuals have a normal distribution.
+plot(density(copier.fit$residuals),xlab="Residuals")
+
+#which observaiton has the smallest residual (in absolute value)
+absres=abs(res)
+
+pos=which(absres==min(absres))
+pos=which.min(absres) #an alternative way
+
+copier.fit$fitted.values[pos]#the fitted value corresponding to this point
+copier[pos,1]#the observed response of this observation
+# what is residual?
+```
+
+#### Practice
+```{r slr_iris}
+plot(iris$Sepal.Length, iris$Petal.Length)
+iris.fit <- lm(Sepal.Length~Petal.Length,data=iris)
+summary(iris.fit)
+
+## Add fitted line in the scatter plot.
+## SSE, df, MSE, RSE ?
+## distribution of residuals ?
+```
+
+### Beta0=0
+We can force Beta0 = 0. We do this in R by telling the lm() function to not include
+an intercept. We can do this with the 0 + option or the -1 option. See the examples below.
+```{r omit_beta0}
+
+lm(minutes ~ number, data=copier)
+lm(minutes ~ 0 + number, data=copier)
+lm(minutes ~ -1 + number, data=copier)
+```
+
+### Beta1=0
+Likewise, we could use the lm() function to fit a model with no slope, but specifying the predictor variables to be constants
+```{r omit_bete1}
+# when Beta1 = 0.
+lm(Sepal.Length ~ 1, data=iris)
+```
