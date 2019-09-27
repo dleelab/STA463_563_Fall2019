@@ -19,8 +19,9 @@ editor_options:
 * [basic plots & ggplot2](Rplot_ggplot2_prac.html)
 * [simple linear regression](slr_prac.html)
 
-#### Lab 4:
+#### Lab 4: SLR model, CalCOFI data, Confidence Interval
 * [SLR CalCOFI data](slr_calcofi.html)
+
 #### Lab 5
 
 
