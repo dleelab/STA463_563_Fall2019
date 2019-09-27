@@ -22,10 +22,14 @@ library(ggplot2)
 ```
 
 ### Load data
+temp: temperature (Celsius) <br />
+sal: salinity (amount of salt dissolved in a body of water) <br />
+depth: depth (meter)
 ```{r load_data}
 cofi <- read.table("https://raw.githubusercontent.com/dleelab/STA463_563_Fall2019/master/data/calcofi_500.csv", header=TRUE, sep = ",")
 head(cofi)
 dim(cofi)
+summary(cofi)
 ```
 
 ### pairwise scatter plot 
@@ -34,24 +38,24 @@ pairs(cofi)
 cor(cofi)
 ```
 
-### scatter plot, temp as a function of sal 
-temp: temperature (Celsius) <br />
-sal: salinity (amount of salt dissolved in a body of water) 
-depth: depth (meter)
+### scatter plots 
 ```{r scatter}
+# temperature as a function of salinity
 ggplot(cofi, aes(x=sal, y=temp, col=depth)) + 
   geom_point() +
   labs(x="Salinity", y="Temperature(C)", col = "Depth(m)")+
   theme_classic()
 
-ggplot(cofi, aes(x=sal, y=depth, col=temp)) + 
+#salinity as a function of depth
+ggplot(cofi, aes(x=depth, y=sal, col=temp)) + 
   geom_point() +
-  labs(x="Salinity", y="Depth(m)", col = "Temperature(C)")+
+  labs(x="Depth(m)", y="Salinity", col = "Temperature(C)")+
   theme_classic()
 
-ggplot(cofi, aes(x=sal, y=log10(depth), col=temp)) + 
+#salinity as a function of log10(depth)
+ggplot(cofi, aes(x=log10(depth), y=sal, col=temp)) + 
   geom_point() +
-  labs(x="Salinity", y="log10(Depth(m))", col = "Temperature(C)")+
+  labs(x="log10(Depth(m))", y="Salinity", col = "Temperature(C)")+
   theme_classic()
 ```
 
