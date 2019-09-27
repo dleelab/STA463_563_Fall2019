@@ -143,6 +143,7 @@ cofi.fit$coefficients[1]+tval*sqrt(MSE*(1/n+mean(cofi$sal)^2/Sxx)) #upper bound
 ```{r manu_sol}
 # Residual
 hist(cofi.fit$residuals)
+plot(density(cofi.fit$residuals), xlab="Residuals")
 # Sum of residuals
 sum(cofi.fit$residuals)
 # Residual Sum of Squares
