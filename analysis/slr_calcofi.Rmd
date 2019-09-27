@@ -136,7 +136,7 @@ cofi.fit$coefficients[1]+tval*sqrt(MSE*(1/n+mean(cofi$sal)^2/Sxx)) #upper bound
 
 
 ### Solutions: Calculate these manually.
-```{r manu}
+```{r manu_sol}
 # Residual
 hist(cofi.fit$residuals)
 # Sum of residuals
