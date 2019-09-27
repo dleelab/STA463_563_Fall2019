@@ -1,0 +1,133 @@
+---
+title: "SLR - CalCOFI data"
+author: "Donghyung Lee"
+date: "`r Sys.Date()`"
+output: 
+  workflowr::wflow_html:
+    code_folding: show
+editor_options:
+  chunk_output_type: console
+---
+
+### CalCOFI data
+"The CalCOFI data set represents the longest (1949-present) and most complete (more than 50,000 sampling stations) time series of oceanographic and larval fish data in the world. It includes abundance data on the larvae of over 250 species of fish; larval length frequency data and egg abundance data on key commercial species; and oceanographic and plankton data. The physical, chemical, and biological data collected at regular time and space intervals quickly became valuable for documenting climatic cycles in the California Current and a range of biological responses to them. CalCOFI research drew world attention to the biological response to the dramatic Pacific-warming event in 1957-58 and introduced the term “El Niño” into the scientific literature." <br />
+
+Here, we use only 500 observations to speed up calculation.
+
+You can download orignial data from: https://www.kaggle.com/sohier/calcofi 
+
+### Load package
+```{r package}
+library(ggplot2)
+```
+
+### Load data
+```{r load_data}
+cofi <- read.table("https://raw.githubusercontent.com/dleelab/STA463_563_Fall2019/master/data/calcofi_500.csv", header=TRUE, sep = ",")
+head(cofi)
+dim(cofi)
+```
+
+### pairwise scatter plot 
+```{r plots}
+pairs(cofi)
+cor(cofi)
+```
+
+### scatter plot, temp as a function of sal 
+temp: temperature (Celsius) <br />
+sal: salinity (amount of salt dissolved in a body of water) 
+depth: depth (meter)
+```{r scatter}
+ggplot(cofi, aes(x=sal, y=temp, col=depth)) + 
+  geom_point() +
+  labs(x="Salinity", y="Temperature(C)", col = "Depth(m)")+
+  theme_classic()
+
+ggplot(cofi, aes(x=sal, y=depth, col=temp)) + 
+  geom_point() +
+  labs(x="Salinity", y="Depth(m)", col = "Temperature(C)")+
+  theme_classic()
+
+ggplot(cofi, aes(x=sal, y=log10(depth), col=temp)) + 
+  geom_point() +
+  labs(x="Salinity", y="log10(Depth(m))", col = "Temperature(C)")+
+  theme_classic()
+```
+
+### SLR model, temp as a function of sal
+```{r slr, eval=TRUE, echo=TRUE}
+cofi.fit <- lm(temp~sal,data=cofi)
+cofi.fit
+```
+
+### Add the fitted line to the scatter plot
+```{r fitted}
+ggplot(cofi, aes(x=sal, y=temp, col=depth)) + 
+  geom_point() +
+  geom_smooth(method='lm') +
+  labs(x="Salinity", y="Temperature(C)", col = "Depth(m)")+
+  theme_classic()
+```
+
+### Summary of lm() output
+```{r summ}
+summary(cofi.fit)
+```
+
+### Questions
+
+Q1. What is sample size?
+
+Q2. What is b0 value?
+
+Q3. What is b1 value?
+
+Q4. What is fitted regression line?
+
+Q5. Test statistic value for a hypothesis test on Beta0 ?
+
+Q6. Test statistic value for a hypothesis test on Beta1?
+
+Q7. What is MSE?
+
+### Calculate these manually.
+```{r manu}
+# Residual
+# Sum of residuals
+# Residual Sum of Squares
+# SSE
+# DF
+# MSE
+# Residual Standard Error: sqrt(MSE)
+```
+
+### Confidence Interval of beta0 and beta1
+```{r ci}
+confint(cofi.fit)
+```
+
+### Manually calculate CI for beta1
+```{r ci_menu_beta1}
+# b1 +- T(1-alpha/2,n-2)*sqrt(MSE/Sxx)
+MSE <- sum(cofi.fit$residuals^2)/cofi.fit$df.residual
+Sxx <- sum((cofi$sal-mean(cofi$sal))^2)
+tval <- qt(.975, df=cofi.fit$df.residual)
+
+cofi.fit$coefficients[2]-tval*sqrt(MSE/Sxx) #lower bound
+cofi.fit$coefficients[2]+tval*sqrt(MSE/Sxx) #upper bound
+```
+
+### Manually calculate CI for beta0
+```{r ci_menu_beta0}
+# b1 +- T(1-alpha/2,n-2)*sqrt(MSE*(1/n+mean(x)^2/Sxx))
+MSE <- sum(cofi.fit$residuals^2)/cofi.fit$df.residual
+Sxx <- sum((cofi$sal-mean(cofi$sal))^2)
+n <- nrow(cofi)
+tval <- qt(.975, df=cofi.fit$df.residual)
+
+cofi.fit$coefficients[1]-tval*sqrt(MSE*(1/n+mean(cofi$sal)^2/Sxx)) #lower bound
+cofi.fit$coefficients[1]+tval*sqrt(MSE*(1/n+mean(cofi$sal)^2/Sxx)) #upper bound
+```
+
+
