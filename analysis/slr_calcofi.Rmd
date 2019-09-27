@@ -100,6 +100,10 @@ Q7. What is MSE?
 # DF
 # MSE
 # Residual Standard Error: sqrt(MSE)
+# cor(sal, temp)
+# Sxx
+# Syy 
+# Compute cor(sal, temp) using b1, Sxx and Syy
 ```
 
 ### Confidence Interval of beta0 and beta1
@@ -131,3 +135,30 @@ cofi.fit$coefficients[1]+tval*sqrt(MSE*(1/n+mean(cofi$sal)^2/Sxx)) #upper bound
 ```
 
 
+### Solutions: Calculate these manually.
+```{r manu}
+# Residual
+hist(cofi.fit$residuals)
+# Sum of residuals
+sum(cofi.fit$residuals)
+# Residual Sum of Squares
+RSS <- sum(cofi.fit$residuals^2)
+# SSE
+SSE <- sum(cofi.fit$residuals^2)
+# DF
+DF <- cofi.fit$df.residual
+# MSE
+MSE <- SSE/DF
+# Residual Standard Error: sqrt(MSE)
+RSE <- sqrt(MSE)
+# cor(sal, temp)
+cor(cofi$sal, cofi$temp)
+# Sxx
+Sxx <- sum((cofi$sal-mean(cofi$sal))^2)
+# Syy 
+Syy <- sum((cofi$temp-mean(cofi$temp))^2)
+# Compute cor(sal, temp) using b1, Sxx and Syy
+r <- cofi.fit$coefficients[2]*sqrt(Sxx/Syy)
+r
+cor(cofi$sal, cofi$temp)
+```
