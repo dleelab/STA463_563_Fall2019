@@ -20,6 +20,7 @@ editor_options:
 * [simple linear regression](slr_prac.html)
 
 #### Lab 4:
+* [SLR CalCOFI data](slr_calcofi.html)
 #### Lab 5
 
 
