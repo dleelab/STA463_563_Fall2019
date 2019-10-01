@@ -11,25 +11,25 @@ editor_options:
 
 Upload a pdf file or word file in Canvas generated using R markdown. You should clearly label the question number, include the r code, the output and any necessary explanation in your file. The plots should be made using ggplot2 package.
 
-### Load CalCOFI data using the following R codes:
+#### Load CalCOFI data using the following R codes:
 ```{r prep}
 cofi <- read.table("https://raw.githubusercontent.com/dleelab/STA463_563_Fall2019/master/data/calcofi_500.csv", header=TRUE, sep = ",")
 head(cofi)
 ```
 
-### Question 1 (1pt) Descriptive statistics for all variables in the data.
+#### Question 1 (1pt) Descriptive statistics for all variables in the data.
 
-### Question 2 (1pt) A density plot for one of the variables.
+#### Question 2 (1pt) A density plot for one of the variables.
 
-### Question 3 (1pt) A scatter plot of salinity and log10(depth+1), use "salinity" as X-axis.
+#### Question 3 (1pt) A scatter plot of salinity and log10(depth+1), use "salinity" as X-axis.
 
-### Question 4 (1pt) A correlation matrix of salinity and log10(depth+1).
+#### Question 4 (1pt) A correlation matrix of salinity and log10(depth+1).
 
-### Question 5 (1pt) Use the lm() function in R, fit a simple linear regression using "salinity" as response and log10(depth+1) as predictor. Report the value of b0 and b1 in fitted simple linear regression equation.
+#### Question 5 (1pt) Use the lm() function in R, fit a simple linear regression using "salinity" as response and log10(depth+1) as predictor. Report the value of b0 and b1 in fitted simple linear regression equation.
 
-### Question 6 (1pt) Verify the sum of the residuals equals to 0.
+#### Question 6 (1pt) Verify the sum of the residuals equals to 0.
 
-### Question 7 (1pt) Make a density plot for the residuals.
+#### Question 7 (1pt) Make a density plot for the residuals.
 
-### Question 8 (3pt) Instead of using lm(), use R code to calculate b0 and b1 based on the formula we discussed in class. Verify the values match the results using the lm() function.
+#### Question 8 (3pt) Instead of using lm(), use R code to calculate b0 and b1 based on the formula we discussed in class. Verify the values match the results using the lm() function.
 
