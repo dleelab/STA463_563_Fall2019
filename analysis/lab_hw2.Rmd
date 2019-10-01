@@ -18,57 +18,18 @@ head(cofi)
 ```
 
 ### Question 1 (1pt) Descriptive statistics for all variables in the data.
-```{r Q1, echo=FALSE, eval=FALSE}
-summary(cofi)
-```
 
 ### Question 2 (1pt) A density plot for one of the variables.
-```{r Q2, echo=FALSE, eval=FALSE}
-library(ggplot2)
-ggplot(cofi, aes(x=sal)) + geom_density()
-
-library(ggplot2)
-ggplot(cofi, aes(x=temp)) + geom_density()
-
-library(ggplot2)
-ggplot(cofi, aes(x=depth)) + geom_density()
-```
 
 ### Question 3 (1pt) A scatter plot of salinity and log10(depth+1), use "salinity" as X-axis.
-```{r Q3, echo=FALSE, eval=FALSE}
-ggplot(cofi, aes(x=sal, y=log10(depth+1))) + geom_point() + theme_classic()
-```
 
 ### Question 4 (1pt) A correlation matrix of salinity and log10(depth+1).
-```{r Q4, echo=FALSE, eval=FALSE}
-cofi$log10depth <- log10(cofi$depth+1)
-cor(cofi[,c(1,4)])
-```
 
 ### Question 5 (1pt) Use the lm() function in R, fit a simple linear regression using "salinity" as response and log10(depth+1) as predictor. Report the value of b0 and b1 in fitted simple linear regression equation.
-```{r Q5, echo=FALSE, eval=FALSE}
-cofi.fit <- lm(sal~log10depth, data=cofi)
-summary(cofi.fit)
-```
 
 ### Question 6 (1pt) Verify the sum of the residuals equals to 0.
-```{r Q6, echo=FALSE, eval=FALSE}
-sum(cofi.fit$residuals)
-```
 
 ### Question 7 (1pt) Make a density plot for the residuals.
-```{r Q7, echo=FALSE, eval=FALSE}
-ggplot(cofi.fit, aes(x=cofi.fit$residuals)) + geom_density() 
-```
 
 ### Question 8 (3pt) Instead of using lm(), use R code to calculate b0 and b1 based on the formula we discussed in class. Verify the values match the results using the lm() function.
-```{r Q8, echo=FALSE, eval=FALSE}
-Sxx <- sum((cofi$log10depth-mean(cofi$log10depth))^2)
-Sxx
-Sxy <- sum((cofi$log10depth-mean(cofi$log10depth))*(cofi$sal-mean(cofi$sal)))
-Sxy
-b1 <- Sxy/Sxx
-b1
-b0 <- mean(cofi$sal)-b1*mean(cofi$log10depth)
-b0
-```
+
