@@ -1,0 +1,74 @@
+---
+title: "Lab Assignment 2 (Due Oct 8 Tuesday)"
+author: "Donghyung Lee"
+date: "`r Sys.Date()`"
+output: 
+  workflowr::wflow_html:
+    code_folding: show
+editor_options:
+  chunk_output_type: console
+---
+
+Upload a pdf file or word file in Canvas generated using R markdown. You should clearly label the question number, include the r code, the output and any necessary explanation in your file. The plots should be made using ggplot2 package.
+
+#### Load CalCOFI data using the following R codes:
+```{r prep}
+cofi <- read.table("https://raw.githubusercontent.com/dleelab/STA463_563_Fall2019/master/data/calcofi_500.csv", header=TRUE, sep = ",")
+head(cofi)
+```
+
+#### Question 1 (1pt) Descriptive statistics for all variables in the data.
+```{r Q1}
+summary(cofi)
+```
+
+#### Question 2 (1pt) A density plot for one of the variables.
+```{r Q2}
+library(ggplot2)
+ggplot(cofi, aes(x=sal)) + geom_density()
+
+library(ggplot2)
+ggplot(cofi, aes(x=temp)) + geom_density()
+
+library(ggplot2)
+ggplot(cofi, aes(x=depth)) + geom_density()
+```
+
+#### Question 3 (1pt) A scatter plot of salinity and log10(depth+1), use "salinity" as X-axis.
+```{r Q3}
+ggplot(cofi, aes(x=sal, y=log10(depth+1))) + geom_point() + theme_classic()
+```
+
+#### Question 4 (1pt) A correlation matrix of salinity and log10(depth+1).
+```{r Q4}
+cofi$log10depth <- log10(cofi$depth+1)
+cor(cofi[,c(1,4)])
+```
+
+#### Question 5 (1pt) Use the lm() function in R, fit a simple linear regression using "salinity" as response and log10(depth+1) as predictor. Report the value of b0 and b1 in fitted simple linear regression equation.
+```{r Q5}
+cofi.fit <- lm(sal~log10depth, data=cofi)
+summary(cofi.fit)
+```
+
+#### Question 6 (1pt) Verify the sum of the residuals equals to 0.
+```{r Q6}
+sum(cofi.fit$residuals)
+```
+
+#### Question 7 (1pt) Make a density plot for the residuals.
+```{r Q7}
+ggplot(cofi.fit, aes(x=cofi.fit$residuals)) + geom_density() 
+```
+
+#### Question 8 (3pt) Instead of using lm(), use R code to calculate b0 and b1 based on the formula we discussed in class. Verify the values match the results using the lm() function.
+```{r Q8}
+Sxx <- sum((cofi$log10depth-mean(cofi$log10depth))^2)
+Sxx
+Sxy <- sum((cofi$log10depth-mean(cofi$log10depth))*(cofi$sal-mean(cofi$sal)))
+Sxy
+b1 <- Sxy/Sxx
+b1
+b0 <- mean(cofi$sal)-b1*mean(cofi$log10depth)
+b0
+```
