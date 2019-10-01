@@ -21,6 +21,10 @@ editor_options:
 
 #### Lab 4: SLR model, CalCOFI data, Confidence Interval
 * [SLR CalCOFI data](slr_calcofi.html)
+* [Lab assignment 2](lab_hw2.html)
+<!--
+  * [Lab assignment 2 sol](lab_hw2_sol.html) 
+-->
 
 #### Lab 5
 
