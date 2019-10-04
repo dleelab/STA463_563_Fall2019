@@ -26,7 +26,8 @@ editor_options:
   * [Lab assignment 2 sol](lab_hw2_sol.html) 
 -->
 
-#### Lab 5
+#### Lab 5: Confidence Interval, Prediction Interval
+* [Confidence/Prediction Intervals](intervals.html)
 
 
 
