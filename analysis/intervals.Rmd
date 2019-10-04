@@ -1,0 +1,194 @@
+---
+title: "Confidence, Prediction Intervals"
+author: "Donghyung Lee"
+date: "`r Sys.Date()`"
+output: 
+  workflowr::wflow_html:
+    code_folding: show
+editor_options:
+  chunk_output_type: console
+---
+
+In this lab, we will talk about the following: <br />
+1. The confidendence intervals for parameters. <br />
+2. Confidence intervals for mean of response when predictor $X$ is equal to specific value $X_h$, the prediction interval for a new observation when $X=X_h$. <br />
+3. Plots of pointwise confidence/prediciton intervals. <br />
+4. Add the predicted response on the graph for new data. <br />
+5. Descriptive measures considering the linear association.
+
+### 1. Confidence Intervals for Parameters
+```{r}
+data0120=read.table("http://www.stat.ufl.edu/~rrandles/sta4210/Rclassnotes/data/textdatasets/KutnerData/Chapter%20%201%20Data%20Sets/CH01PR20.txt")
+colnames(data0120)=c("minutes","number")
+fit=lm(minutes~number,data=data0120)
+confint(fit,,0.95)
+confint(fit,2,.95)
+```
+
+### 2. Confidence Intervals or Prediction Intervals When $X=X_h$
+#### 2.a. Confidence Intervals for Mean of Response When $X=X_h$.
+Get a 95\% confidence interval for the mean minutes took if the number of copiers serviced=15 and 12.
+```{r}
+new=data.frame(number=c(15,12))
+predict(fit,new,interval="confidence",level = 0.95)
+```
+
+#### 2.b. Prediction Interval for a New Observation When $X=X_h$.
+Get a 95\% prediction interval for the service time in minutes of a service call with 15 or 12 copiers serviced.
+```{r}
+predict(fit,new,interval="prediction",level=0.95)
+```
+
+#### 2.c. Look at One Issue of Using Predict Function
+```{r}
+ofit=lm(circumference~age,data=Orange)
+predict(ofit,data.frame(age=600),interval="confidence",level=0.95)#by default is 95%
+
+ofit2<-lm(Orange$circumference~Orange$age)
+predict(ofit2,data.frame(age=600),interval="confidence",level=0.95)
+```
+The second code gives very strange output. We want one confidence interval, but it gives us many. This is an issue about using different names when referring to different predictor variables. Look at the following ofit3 to understand how to make a correct fit better.
+```{r}
+a=Orange$circumference
+x=Orange$age
+#here you use x as a name
+ofit3=lm(a ~ x) 
+#here you use x again as a name in newdata.
+predict(ofit3, data.frame(x=600), interval = "confidence",level=0.95)
+```
+#### 2.d. We can also let $X_h$ equal to more complex values.
+```{r}
+predict(ofit,data.frame(age=mean(Orange$age)), interval="confidence",level=0.95)
+```
+
+### 3. Plots of Pointwise Confidence/Prediciton Intervals
+#### Traditional R plot
+```{r}
+conf.band <- predict(fit, interval="confidence")
+pred.band <- predict(fit, interval="prediction")
+class(conf.band)
+plot(minutes~number,data=data0120)
+abline(fit)
+lines(data0120$number, conf.band[,2])
+lines(data0120$number, conf.band[,3])
+```
+R used line to connect points, but they overlap with each other. How to fix? We need to sort the data first, then connect them. 
+
+```{r}
+plot(minutes~number,data=data0120)
+abline(fit)
+lines(sort(data0120$number), sort(conf.band[,2]),col="red",lty=3)
+lines(sort(data0120$number), sort(conf.band[,3]),col="red",lty=3)
+```
+
+Add the prediction band to it. Use a different color.
+```{r}
+plot(minutes~number,data=data0120)
+abline(fit)
+lines(sort(data0120$number), sort(conf.band[,2]),col="red",lty=2)
+lines(sort(data0120$number), sort(conf.band[,3]),col="red",lty=2)
+lines(sort(data0120$number), sort(pred.band[,2]),col="blue",lty=3)
+lines(sort(data0120$number), sort(pred.band[,3]),col="blue",lty=3)
+```
+
+#### Use ggplot2
+We can do the same thing in ggplot.
+First a plot of the data with the linear model (lm) with confidence band.
+```{r}
+library(ggplot2)
+ggplot(data0120) +
+  geom_point(aes(x=number, y=minutes)) +
+  geom_smooth(method=lm, se=TRUE, aes(x=number, y=minutes))
+```
+
+To add the prediction bands we need to add something to the data. Column bind the output from the predict function to the dataset we are send into the ggplot function.  Then we'll simply draw some extra lines
+
+```{r}
+ggplot(cbind(data0120, pred.band) ) +
+  geom_point(aes(x=number, y=minutes)) +
+  geom_smooth(method=lm, se=TRUE, aes(x=number, y=minutes))+
+  geom_line(aes(x=number, y=lwr), col="red", linetype="dashed") +
+  geom_line(aes(x=number, y=upr), col="red", linetype="dashed")
+```
+
+### 4. Add the Predicted Response on the Graph for New Data
+We will predict the response value for some new predict variable values. We will also calculate the prediction interval to demonstrate the behavior far from our dataset. We will also demonstrate a limitation of base R graphics in the process.
+
+First prepare the new data and calculate the predicted value using this new data.
+```{r}
+new.number<- data.frame(number=c(0, 1.0, 4, 7,12))
+new.pred <- predict(fit, newdata=new.number, interval="prediction")
+new.number.pred <- cbind(new.number, new.pred)
+new.number.pred
+```
+
+#### Traditional R plot
+
+
+```{r}
+plot(minutes~number,data=data0120)
+abline(fit)
+points(new.number.pred$number, new.number.pred$fit, col="red", pch=8)
+lines(sort(data0120$number), sort(pred.band[,2]),col="red",lty=2)
+lines(sort(data0120$number), sort(pred.band[,3]),col="red",lty=2)
+```
+
+The above does not show all the information. Need to edit the plot function.
+```{r}
+plot(minutes~number,data=data0120,xlim=c(-2,12.5),ylim=c(-5,260))
+abline(fit)
+points(new.number.pred$number, new.number.pred$fit, col="red", pch=8)
+lines(sort(data0120$number), sort(pred.band[,2]),col="red",lty=2)
+lines(sort(data0120$number), sort(pred.band[,3]),col="red",lty=2)
+```
+
+#### Use ggplot2
+```{r}
+ggplot(data0120) +
+  geom_point(aes(x=number, y=minutes)) +
+  geom_smooth(method=lm, se=TRUE, aes(x=number, y=minutes)) +
+  geom_point(data=new.number.pred, aes(x=number, y=fit), col="red", shape=8, size=2) + 
+  geom_line(data=new.number.pred, aes(x=number, y=lwr), col="red", linetype="dashed") + 
+  geom_line(data=new.number.pred, aes(x=number, y=upr), col="red", linetype="dashed") 
+```
+
+Use the ggplot, it will automatically cover the new data point.
+
+
+### 5. Descriptive Measures of Linear Association between $X$ and $Y$, that is $R^2$ and $r$ 
+#### 5.a. Options to Quantify the Size of $Y_i-\hat{Y_i}$ 
+Residual standard error is an estimate of the standard deviation of $\epsilon$, $\sqrt{MSE}$. It tells the amount of the variation that a fitted regression line fails to account for. However, it depends on the scale of the $Y$s. See the following example.
+
+##### Example 1. Minutes and number of copiers (data0120).
+```{r}
+summary(fit)
+plot(minutes~number,data=data0120)
+abline(fit)
+```
+
+##### Example 2. First year college GPA and ACT score (data0119).
+```{r}
+data0119=read.table("http://www.stat.ufl.edu/~rrandles/sta4210/Rclassnotes/data/textdatasets/KutnerData/Chapter%20%201%20Data%20Sets/CH01PR19.txt")
+colnames(data0119)=c("Y","X")
+fit2=lm(Y~X,data=data0119)
+summary(fit2)
+plot(Y~X,data=data0119)
+abline(fit2)
+```
+
+Look at the two graphs and residual standard errors. Which example seems to have a more clear linear association? Which example has a smaller residual standard error?
+
+**Example 1: Residual standard error: 8.914 on 43 degrees of freedom.**
+
+**Example 2: Residual standard error: 0.6231 on 118 degrees of freedom.**
+
+Explanation: The scales of the response variable are different. 
+
+#### 5.b. We Seek a Descriptive measures of How Well the Fitted Model Explains the Observed Response. 
+* \[R^2=\frac{SSR}{SST}=1-\frac{SSE}{SST}\]
+* $R^2$ is the proportion of total variation in the response that is explained by the model. 
+* \[0\leq R^2 \leq 1\]
+* $R^2$ is not an estimate of any parameter, but rather a descriptive number about the **goodness of fit** of a model.
+* An $R^2$ value of 1 implies a perfect fit of the observed data to the line. That is, all the points fall perfectly on a line.
+* An $R^2$ value of 0 does not imply there's no relationship, just that there's no linear relationship. There could be nonlinear relationship. Plot your data to avoid this misinterpretation. 
+* $R^2$ does not tell us the directiion of the relationship (whether it's positive or negative)
