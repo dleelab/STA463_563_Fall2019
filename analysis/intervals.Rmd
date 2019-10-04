@@ -22,7 +22,10 @@ data0120=read.table("http://www.stat.ufl.edu/~rrandles/sta4210/Rclassnotes/data/
 colnames(data0120)=c("minutes","number")
 fit=lm(minutes~number,data=data0120)
 confint(fit,,0.95)
+confint(fit,1,.95)
 confint(fit,2,.95)
+confint(fit,"(Intercept)",.95)
+confint(fit,"number",.95)
 ```
 
 ### 2. Confidence Intervals or Prediction Intervals When $X=X_h$
@@ -30,6 +33,7 @@ confint(fit,2,.95)
 Get a 95\% confidence interval for the mean minutes took if the number of copiers serviced=15 and 12.
 ```{r}
 new=data.frame(number=c(15,12))
+new
 predict(fit,new,interval="confidence",level = 0.95)
 ```
 
@@ -123,7 +127,6 @@ new.number.pred
 ```
 
 #### Traditional R plot
-
 
 ```{r}
 plot(minutes~number,data=data0120)
