@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Donghyung Lee" />
+
+<meta name="date" content="2019-10-04" />
+
+<title>Confidence, Prediction Intervals</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">STA463/563 Fall 2019</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="https://github.com/dleelab/STA463_563_Fall2019">GitHub</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Confidence, Prediction Intervals</h1>
+<h4 class="author">Donghyung Lee</h4>
+<h4 class="date">2019-10-04</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#confidence-intervals-for-parameters">1. Confidence Intervals for Parameters</a></li>
+<li><a href="#confidence-intervals-or-prediction-intervals-when-xx_h">2. Confidence Intervals or Prediction Intervals When <span class="math inline">\(X=X_h\)</span></a></li>
+<li><a href="#plots-of-pointwise-confidenceprediciton-intervals">3. Plots of Pointwise Confidence/Prediciton Intervals</a></li>
+<li><a href="#add-the-predicted-response-on-the-graph-for-new-data">4. Add the Predicted Response on the Graph for New Data</a></li>
+<li><a href="#descriptive-measures-of-linear-association-between-x-and-y-that-is-r2-and-r">5. Descriptive Measures of Linear Association between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, that is <span class="math inline">\(R^2\)</span> and <span class="math inline">\(r\)</span></a></li>
+</ul>
+</div>
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2019-10-04
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>STA_463_563_Fall2019/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.4.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20190905code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20190905)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20190905code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20190905)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019treefccef14ae8c6ff221377f43376592af832ea5809targetblankfccef14a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dleelab/STA463_563_Fall2019/tree/fccef14ae8c6ff221377f43376592af832ea5809" target="_blank">fccef14</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019treefccef14ae8c6ff221377f43376592af832ea5809targetblankfccef14a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+
+Untracked files:
+    Untracked:  docs/figure/intervals.Rmd/
+    Untracked:  docs/figure/lab_hw2_sol.Rmd/
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/fccef14ae8c6ff221377f43376592af832ea5809/analysis/intervals.Rmd" target="_blank">fccef14</a>
+</td>
+<td>
+dleelab
+</td>
+<td>
+2019-10-04
+</td>
+<td>
+updated
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/b1f7a6dd85d653808181c182a491f4ac46288126/analysis/intervals.Rmd" target="_blank">b1f7a6d</a>
+</td>
+<td>
+dleelab
+</td>
+<td>
+2019-10-04
+</td>
+<td>
+created
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<p>In this lab, we will talk about the following: <br /> 1. The confidendence intervals for parameters. <br /> 2. Confidence intervals for mean of response when predictor <span class="math inline">\(X\)</span> is equal to specific value <span class="math inline">\(X_h\)</span>, the prediction interval for a new observation when <span class="math inline">\(X=X_h\)</span>. <br /> 3. Plots of pointwise confidence/prediciton intervals. <br /> 4. Add the predicted response on the graph for new data. <br /> 5. Descriptive measures considering the linear association.</p>
+<div id="confidence-intervals-for-parameters" class="section level3">
+<h3>1. Confidence Intervals for Parameters</h3>
+<pre class="r"><code>data0120=read.table(&quot;http://www.stat.ufl.edu/~rrandles/sta4210/Rclassnotes/data/textdatasets/KutnerData/Chapter%20%201%20Data%20Sets/CH01PR20.txt&quot;)
+colnames(data0120)=c(&quot;minutes&quot;,&quot;number&quot;)
+fit=lm(minutes~number,data=data0120)
+confint(fit,,0.95)</code></pre>
+<pre><code>                2.5 %    97.5 %
+(Intercept) -6.234843  5.074529
+number      14.061010 16.009486</code></pre>
+<pre class="r"><code>confint(fit,1,.95)</code></pre>
+<pre><code>                2.5 %   97.5 %
+(Intercept) -6.234843 5.074529</code></pre>
+<pre class="r"><code>confint(fit,2,.95)</code></pre>
+<pre><code>          2.5 %   97.5 %
+number 14.06101 16.00949</code></pre>
+<pre class="r"><code>confint(fit,&quot;(Intercept)&quot;,.95)</code></pre>
+<pre><code>                2.5 %   97.5 %
+(Intercept) -6.234843 5.074529</code></pre>
+<pre class="r"><code>confint(fit,&quot;number&quot;,.95)</code></pre>
+<pre><code>          2.5 %   97.5 %
+number 14.06101 16.00949</code></pre>
+</div>
+<div id="confidence-intervals-or-prediction-intervals-when-xx_h" class="section level3">
+<h3>2. Confidence Intervals or Prediction Intervals When <span class="math inline">\(X=X_h\)</span></h3>
+<div id="a.-confidence-intervals-for-mean-of-response-when-xx_h." class="section level4">
+<h4>2.a. Confidence Intervals for Mean of Response When <span class="math inline">\(X=X_h\)</span>.</h4>
+<p>Get a 95% confidence interval for the mean minutes took if the number of copiers serviced=15 and 12.</p>
+<pre class="r"><code>new=data.frame(number=c(15,12))
+new</code></pre>
+<pre><code>  number
+1     15
+2     12</code></pre>
+<pre class="r"><code>predict(fit,new,interval=&quot;confidence&quot;,level = 0.95)</code></pre>
+<pre><code>       fit      lwr      upr
+1 224.9486 214.9487 234.9484
+2 179.8428 172.6162 187.0694</code></pre>
+</div>
+<div id="b.-prediction-interval-for-a-new-observation-when-xx_h." class="section level4">
+<h4>2.b. Prediction Interval for a New Observation When <span class="math inline">\(X=X_h\)</span>.</h4>
+<p>Get a 95% prediction interval for the service time in minutes of a service call with 15 or 12 copiers serviced.</p>
+<pre class="r"><code>predict(fit,new,interval=&quot;prediction&quot;,level=0.95)</code></pre>
+<pre><code>       fit      lwr      upr
+1 224.9486 204.3785 245.5186
+2 179.8428 160.4688 199.2169</code></pre>
+</div>
+<div id="c.-look-at-one-issue-of-using-predict-function" class="section level4">
+<h4>2.c. Look at One Issue of Using Predict Function</h4>
+<pre class="r"><code>ofit=lm(circumference~age,data=Orange)
+predict(ofit,data.frame(age=600),interval=&quot;confidence&quot;,level=0.95)#by default is 95%</code></pre>
+<pre><code>       fit      lwr      upr
+1 81.46185 71.66058 91.26311</code></pre>
+<pre class="r"><code>ofit2&lt;-lm(Orange$circumference~Orange$age)
+predict(ofit2,data.frame(age=600),interval=&quot;confidence&quot;,level=0.95)</code></pre>
+<pre><code>Warning: &#39;newdata&#39; had 1 row but variables found have 35 rows</code></pre>
+<pre><code>         fit       lwr       upr
+1   29.99855  14.18732  45.80978
+2   69.07649  58.07322  80.07976
+3   88.29515  79.04667  97.54362
+4  124.59706 116.31822 132.87590
+5  148.83392 139.15468 158.51317
+6  163.88854 152.75204 175.02503
+7  186.31030 172.52264 200.09797
+8   29.99855  14.18732  45.80978
+9   69.07649  58.07322  80.07976
+10  88.29515  79.04667  97.54362
+11 124.59706 116.31822 132.87590
+12 148.83392 139.15468 158.51317
+13 163.88854 152.75204 175.02503
+14 186.31030 172.52264 200.09797
+15  29.99855  14.18732  45.80978
+16  69.07649  58.07322  80.07976
+17  88.29515  79.04667  97.54362
+18 124.59706 116.31822 132.87590
+19 148.83392 139.15468 158.51317
+20 163.88854 152.75204 175.02503
+21 186.31030 172.52264 200.09797
+22  29.99855  14.18732  45.80978
+23  69.07649  58.07322  80.07976
+24  88.29515  79.04667  97.54362
+25 124.59706 116.31822 132.87590
+26 148.83392 139.15468 158.51317
+27 163.88854 152.75204 175.02503
+28 186.31030 172.52264 200.09797
+29  29.99855  14.18732  45.80978
+30  69.07649  58.07322  80.07976
+31  88.29515  79.04667  97.54362
+32 124.59706 116.31822 132.87590
+33 148.83392 139.15468 158.51317
+34 163.88854 152.75204 175.02503
+35 186.31030 172.52264 200.09797</code></pre>
+<p>The second code gives very strange output. We want one confidence interval, but it gives us many. This is an issue about using different names when referring to different predictor variables. Look at the following ofit3 to understand how to make a correct fit better.</p>
+<pre class="r"><code>a=Orange$circumference
+x=Orange$age
+#here you use x as a name
+ofit3=lm(a ~ x) 
+#here you use x again as a name in newdata.
+predict(ofit3, data.frame(x=600), interval = &quot;confidence&quot;,level=0.95)</code></pre>
+<pre><code>       fit      lwr      upr
+1 81.46185 71.66058 91.26311</code></pre>
+</div>
+<div id="d.-we-can-also-let-x_h-equal-to-more-complex-values." class="section level4">
+<h4>2.d. We can also let <span class="math inline">\(X_h\)</span> equal to more complex values.</h4>
+<pre class="r"><code>predict(ofit,data.frame(age=mean(Orange$age)), interval=&quot;confidence&quot;,level=0.95)</code></pre>
+<pre><code>       fit      lwr      upr
+1 115.8571 107.6939 124.0204</code></pre>
+</div>
+</div>
+<div id="plots-of-pointwise-confidenceprediciton-intervals" class="section level3">
+<h3>3. Plots of Pointwise Confidence/Prediciton Intervals</h3>
+<div id="traditional-r-plot" class="section level4">
+<h4>Traditional R plot</h4>
+<pre class="r"><code>conf.band &lt;- predict(fit, interval=&quot;confidence&quot;)
+pred.band &lt;- predict(fit, interval=&quot;prediction&quot;)</code></pre>
+<pre><code>Warning in predict.lm(fit, interval = &quot;prediction&quot;): predictions on current data refer to _future_ responses</code></pre>
+<pre class="r"><code>class(conf.band)</code></pre>
+<pre><code>[1] &quot;matrix&quot;</code></pre>
+<pre class="r"><code>plot(minutes~number,data=data0120)
+abline(fit)
+lines(data0120$number, conf.band[,2])
+lines(data0120$number, conf.band[,3])</code></pre>
+<p><img src="figure/intervals.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /> R used line to connect points, but they overlap with each other. How to fix? We need to sort the data first, then connect them.</p>
+<pre class="r"><code>plot(minutes~number,data=data0120)
+abline(fit)
+lines(sort(data0120$number), sort(conf.band[,2]),col=&quot;red&quot;,lty=3)
+lines(sort(data0120$number), sort(conf.band[,3]),col=&quot;red&quot;,lty=3)</code></pre>
+<p><img src="figure/intervals.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Add the prediction band to it. Use a different color.</p>
+<pre class="r"><code>plot(minutes~number,data=data0120)
+abline(fit)
+lines(sort(data0120$number), sort(conf.band[,2]),col=&quot;red&quot;,lty=2)
+lines(sort(data0120$number), sort(conf.band[,3]),col=&quot;red&quot;,lty=2)
+lines(sort(data0120$number), sort(pred.band[,2]),col=&quot;blue&quot;,lty=3)
+lines(sort(data0120$number), sort(pred.band[,3]),col=&quot;blue&quot;,lty=3)</code></pre>
+<p><img src="figure/intervals.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="use-ggplot2" class="section level4">
+<h4>Use ggplot2</h4>
+<p>We can do the same thing in ggplot. First a plot of the data with the linear model (lm) with confidence band.</p>
+<pre class="r"><code>library(ggplot2)
+ggplot(data0120) +
+  geom_point(aes(x=number, y=minutes)) +
+  geom_smooth(method=lm, se=TRUE, aes(x=number, y=minutes))</code></pre>
+<p><img src="figure/intervals.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>To add the prediction bands we need to add something to the data. Column bind the output from the predict function to the dataset we are send into the ggplot function. Then we’ll simply draw some extra lines</p>
+<pre class="r"><code>ggplot(cbind(data0120, pred.band) ) +
+  geom_point(aes(x=number, y=minutes)) +
+  geom_smooth(method=lm, se=TRUE, aes(x=number, y=minutes))+
+  geom_line(aes(x=number, y=lwr), col=&quot;red&quot;, linetype=&quot;dashed&quot;) +
+  geom_line(aes(x=number, y=upr), col=&quot;red&quot;, linetype=&quot;dashed&quot;)</code></pre>
+<p><img src="figure/intervals.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="add-the-predicted-response-on-the-graph-for-new-data" class="section level3">
+<h3>4. Add the Predicted Response on the Graph for New Data</h3>
+<p>We will predict the response value for some new predict variable values. We will also calculate the prediction interval to demonstrate the behavior far from our dataset. We will also demonstrate a limitation of base R graphics in the process.</p>
+<p>First prepare the new data and calculate the predicted value using this new data.</p>
+<pre class="r"><code>new.number&lt;- data.frame(number=c(0, 1.0, 4, 7,12))
+new.pred &lt;- predict(fit, newdata=new.number, interval=&quot;prediction&quot;)
+new.number.pred &lt;- cbind(new.number, new.pred)
+new.number.pred</code></pre>
+<pre><code>  number         fit        lwr       upr
+1      0  -0.5801567 -19.424385  18.26407
+2      1  14.4550914  -4.155437  33.06562
+3      4  59.5608355  41.354191  77.76748
+4      7 104.6665796  86.399216 122.93394
+5     12 179.8428198 160.468784 199.21686</code></pre>
+<div id="traditional-r-plot-1" class="section level4">
+<h4>Traditional R plot</h4>
+<pre class="r"><code>plot(minutes~number,data=data0120)
+abline(fit)
+points(new.number.pred$number, new.number.pred$fit, col=&quot;red&quot;, pch=8)
+lines(sort(data0120$number), sort(pred.band[,2]),col=&quot;red&quot;,lty=2)
+lines(sort(data0120$number), sort(pred.band[,3]),col=&quot;red&quot;,lty=2)</code></pre>
+<p><img src="figure/intervals.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The above does not show all the information. Need to edit the plot function.</p>
+<pre class="r"><code>plot(minutes~number,data=data0120,xlim=c(-2,12.5),ylim=c(-5,260))
+abline(fit)
+points(new.number.pred$number, new.number.pred$fit, col=&quot;red&quot;, pch=8)
+lines(sort(data0120$number), sort(pred.band[,2]),col=&quot;red&quot;,lty=2)
+lines(sort(data0120$number), sort(pred.band[,3]),col=&quot;red&quot;,lty=2)</code></pre>
+<p><img src="figure/intervals.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="use-ggplot2-1" class="section level4">
+<h4>Use ggplot2</h4>
+<pre class="r"><code>ggplot(data0120) +
+  geom_point(aes(x=number, y=minutes)) +
+  geom_smooth(method=lm, se=TRUE, aes(x=number, y=minutes)) +
+  geom_point(data=new.number.pred, aes(x=number, y=fit), col=&quot;red&quot;, shape=8, size=2) + 
+  geom_line(data=new.number.pred, aes(x=number, y=lwr), col=&quot;red&quot;, linetype=&quot;dashed&quot;) + 
+  geom_line(data=new.number.pred, aes(x=number, y=upr), col=&quot;red&quot;, linetype=&quot;dashed&quot;) </code></pre>
+<p><img src="figure/intervals.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Use the ggplot, it will automatically cover the new data point.</p>
+</div>
+</div>
+<div id="descriptive-measures-of-linear-association-between-x-and-y-that-is-r2-and-r" class="section level3">
+<h3>5. Descriptive Measures of Linear Association between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, that is <span class="math inline">\(R^2\)</span> and <span class="math inline">\(r\)</span></h3>
+<div id="a.-options-to-quantify-the-size-of-y_i-haty_i" class="section level4">
+<h4>5.a. Options to Quantify the Size of <span class="math inline">\(Y_i-\hat{Y_i}\)</span></h4>
+<p>Residual standard error is an estimate of the standard deviation of <span class="math inline">\(\epsilon\)</span>, <span class="math inline">\(\sqrt{MSE}\)</span>. It tells the amount of the variation that a fitted regression line fails to account for. However, it depends on the scale of the <span class="math inline">\(Y\)</span>s. See the following example.</p>
+<div id="example-1.-minutes-and-number-of-copiers-data0120." class="section level5">
+<h5>Example 1. Minutes and number of copiers (data0120).</h5>
+<pre class="r"><code>summary(fit)</code></pre>
+<pre><code>
+Call:
+lm(formula = minutes ~ number, data = data0120)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-22.7723  -3.7371   0.3334   6.3334  15.4039 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  -0.5802     2.8039  -0.207    0.837    
+number       15.0352     0.4831  31.123   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 8.914 on 43 degrees of freedom
+Multiple R-squared:  0.9575,    Adjusted R-squared:  0.9565 
+F-statistic: 968.7 on 1 and 43 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>plot(minutes~number,data=data0120)
+abline(fit)</code></pre>
+<p><img src="figure/intervals.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="example-2.-first-year-college-gpa-and-act-score-data0119." class="section level5">
+<h5>Example 2. First year college GPA and ACT score (data0119).</h5>
+<pre class="r"><code>data0119=read.table(&quot;http://www.stat.ufl.edu/~rrandles/sta4210/Rclassnotes/data/textdatasets/KutnerData/Chapter%20%201%20Data%20Sets/CH01PR19.txt&quot;)
+colnames(data0119)=c(&quot;Y&quot;,&quot;X&quot;)
+fit2=lm(Y~X,data=data0119)
+summary(fit2)</code></pre>
+<pre><code>
+Call:
+lm(formula = Y ~ X, data = data0119)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.74004 -0.33827  0.04062  0.44064  1.22737 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  2.11405    0.32089   6.588  1.3e-09 ***
+X            0.03883    0.01277   3.040  0.00292 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.6231 on 118 degrees of freedom
+Multiple R-squared:  0.07262,   Adjusted R-squared:  0.06476 
+F-statistic:  9.24 on 1 and 118 DF,  p-value: 0.002917</code></pre>
+<pre class="r"><code>plot(Y~X,data=data0119)
+abline(fit2)</code></pre>
+<p><img src="figure/intervals.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Look at the two graphs and residual standard errors. Which example seems to have a more clear linear association? Which example has a smaller residual standard error?</p>
+<p><strong>Example 1: Residual standard error: 8.914 on 43 degrees of freedom.</strong></p>
+<p><strong>Example 2: Residual standard error: 0.6231 on 118 degrees of freedom.</strong></p>
+<p>Explanation: The scales of the response variable are different.</p>
+</div>
+</div>
+<div id="b.-we-seek-a-descriptive-measures-of-how-well-the-fitted-model-explains-the-observed-response." class="section level4">
+<h4>5.b. We Seek a Descriptive measures of How Well the Fitted Model Explains the Observed Response.</h4>
+<ul>
+<li><span class="math display">\[R^2=\frac{SSR}{SST}=1-\frac{SSE}{SST}\]</span></li>
+<li><span class="math inline">\(R^2\)</span> is the proportion of total variation in the response that is explained by the model.</li>
+<li><span class="math display">\[0\leq R^2 \leq 1\]</span></li>
+<li><span class="math inline">\(R^2\)</span> is not an estimate of any parameter, but rather a descriptive number about the <strong>goodness of fit</strong> of a model.</li>
+<li>An <span class="math inline">\(R^2\)</span> value of 1 implies a perfect fit of the observed data to the line. That is, all the points fall perfectly on a line.</li>
+<li>An <span class="math inline">\(R^2\)</span> value of 0 does not imply there’s no relationship, just that there’s no linear relationship. There could be nonlinear relationship. Plot your data to avoid this misinterpretation.</li>
+<li><span class="math inline">\(R^2\)</span> does not tell us the directiion of the relationship (whether it’s positive or negative)</li>
+</ul>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.6.1 (2019-07-05)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS Mojave 10.14.6
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] ggplot2_3.2.1
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.2       knitr_1.24       whisker_0.3-2    magrittr_1.5    
+ [5] workflowr_1.4.0  tidyselect_0.2.5 munsell_0.5.0    colorspace_1.4-1
+ [9] R6_2.4.0         rlang_0.4.0      dplyr_0.8.3      stringr_1.4.0   
+[13] tools_3.6.1      grid_3.6.1       gtable_0.3.0     xfun_0.9        
+[17] withr_2.1.2      git2r_0.26.1     htmltools_0.3.6  assertthat_0.2.1
+[21] yaml_2.2.0       lazyeval_0.2.2   rprojroot_1.3-2  digest_0.6.20   
+[25] tibble_2.1.3     crayon_1.3.4     purrr_0.3.2      fs_1.3.1        
+[29] glue_1.3.1       evaluate_0.14    rmarkdown_1.15   labeling_0.3    
+[33] stringi_1.4.3    pillar_1.4.2     compiler_3.6.1   scales_1.0.0    
+[37] backports_1.1.4  pkgconfig_2.0.2 </code></pre>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
