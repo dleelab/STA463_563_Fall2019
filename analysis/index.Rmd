@@ -29,6 +29,8 @@ editor_options:
 #### Lab 5: Confidence Interval, Prediction Interval
 * [Confidence/Prediction Intervals](intervals.html)
 
+#### Lab 6: ANOVA and descriptive measures
+* [ANOVA & descriptive measures](anova_desc.html)
 
 
 
