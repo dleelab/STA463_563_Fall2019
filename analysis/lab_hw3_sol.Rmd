@@ -1,0 +1,120 @@
+---
+title: "Lab Assignment 3 (Due Oct 30 Wednesday)"
+author: "Donghyung Lee"
+date: "`r Sys.Date()`"
+output: 
+  workflowr::wflow_html:
+    code_folding: show
+editor_options:
+  chunk_output_type: console
+---
+
+Upload a pdf file or word file in Canvas generated using R markdown. You should clearly label the question number, include the r code, the output and any necessary explanation in your file. The plots should be made using ggplot2 package.
+
+#### Load CalCOFI data using the following R codes:
+```{r prep}
+cofi <- read.table("https://raw.githubusercontent.com/dleelab/STA463_563_Fall2019/master/data/calcofi_500.csv", header=TRUE, sep = ",")
+head(cofi)
+```
+
+#### Use the CalCOFI data to do the following exercise
+
+#### Q1 (1pt) Using the lm() function in R, fit a simple linear regression using “salinity” as response and temperature as predictor. Print the summary output using summary().
+```{r Q1}
+cofi.fit <- lm(sal~temp, data=cofi)
+summary(cofi.fit)
+```
+
+#### Q2 (1pt) Verify the residual standard error ($\sqrt{MSE}$) and its degree of freedom (it is the same as the degree of freedom for MSE) calculated by the summary function is correct. 
+<span style="color:red"> 
+The residual standard error is 0.2161 with degree of freedom 491 based on the lm output. 
+</span>
+```{r Q2}
+df <- nrow(cofi)-2
+sqrt(sum(cofi.fit$residuals^2)/df)
+```
+<span style="color:red"> 
+The result from the above calculation shows the values provided by the summary(cofi.fit) function about residual standard error and the degree of freedom are correct. 
+</span>
+
+#### Q3 (1pt) Find the value of $R^2$, interpret it.
+<span style="color:red">
+$R^2=0.8517$. It means 85.17\% of the total variation in Salinity can be explained by a linear relationship with Temperature.
+</span>
+
+#### Q4 (2pt) Instead of doing a t-test for $\beta_1$, conduct an F test with ANOVA. Report the following:
+* Null and alternative hypothesis
+* ANOVA table 
+* Test statistic
+* p-value or critical value
+* Make your conclusion based on the previous results (interpret the test result).
+
+<span style="color:red">
+(1) $H_0:\beta_1=0$, $H_0:\beta_1\neq0$. <br>
+(2) The ANOVA table is as follows:
+</span>
+```{r}
+anova(cofi.fit)
+```
+<span style="color:red">
+(3) The test statistic is 2820.9.
+(4) The p-value is less than $2.2\times 10^{-16}$. 2.2e-16 or $2.2\times 10^{-16}$ is the smallest positive number that can be stored in the floating points system. If conducting the analysis at confidence level 0.05, the critical value is 3.860467.
+</span>
+```{r}
+qf(0.95,1,nrow(cofi)-2)
+```
+<span style="color:red">
+(5) Compare the p-value with 0.05, since the pval (<$2.2\times 10^{-16}$) is much smaller than 0.05, we reject the null hypothesis and conclude $\beta_1\neq0$. That is there's significant linear relationship between salinity and temperature. (Or we can also compare the test statistic with critical value. Since 2820.9 is much larger than critical value 3.860467, we reject the null hypothesis and conclude $\beta_1\neq0$. That is there's significant linear relationship between salinity and temperature. )
+</span>
+
+#### Q5 (1pt) Compute confidence intervals for regression parameters ($\beta_0$ & $\beta_1$). Use $\alpha$=0.1.
+```{r}
+confint(cofi.fit,,0.9)
+```
+#### Q6 (1pt) Compute confidence intervals for mean of "salinity" when temperature ($X_h$) = 3.8, 4.2, 5.5, 9.6, 10 and 11.2. Use $\alpha$=0.1.
+```{r}
+xh <- data.frame(temp=c(3.8, 4.2, 5.5, 9.6, 10, 11.2))
+confb <-predict(cofi.fit, xh, interval="confidence", level=0.9)
+confb
+```
+
+#### Q7 (1pt) Compute prediction intervals for new salinity observations when temperature ($X_h$) = -3, -1.2, 0, 1.8, 4.5, 12.5 and 14.9. Use $\alpha$=0.1.
+```{r}
+xhnew <- data.frame(temp=c(-3,-1.2, 0, 1.8, 4.5, 12.5, 14.9))
+predb <- predict(cofi.fit, xhnew, interval="prediction", level=0.9)
+pred.df <- cbind(xhnew, predb)
+```
+#### Q8 (1pt) Compute 90% point-wise confidence & prediction bands and plot them using ggplot(). (Add a scatter plot of Salinity vs Temperature, the fitted line, predicted values from Q7 as well.)   
+```{r}
+library(ggplot2)
+conf.band <- predict(cofi.fit, interval="confidence", level=0.9)
+pred.band <- predict(cofi.fit, interval="prediction", level=0.9)
+colnames(conf.band) <- c("conf.fit","conf.lwr","conf.upr")
+colnames(pred.band) <- c("pred.fit","pred.lwr","pred.upr")
+
+ggplot(cbind(cofi,conf.band, pred.band)) +
+  geom_point(aes(x=temp, y=sal)) +
+  geom_smooth(method=lm, se=TRUE, aes(x=temp, y=sal), level=0.9) +
+  geom_point(data=pred.df, aes(x=temp, y=fit), col="red", shape=8, size=2) + 
+  geom_line(aes(x=temp, y=pred.lwr), col="red", linetype="dashed") + 
+  geom_line(aes(x=temp, y=pred.upr), col="red", linetype="dashed") 
+
+## OR
+
+ggplot(cbind(cofi,conf.band, pred.band)) +
+  geom_point(aes(x=temp, y=sal)) +
+  geom_point(data=pred.df, aes(x=temp, y=fit), col="red", shape=8, size=2) + 
+  geom_line(aes(x=temp, y=conf.lwr), col="blue", linetype="dashed") +  ## this is also OK.
+  geom_line(aes(x=temp, y=conf.upr), col="blue", linetype="dashed") +  
+  geom_line(aes(x=temp, y=pred.lwr), col="red", linetype="dashed") + 
+  geom_line(aes(x=temp, y=pred.upr), col="red", linetype="dashed")
+
+## OR
+
+ggplot(cbind(cofi,conf.band, pred.band)) +
+  geom_point(aes(x=temp, y=sal)) +
+  geom_smooth(method=lm, se=TRUE, aes(x=temp, y=sal), level=0.9) +
+  geom_point(data=pred.df, aes(x=temp, y=fit), col="red", shape=8, size=2) + 
+  geom_line(data=pred.df, aes(x=temp, y=lwr), col="red", linetype="dashed") + 
+  geom_line(data=pred.df, aes(x=temp, y=upr), col="red", linetype="dashed")
+```
