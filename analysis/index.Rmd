@@ -24,12 +24,13 @@ editor_options:
 * [Lab assignment 2](lab_hw2.html)
 * [Lab assignment 2 sol](lab_hw2_sol.html) 
 
-
 #### Lab 5: Confidence Interval, Prediction Interval
 * [Confidence/Prediction Intervals](intervals.html)
+* [Lab assignment 3](lab_hw3.html) 
 
 #### Lab 6: ANOVA and descriptive measures
 * [ANOVA & descriptive measures](anova_desc.html)
+
 
 
 
