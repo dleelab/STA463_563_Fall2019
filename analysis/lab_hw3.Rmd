@@ -1,0 +1,42 @@
+---
+title: "Lab Assignment 3 (Due Oct 30 Wednesday)"
+author: "Donghyung Lee"
+date: "`r Sys.Date()`"
+output: 
+  workflowr::wflow_html:
+    code_folding: show
+editor_options:
+  chunk_output_type: console
+---
+
+Upload a pdf file or word file in Canvas generated using R markdown. You should clearly label the question number, include the r code, the output and any necessary explanation in your file. The plots should be made using ggplot2 package.
+
+#### Load CalCOFI data using the following R codes:
+```{r prep}
+cofi <- read.table("https://raw.githubusercontent.com/dleelab/STA463_563_Fall2019/master/data/calcofi_500.csv", header=TRUE, sep = ",")
+head(cofi)
+```
+
+#### Use the CalCOFI data to do the following exercise
+
+#### Q1 (1pt) Using the lm() function in R, fit a simple linear regression using “salinity” as response and temperature as predictor. Print the summary output using summary().
+
+#### Q2 (1pt) Verify the residual standard error ($\sqrt{MSE}$) and its degree of freedom (it is the same as the degree of freedom for MSE) calculated by the summary function is correct. 
+
+#### Q3 (1pt) Find the value of $R^2$, interpret it.
+
+#### Q4 (2pt) Instead of doing a t-test, conduct an F test with ANOVA. Report the following:
+* Null and alternative hypothesis
+* ANOVA table 
+* Test statistic
+* p-value or critical value
+* Make your conclusion based on the previous results (interpret the test result).
+
+#### Q5 (1pt) Compute confidence intervals for regression parameters ($\beta_0$ & $\beta_1$)
+
+#### Q6 (1pt) Compute confidence intervals for mean of "salinity" when temperature ($X_h$) = 3.8, 4.2, 5.5, 9.6, 10 and 11.2. Use $\alpha$=0.1.
+
+#### Q7 (1pt) Compute prediction intervals for new salinity observations when temperature ($X_h$) = -3, -1.2, 0, 1.8, 4.5, 12.5 and 14.9. Use $\alpha$=0.1.
+
+#### Q8 (2pt) Compute 90% point-wise confidence & prediction bands and plot them using ggplot(). (Add a scatter plot of Salinity vs Temperature, the fitted line and predicted values from Q7 as well.)   
+
