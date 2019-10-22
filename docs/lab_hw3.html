@@ -10,9 +10,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Donghyung Lee" />
 
+<meta name="date" content="2019-10-22" />
 
-<title>STA 463 &amp; 563 Lab Sessions</title>
+<title>Lab Assignment 3 (Due Oct 30 Wednesday)</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +23,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -245,6 +248,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -294,9 +300,19 @@ div.section {
 
 <div class="fluid-row" id="header">
 
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
 
 
-<h1 class="title toc-ignore">STA 463 &amp; 563 Lab Sessions</h1>
+
+<h1 class="title toc-ignore">Lab Assignment 3 (Due Oct 30 Wednesday)</h1>
+<h4 class="author">Donghyung Lee</h4>
+<h4 class="date">2019-10-22</h4>
 
 </div>
 
@@ -324,7 +340,7 @@ div.section {
 <strong>Last updated:</strong> 2019-10-22
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>STA_463_563_Fall2019/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -346,6 +362,66 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
 <p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20190905code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20190905)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20190905code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20190905)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
@@ -411,7 +487,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/2866be8f6f70320045f7fcdaa8a95d5d32ff4d49/analysis/index.Rmd" target="_blank">2866be8</a>
+<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/11516fa4ab9ee23090cd4da8e1c070ace40bee1d/analysis/lab_hw3.Rmd" target="_blank">11516fa</a>
 </td>
 <td>
 dleelab
@@ -423,482 +499,6 @@ dleelab
 added
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/95c9babf56cf241053f376836f67e2c31c9a636c/docs/index.html" target="_blank">95c9bab</a>
-</td>
-<td>
-dleelab
-</td>
-<td>
-2019-10-18
-</td>
-<td>
-added
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/3972b910a104ea101d77846f0db90aea885834f7/analysis/index.Rmd" target="_blank">3972b91</a>
-</td>
-<td>
-dleelab
-</td>
-<td>
-2019-10-18
-</td>
-<td>
-added
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/3ba35c4b01aeb2640704f57711267f89abf353da/analysis/index.Rmd" target="_blank">3ba35c4</a>
-</td>
-<td>
-dleelab
-</td>
-<td>
-2019-10-18
-</td>
-<td>
-added
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/724347060af3764788bc775923df42973caf4efd/docs/index.html" target="_blank">7243470</a>
-</td>
-<td>
-dleelab
-</td>
-<td>
-2019-10-04
-</td>
-<td>
-added
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/551c19b56489a2d302a04223bfe2ed91308224fd/analysis/index.Rmd" target="_blank">551c19b</a>
-</td>
-<td>
-dleelab
-</td>
-<td>
-2019-10-04
-</td>
-<td>
-added
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/826cdb4f62e0cf71ce633cd2a8ae53430c0dc1d8/docs/index.html" target="_blank">826cdb4</a>
-</td>
-<td>
-dleelab
-</td>
-<td>
-2019-10-01
-</td>
-<td>
-lab hw2 uploaded
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/277a5eb3c31666ca482bd1b7c3d0aea947dec9cb/analysis/index.Rmd" target="_blank">277a5eb</a>
-</td>
-<td>
-dleelab
-</td>
-<td>
-2019-10-01
-</td>
-<td>
-hw added
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/ceb52880f867333611072ed6ad6cfd5ddb08f2da/docs/index.html" target="_blank">ceb5288</a>
-</td>
-<td>
-dleelab
-</td>
-<td>
-2019-09-27
-</td>
-<td>
-added
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/d5395fb9ef0ee07f4685ee4b27acb750a752309b/analysis/index.Rmd" target="_blank">d5395fb</a>
-</td>
-<td>
-dleelab
-</td>
-<td>
-2019-09-27
-</td>
-<td>
-added
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/a9c8ab3674b10844c444dfbdeed84ede310e0230/analysis/index.Rmd" target="_blank">a9c8ab3</a>
-</td>
-<td>
-dleelab
-</td>
-<td>
-2019-09-27
-</td>
-<td>
-lab4 added
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/15a315a0d656334da7e0853f13820644aec0873c/docs/index.html" target="_blank">15a315a</a>
-</td>
-<td>
-dleelab
-</td>
-<td>
-2019-09-20
-</td>
-<td>
-added
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/897fd3c4c34f255ab779f1a61c2def3969600f6f/analysis/index.Rmd" target="_blank">897fd3c</a>
-</td>
-<td>
-dleelab
-</td>
-<td>
-2019-09-20
-</td>
-<td>
-added
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/8fe2e84d7a7b7dd66b799f593bc538d1f41bfc09/docs/index.html" target="_blank">8fe2e84</a>
-</td>
-<td>
-dleelab
-</td>
-<td>
-2019-09-13
-</td>
-<td>
-add
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/6976494e1fd16ce0d9eb1199bc6c68f31c08c5e7/analysis/index.Rmd" target="_blank">6976494</a>
-</td>
-<td>
-dleelab
-</td>
-<td>
-2019-09-13
-</td>
-<td>
-empty labs deleted
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/5a7bcf977d8311cf4caf3a9ccca04b1b06be57fd/analysis/index.Rmd" target="_blank">5a7bcf9</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-<td>
-c
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/b29a4e01d20428fa5f8a4110f89af21cf07b6e9c/analysis/index.Rmd" target="_blank">b29a4e0</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-<td>
-c
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/b29a4e01d20428fa5f8a4110f89af21cf07b6e9c/docs/index.html" target="_blank">b29a4e0</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-<td>
-c
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/eb929d98935ff8871bf9600a2eab834f92da3cd0/analysis/index.Rmd" target="_blank">eb929d9</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-<td>
-c
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/eb929d98935ff8871bf9600a2eab834f92da3cd0/docs/index.html" target="_blank">eb929d9</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-<td>
-c
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/15af63d99f662c4bdd39c2eacddc77eba52eb623/analysis/index.Rmd" target="_blank">15af63d</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-<td>
-c
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/15af63d99f662c4bdd39c2eacddc77eba52eb623/docs/index.html" target="_blank">15af63d</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-<td>
-c
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/51b8a16f2e24f73bc5c8ca63cafc6e74ce779544/docs/index.html" target="_blank">51b8a16</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-<td>
-created
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/74438a5de9b009069a8d9085d646d38bba00d00e/analysis/index.Rmd" target="_blank">74438a5</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-<td>
-added
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/a70d7a4905eab563e0c209be2abea93422a16550/docs/index.html" target="_blank">a70d7a4</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-<td>
-updated
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/a7814ef698548b5fe7346d804431ed4c4064fb70/analysis/index.Rmd" target="_blank">a7814ef</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-<td>
-updated
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/235a40a8d8dd7857274958833a3a92e2491ea060/docs/index.html" target="_blank">235a40a</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-<td>
-index updated
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/413fc0a3ed01667dc5845054b048bd7c685330e8/analysis/index.Rmd" target="_blank">413fc0a</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-<td>
-updated
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/4474ca5877626d353182db46251e1179ad97f48a/analysis/index.Rmd" target="_blank">4474ca5</a>
-</td>
-<td>
-statslee
-</td>
-<td>
-2019-09-06
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -906,46 +506,81 @@ Start workflowr project.
 </div>
 </div>
 </div>
-<div id="lab-1" class="section level4">
-<h4>Lab 1</h4>
+<p>Upload a pdf file or word file in Canvas generated using R markdown. You should clearly label the question number, include the r code, the output and any necessary explanation in your file. The plots should be made using ggplot2 package.</p>
+<div id="load-calcofi-data-using-the-following-r-codes" class="section level4">
+<h4>Load CalCOFI data using the following R codes:</h4>
+<pre class="r"><code>cofi &lt;- read.table(&quot;https://raw.githubusercontent.com/dleelab/STA463_563_Fall2019/master/data/calcofi_500.csv&quot;, header=TRUE, sep = &quot;,&quot;)
+head(cofi)</code></pre>
+<pre><code>     sal  temp depth
+1 33.440 10.50     0
+2 33.440 10.46     8
+3 33.437 10.46    10
+4 33.420 10.45    19
+5 33.421 10.45    20
+6 33.431 10.45    30</code></pre>
+</div>
+<div id="use-the-calcofi-data-to-do-the-following-exercise" class="section level4">
+<h4>Use the CalCOFI data to do the following exercise</h4>
+</div>
+<div id="q1-1pt-using-the-lm-function-in-r-fit-a-simple-linear-regression-using-salinity-as-response-and-temperature-as-predictor.-print-the-summary-output-using-summary." class="section level4">
+<h4>Q1 (1pt) Using the lm() function in R, fit a simple linear regression using “salinity” as response and temperature as predictor. Print the summary output using summary().</h4>
+</div>
+<div id="q2-1pt-verify-the-residual-standard-error-sqrtmse-and-its-degree-of-freedom-it-is-the-same-as-the-degree-of-freedom-for-mse-calculated-by-the-summary-function-is-correct." class="section level4">
+<h4>Q2 (1pt) Verify the residual standard error (<span class="math inline">\(\sqrt{MSE}\)</span>) and its degree of freedom (it is the same as the degree of freedom for MSE) calculated by the summary function is correct.</h4>
+</div>
+<div id="q3-1pt-find-the-value-of-r2-interpret-it." class="section level4">
+<h4>Q3 (1pt) Find the value of <span class="math inline">\(R^2\)</span>, interpret it.</h4>
+</div>
+<div id="q4-2pt-instead-of-doing-a-t-test-conduct-an-f-test-with-anova.-report-the-following" class="section level4">
+<h4>Q4 (2pt) Instead of doing a t-test, conduct an F test with ANOVA. Report the following:</h4>
 <ul>
-<li><a href="lab_assignment1_sol.html">Lab Assignment 1 Solution</a></li>
+<li>Null and alternative hypothesis</li>
+<li>ANOVA table</li>
+<li>Test statistic</li>
+<li>p-value or critical value</li>
+<li>Make your conclusion based on the previous results (interpret the test result).</li>
 </ul>
 </div>
-<div id="lab-2-data-type-eda-dplyr" class="section level4">
-<h4>Lab 2: data type, EDA, dplyr</h4>
-<ul>
-<li><a href="lab2_inclass_prac.html">In-class practice</a></li>
-<li><a href="dplyr_prac.html">dplyr package</a></li>
-</ul>
+<div id="q5-1pt-compute-confidence-intervals-for-regression-parameters-beta_0-beta_1" class="section level4">
+<h4>Q5 (1pt) Compute confidence intervals for regression parameters (<span class="math inline">\(\beta_0\)</span> &amp; <span class="math inline">\(\beta_1\)</span>)</h4>
 </div>
-<div id="lab-3-r-basic-plots-ggplot2-simple-linear-regression" class="section level4">
-<h4>Lab 3: R basic plots, ggplot2, simple linear regression</h4>
-<ul>
-<li><a href="Rplot_ggplot2_prac.html">basic plots &amp; ggplot2</a></li>
-<li><a href="slr_prac.html">simple linear regression</a></li>
-</ul>
+<div id="q6-1pt-compute-confidence-intervals-for-mean-of-salinity-when-temperature-x_h-3.8-4.2-5.5-9.6-10-and-11.2.-use-alpha0.1." class="section level4">
+<h4>Q6 (1pt) Compute confidence intervals for mean of “salinity” when temperature (<span class="math inline">\(X_h\)</span>) = 3.8, 4.2, 5.5, 9.6, 10 and 11.2. Use <span class="math inline">\(\alpha\)</span>=0.1.</h4>
 </div>
-<div id="lab-4-slr-model-calcofi-data-confidence-interval" class="section level4">
-<h4>Lab 4: SLR model, CalCOFI data, Confidence Interval</h4>
-<ul>
-<li><a href="slr_calcofi.html">SLR CalCOFI data</a></li>
-<li><a href="lab_hw2.html">Lab assignment 2</a></li>
-<li><a href="lab_hw2_sol.html">Lab assignment 2 sol</a></li>
-</ul>
+<div id="q7-1pt-compute-prediction-intervals-for-new-salinity-observations-when-temperature-x_h--3--1.2-0-1.8-4.5-12.5-and-14.9.-use-alpha0.1." class="section level4">
+<h4>Q7 (1pt) Compute prediction intervals for new salinity observations when temperature (<span class="math inline">\(X_h\)</span>) = -3, -1.2, 0, 1.8, 4.5, 12.5 and 14.9. Use <span class="math inline">\(\alpha\)</span>=0.1.</h4>
 </div>
-<div id="lab-5-confidence-interval-prediction-interval" class="section level4">
-<h4>Lab 5: Confidence Interval, Prediction Interval</h4>
-<ul>
-<li><a href="intervals.html">Confidence/Prediction Intervals</a></li>
-<li><a href="lab_hw3.html">Lab assignment 3</a></li>
-</ul>
+<div id="q8-2pt-compute-90-point-wise-confidence-prediction-bands-and-plot-them-using-ggplot.-add-a-scatter-plot-of-salinity-vs-temperature-the-fitted-line-and-predicted-values-from-q7-as-well." class="section level4">
+<h4>Q8 (2pt) Compute 90% point-wise confidence &amp; prediction bands and plot them using ggplot(). (Add a scatter plot of Salinity vs Temperature, the fitted line and predicted values from Q7 as well.)</h4>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.6.1 (2019-07-05)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS Mojave 10.14.6
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+loaded via a namespace (and not attached):
+ [1] workflowr_1.4.0 Rcpp_1.0.2      digest_0.6.20   rprojroot_1.3-2
+ [5] backports_1.1.4 git2r_0.26.1    magrittr_1.5    evaluate_0.14  
+ [9] stringi_1.4.3   fs_1.3.1        whisker_0.3-2   rmarkdown_1.15 
+[13] tools_3.6.1     stringr_1.4.0   glue_1.3.1      xfun_0.9       
+[17] yaml_2.2.0      compiler_3.6.1  htmltools_0.3.6 knitr_1.24     </code></pre>
 </div>
-<div id="lab-6-anova-and-descriptive-measures" class="section level4">
-<h4>Lab 6: ANOVA and descriptive measures</h4>
-<ul>
-<li><a href="anova_desc.html">ANOVA &amp; descriptive measures</a></li>
-</ul>
 </div>
 
 
@@ -993,6 +628,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
