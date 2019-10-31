@@ -12,7 +12,7 @@
 
 <meta name="author" content="Donghyung Lee" />
 
-<meta name="date" content="2019-10-18" />
+<meta name="date" content="2019-10-31" />
 
 <title>ANOVA and descriptive measures</title>
 
@@ -312,10 +312,16 @@ div.section {
 
 <h1 class="title toc-ignore">ANOVA and descriptive measures</h1>
 <h4 class="author">Donghyung Lee</h4>
-<h4 class="date">2019-10-18</h4>
+<h4 class="date">2019-10-31</h4>
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#anova-table-and-related-test">1. ANOVA Table and Related Test</a></li>
+<li><a href="#we-seek-a-descriptive-measures-of-how-well-the-fitted-model-explains-the-observed-response.">2. We Seek a Descriptive measures of How Well the Fitted Model Explains the Observed Response.</a></li>
+</ul>
+</div>
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
@@ -337,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-10-18
+<strong>Last updated:</strong> 2019-10-31
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -428,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019tree95c9babf56cf241053f376836f67e2c31c9a636ctargetblank95c9baba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dleelab/STA463_563_Fall2019/tree/95c9babf56cf241053f376836f67e2c31c9a636c" target="_blank">95c9bab</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019treeb46eac375742d805cddbad90b203fc5795cf8febtargetblankb46eac3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dleelab/STA463_563_Fall2019/tree/b46eac375742d805cddbad90b203fc5795cf8feb" target="_blank">b46eac3</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019tree95c9babf56cf241053f376836f67e2c31c9a636ctargetblank95c9baba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019treeb46eac375742d805cddbad90b203fc5795cf8febtargetblankb46eac3a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -441,9 +447,11 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
 
 Untracked files:
-    Untracked:  docs/figure/lab_hw2_sol.Rmd/
+    Untracked:  analysis/lab_hw3_sol.Rmd
+    Untracked:  docs/figure/lab_hw3_sol.Rmd/
 
 </code></pre>
 <p>
@@ -487,6 +495,57 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/b46eac375742d805cddbad90b203fc5795cf8feb/analysis/anova_desc.Rmd" target="_blank">b46eac3</a>
+</td>
+<td>
+dleelab
+</td>
+<td>
+2019-10-31
+</td>
+<td>
+size changed
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/724723a752665d8db2e4bedb89ff197ba30a46fd/analysis/anova_desc.Rmd" target="_blank">724723a</a>
+</td>
+<td>
+dleelab
+</td>
+<td>
+2019-10-31
+</td>
+<td>
+title corrected
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/9f77fa848bffa3377bbccbbeb2c707cd6f6bf0ff/docs/anova_desc.html" target="_blank">9f77fa8</a>
+</td>
+<td>
+dleelab
+</td>
+<td>
+2019-10-18
+</td>
+<td>
+added
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/dleelab/STA463_563_Fall2019/blob/41acc1ba9d1d587361e448a6d21e696378987464/analysis/anova_desc.Rmd" target="_blank">41acc1b</a>
 </td>
 <td>
@@ -510,7 +569,8 @@ new
 colnames(data0120)=c(&quot;minutes&quot;,&quot;copiers_number&quot;)
 attach(data0120)
 fit=lm(minutes~copiers_number)</code></pre>
-<p>##1. ANOVA Table and Related Test</p>
+<div id="anova-table-and-related-test" class="section level3">
+<h3>1. ANOVA Table and Related Test</h3>
 <pre class="r"><code>anova(fit)</code></pre>
 <pre><code>Analysis of Variance Table
 
@@ -525,8 +585,21 @@ n=nrow(data0120)
 qf(1-alpha,1,n-2)</code></pre>
 <pre><code>[1] 4.067047</code></pre>
 <pre class="r"><code>#critical value of F_1,n-2, with alpha=0.05</code></pre>
-<p>##2. We Seek a Descriptive measures of How Well the Fitted Model Explains the Observed Response. * <span class="math display">\[R^2=\frac{SSR}{SST}=1-\frac{SSE}{SST}\]</span> * <span class="math inline">\(R^2\)</span> is the proportion of total variation in the response that is explained by the model. * <span class="math display">\[0\leq R^2 \leq 1\]</span> * <span class="math inline">\(R^2\)</span> is not an estimate of any parameter, but rather a descriptive number about the <strong>goodness of fit</strong> of a model. * An <span class="math inline">\(R^2\)</span> value of 1 implies a perfect fit of the observed data to the line. That is, all the points fall perfectly on a line. * An <span class="math inline">\(R^2\)</span> value of 0 does not imply there’s no relationship, just that there’s no linear relationship. There could be nonlinear relationship. Plot your data to avoid this misinterpretation. * <span class="math inline">\(R^2\)</span> does not tell us the directiion of the relationship (whether it’s positive or negative)</p>
-<p>##2.a. Compute SST, SSR and <span class="math inline">\(R^2\)</span> using R. <span class="math display">\[SST=\sum_{i=1}^{n}(Y_i-\bar{Y})^2\]</span></p>
+</div>
+<div id="we-seek-a-descriptive-measures-of-how-well-the-fitted-model-explains-the-observed-response." class="section level3">
+<h3>2. We Seek a Descriptive measures of How Well the Fitted Model Explains the Observed Response.</h3>
+<ul>
+<li><span class="math display">\[R^2=\frac{SSR}{SST}=1-\frac{SSE}{SST}\]</span></li>
+<li><span class="math inline">\(R^2\)</span> is the proportion of total variation in the response that is explained by the model.</li>
+<li><span class="math display">\[0\leq R^2 \leq 1\]</span></li>
+<li><span class="math inline">\(R^2\)</span> is not an estimate of any parameter, but rather a descriptive number about the <strong>goodness of fit</strong> of a model.</li>
+<li>An <span class="math inline">\(R^2\)</span> value of 1 implies a perfect fit of the observed data to the line. That is, all the points fall perfectly on a line.</li>
+<li>An <span class="math inline">\(R^2\)</span> value of 0 does not imply there’s no relationship, just that there’s no linear relationship. There could be nonlinear relationship. Plot your data to avoid this misinterpretation.</li>
+<li><span class="math inline">\(R^2\)</span> does not tell us the directiion of the relationship (whether it’s positive or negative)</li>
+</ul>
+<div id="a.-compute-sst-ssr-and-r2-using-r." class="section level4">
+<h4>2.a. Compute SST, SSR and <span class="math inline">\(R^2\)</span> using R.</h4>
+<p><span class="math display">\[SST=\sum_{i=1}^{n}(Y_i-\bar{Y})^2\]</span></p>
 <pre class="r"><code>SST=sum((data0120$minutes-mean(data0120$minutes))^2)
 SST</code></pre>
 <pre><code>[1] 80376.8</code></pre>
@@ -558,7 +631,15 @@ Residual standard error: 8.914 on 43 degrees of freedom
 Multiple R-squared:  0.9575,    Adjusted R-squared:  0.9565 
 F-statistic: 968.7 on 1 and 43 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><strong>Interpretation:</strong> 95.75% of the total variation in minutes can be explained by a linear relationship with copiers_number.</p>
-<p>##2.b. Coefficient of Correlation, <span class="math inline">\(r=\pm \sqrt{R^2}\)</span>. * The sign is determined by the slope of the regression equation. * <span class="math inline">\(r\)</span> does not have any particular interpretation in regression. It is simply a measure of the fit of the linear regression model. * <span class="math display">\[-1\leq r \leq 1\]</span> * Relationship between <span class="math inline">\(b_1\)</span> and <span class="math inline">\(r\)</span>: <span class="math inline">\(b_1=r\sqrt{\frac{S_{YY}}{S_{XX}}}\)</span>.</p>
+</div>
+<div id="b.-coefficient-of-correlation-rpm-sqrtr2." class="section level4">
+<h4>2.b. Coefficient of Correlation, <span class="math inline">\(r=\pm \sqrt{R^2}\)</span>.</h4>
+<ul>
+<li>The sign is determined by the slope of the regression equation.</li>
+<li><span class="math inline">\(r\)</span> does not have any particular interpretation in regression. It is simply a measure of the fit of the linear regression model.</li>
+<li><span class="math display">\[-1\leq r \leq 1\]</span></li>
+<li>Relationship between <span class="math inline">\(b_1\)</span> and <span class="math inline">\(r\)</span>: <span class="math inline">\(b_1=r\sqrt{\frac{S_{YY}}{S_{XX}}}\)</span>.</li>
+</ul>
 <pre class="r"><code>r=sqrt(Rsq)
 r</code></pre>
 <pre><code>[1] 0.978517</code></pre>
@@ -592,6 +673,8 @@ loaded via a namespace (and not attached):
  [9] stringi_1.4.3   fs_1.3.1        whisker_0.3-2   rmarkdown_1.15 
 [13] tools_3.6.1     stringr_1.4.0   glue_1.3.1      xfun_0.9       
 [17] yaml_2.2.0      compiler_3.6.1  htmltools_0.3.6 knitr_1.24     </code></pre>
+</div>
+</div>
 </div>
 
 
