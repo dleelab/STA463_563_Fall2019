@@ -1,0 +1,119 @@
+---
+title: "Diagnostics"
+author: "Donghyung Lee"
+date: "`r Sys.Date()`"
+output: 
+  workflowr::wflow_html:
+    code_folding: show
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this lab, we will use the data "Cars93". It is in the "MASS" package. Cars were selected at random from among 1993 passenger car models that were listed in both the Consumer Reports issue and the PACE Buying Guide. Pickup trucks and Sport/Utility vehicles were eliminated due to incomplete information in the Consumer Reports source. Duplicate models (e.g., Dodge Shadow and Plymouth Sundance) were listed at most once. Further description can be found in Lock (1993).
+
+The dataset contains 93 rows and 27 columns, the variables it includes are manufacturer, model, type, etc. We will use this data to look at regression diagnostics. We use the variable "Weight" as $X$ and "MPG.highway" as $Y$.
+```{r}
+#install.packages("MASS")
+library(MASS)
+#Cars93 data MPG.highway(Y), Weight(X)
+names(Cars93)
+```
+
+### 1. Diagnostics for Predictor Variable
+#### Histogram
+```{r}
+hist(Cars93$Weight)#histogram
+```
+
+#### Boxplot
+```{r}
+boxplot(Cars93$Weight)#boxplot
+```
+Based on the plots, no significant unusual values have been found in the predictor variable.
+
+### 2. Diagnostic for Residuals
+```{r}
+carfit=lm(MPG.highway~Weight,data=Cars93)
+#plot(fit)
+```
+
+#### 2.a. Linearity Assumption
+```{r}
+plot(carfit,which=1)
+```
+
+Since the shows residuals are roughly located randomly aroudn the $e_i=0$ line, the fitted line is also flat, no clear departutre from linearity can be found. 
+
+Alternative method is to plot the residuals again fitted value or the predictor directly.
+```{r}
+plot(x=fitted(carfit),y=rstandard(carfit),main="Studentized Residuals against Fitted Value")
+plot(x=Cars93$Weight,y=rstandard(carfit),main="Studentized Residuals against Predictor")
+```
+
+#### 2.b. Independence Assumption
+Since the data is collected from random sampling, it's ok not to suspect the independence assumption. However, if we have data collected over time, we may want to check the residuals over time. 
+```{r}
+plot(residuals(carfit),pch=18,type="o")
+```
+
+We will look for a data that does not show clear pattern. If you find many positive/negative residuals clustered together, there may be some problem. 
+
+#### 2.c. Normality Assumption
+##### Plot
+```{r}
+plot(carfit,which=2)
+```
+
+There is a noticeable skew in the points at the top of the plot. You may refer to the website for more information https://stats.stackexchange.com/questions/348438/qq-plot-and-x-y-line.
+
+
+#### Test for namality
+##### a. Shapiro-Wilk Test
+```{r}
+shapiro.test(carfit$residuals)
+```
+
+##### b. Anderson-Darling test
+```{r}
+#install.packages("nortest") # To use ad.test(). "nortest" package should be installed.
+library(nortest)
+ad.test(carfit$residuals)
+```
+
+Based on the test result, we reject the null hypothesis and conclude the population (error) is not normally distributed.
+
+#### 2.d. Constant Variance Assumption
+##### Plot
+##### a. Scale Location Plot
+```{r}
+plot(carfit,which=3)
+```
+
+From the plot, we find the variance in the middle is much smaller than the variance in
+the right end.
+
+#### Test for homoscedasticity (constant variance)
+##### a. Breusch-Pagan Test
+```{r}
+#install.packages("lmtest")
+library(lmtest)#to use the bptest function
+library(zoo)
+bptest(MPG.highway~Weight,data=Cars93)
+```
+
+Based on the test, we reject the null hypothesis and condluce the error variance is not constant. 
+
+#### 2.e. Unusual Observations
+```{r}
+plot(carfit,which=5)
+dim(Cars93)
+abline(h=3,col="green")
+```
+
+* Suspect points are flagged in R by their observation number.
+* Observation 42 and 39 appear to be a potential outlier.
+
