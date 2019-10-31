@@ -18,7 +18,7 @@ colnames(data0120)=c("minutes","copiers_number")
 attach(data0120)
 fit=lm(minutes~copiers_number)
 ```
-## 1. ANOVA Table and Related Test
+### 1. ANOVA Table and Related Test
 ```{r}
 anova(fit)
 alpha=0.05
@@ -27,7 +27,7 @@ qf(1-alpha,1,n-2)
 #critical value of F_1,n-2, with alpha=0.05
 ```
 
-## 2. We Seek a Descriptive measures of How Well the Fitted Model Explains the Observed Response. 
+### 2. We Seek a Descriptive measures of How Well the Fitted Model Explains the Observed Response. 
 * \[R^2=\frac{SSR}{SST}=1-\frac{SSE}{SST}\]
 * $R^2$ is the proportion of total variation in the response that is explained by the model. 
 * \[0\leq R^2 \leq 1\]
