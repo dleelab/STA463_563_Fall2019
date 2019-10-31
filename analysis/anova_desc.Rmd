@@ -18,7 +18,7 @@ colnames(data0120)=c("minutes","copiers_number")
 attach(data0120)
 fit=lm(minutes~copiers_number)
 ```
-##1. ANOVA Table and Related Test
+## 1. ANOVA Table and Related Test
 ```{r}
 anova(fit)
 alpha=0.05
@@ -27,7 +27,7 @@ qf(1-alpha,1,n-2)
 #critical value of F_1,n-2, with alpha=0.05
 ```
 
-##2. We Seek a Descriptive measures of How Well the Fitted Model Explains the Observed Response. 
+## 2. We Seek a Descriptive measures of How Well the Fitted Model Explains the Observed Response. 
 * \[R^2=\frac{SSR}{SST}=1-\frac{SSE}{SST}\]
 * $R^2$ is the proportion of total variation in the response that is explained by the model. 
 * \[0\leq R^2 \leq 1\]
@@ -36,7 +36,7 @@ qf(1-alpha,1,n-2)
 * An $R^2$ value of 0 does not imply there's no relationship, just that there's no linear relationship. There could be nonlinear relationship. Plot your data to avoid this misinterpretation. 
 * $R^2$ does not tell us the directiion of the relationship (whether it's positive or negative)
 
-##2.a. Compute SST, SSR and $R^2$ using R.
+#### 2.a. Compute SST, SSR and $R^2$ using R.
 \[SST=\sum_{i=1}^{n}(Y_i-\bar{Y})^2\]
 ```{r}
 SST=sum((data0120$minutes-mean(data0120$minutes))^2)
@@ -56,7 +56,7 @@ summary(fit)#compare with the summary(fit)
 **Interpretation:** 95.75% of the total variation in minutes can be explained by a linear relationship with copiers_number.
 
 
-##2.b. Coefficient of Correlation, $r=\pm \sqrt{R^2}$.
+#### 2.b. Coefficient of Correlation, $r=\pm \sqrt{R^2}$.
 * The sign is determined by the slope of the regression equation. 
 * $r$ does not have any particular interpretation in regression. It is simply a measure of the fit of the linear regression model.
 * \[-1\leq r \leq 1\]
