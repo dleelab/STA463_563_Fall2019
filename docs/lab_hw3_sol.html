@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Donghyung Lee" />
+
+<meta name="date" content="2019-11-04" />
+
+<title>Lab Assignment 3 (Due Oct 30 Wednesday)</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">STA463/563 Fall 2019</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="https://github.com/dleelab/STA463_563_Fall2019">GitHub</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Lab Assignment 3 (Due Oct 30 Wednesday)</h1>
+<h4 class="author">Donghyung Lee</h4>
+<h4 class="date">2019-11-04</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2019-11-04
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>STA_463_563_Fall2019/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.4.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20190905code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20190905)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20190905code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20190905)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019tree43f1909dfc3ccd404625b834eda30ca486b8c81btargetblank43f1909a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dleelab/STA463_563_Fall2019/tree/43f1909dfc3ccd404625b834eda30ca486b8c81b" target="_blank">43f1909</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019tree43f1909dfc3ccd404625b834eda30ca486b8c81btargetblank43f1909a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/transform.Rmd
+    Untracked:  docs/figure/lab_hw3_sol.Rmd/
+    Untracked:  docs/figure/transform.Rmd/
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/81f1e6db3287d00f3545c000d7285d408a886595/analysis/lab_hw3_sol.Rmd" target="_blank">81f1e6d</a>
+</td>
+<td>
+dleelab
+</td>
+<td>
+2019-10-22
+</td>
+<td>
+created
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<p>Upload a pdf file or word file in Canvas generated using R markdown. You should clearly label the question number, include the r code, the output and any necessary explanation in your file. The plots should be made using ggplot2 package.</p>
+<div id="load-calcofi-data-using-the-following-r-codes" class="section level4">
+<h4>Load CalCOFI data using the following R codes:</h4>
+<pre class="r"><code>cofi &lt;- read.table(&quot;https://raw.githubusercontent.com/dleelab/STA463_563_Fall2019/master/data/calcofi_500.csv&quot;, header=TRUE, sep = &quot;,&quot;)
+head(cofi)</code></pre>
+<pre><code>     sal  temp depth
+1 33.440 10.50     0
+2 33.440 10.46     8
+3 33.437 10.46    10
+4 33.420 10.45    19
+5 33.421 10.45    20
+6 33.431 10.45    30</code></pre>
+</div>
+<div id="use-the-calcofi-data-to-do-the-following-exercise" class="section level4">
+<h4>Use the CalCOFI data to do the following exercise</h4>
+</div>
+<div id="q1-1pt-using-the-lm-function-in-r-fit-a-simple-linear-regression-using-salinity-as-response-and-temperature-as-predictor.-print-the-summary-output-using-summary." class="section level4">
+<h4>Q1 (1pt) Using the lm() function in R, fit a simple linear regression using “salinity” as response and temperature as predictor. Print the summary output using summary().</h4>
+<pre class="r"><code>cofi.fit &lt;- lm(sal~temp, data=cofi)
+summary(cofi.fit)</code></pre>
+<pre><code>
+Call:
+lm(formula = sal ~ temp, data = cofi)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.6274 -0.1053 -0.0035  0.1383  0.4892 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 35.017089   0.027904 1254.93   &lt;2e-16 ***
+temp        -0.177578   0.003343  -53.11   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.2161 on 491 degrees of freedom
+Multiple R-squared:  0.8517,    Adjusted R-squared:  0.8514 
+F-statistic:  2821 on 1 and 491 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div id="q2-1pt-verify-the-residual-standard-error-sqrtmse-and-its-degree-of-freedom-it-is-the-same-as-the-degree-of-freedom-for-mse-calculated-by-the-summary-function-is-correct." class="section level4">
+<h4>Q2 (1pt) Verify the residual standard error (<span class="math inline">\(\sqrt{MSE}\)</span>) and its degree of freedom (it is the same as the degree of freedom for MSE) calculated by the summary function is correct.</h4>
+<p><span style="color:red"> The residual standard error is 0.2161 with degree of freedom 491 based on the lm output. </span></p>
+<pre class="r"><code>df &lt;- nrow(cofi)-2
+sqrt(sum(cofi.fit$residuals^2)/df)</code></pre>
+<pre><code>[1] 0.2161469</code></pre>
+<p><span style="color:red"> The result from the above calculation shows the values provided by the summary(cofi.fit) function about residual standard error and the degree of freedom are correct. </span></p>
+</div>
+<div id="q3-1pt-find-the-value-of-r2-interpret-it." class="section level4">
+<h4>Q3 (1pt) Find the value of <span class="math inline">\(R^2\)</span>, interpret it.</h4>
+<p><span style="color:red"> <span class="math inline">\(R^2=0.8517\)</span>. It means 85.17% of the total variation in Salinity can be explained by a linear relationship with Temperature. </span></p>
+</div>
+<div id="q4-2pt-instead-of-doing-a-t-test-for-beta_1-conduct-an-f-test-with-anova.-report-the-following" class="section level4">
+<h4>Q4 (2pt) Instead of doing a t-test for <span class="math inline">\(\beta_1\)</span>, conduct an F test with ANOVA. Report the following:</h4>
+<ul>
+<li>Null and alternative hypothesis</li>
+<li>ANOVA table</li>
+<li>Test statistic</li>
+<li>p-value or critical value</li>
+<li>Make your conclusion based on the previous results (interpret the test result).</li>
+</ul>
+<p><span style="color:red"> (1) <span class="math inline">\(H_0:\beta_1=0\)</span>, <span class="math inline">\(H_0:\beta_1\neq0\)</span>. <br> (2) The ANOVA table is as follows: </span></p>
+<pre class="r"><code>anova(cofi.fit)</code></pre>
+<pre><code>Analysis of Variance Table
+
+Response: sal
+           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+temp        1 131.789 131.789  2820.9 &lt; 2.2e-16 ***
+Residuals 491  22.939   0.047                      
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><span style="color:red"> (3) The test statistic is 2820.9. (4) The p-value is less than <span class="math inline">\(2.2\times 10^{-16}\)</span>. 2.2e-16 or <span class="math inline">\(2.2\times 10^{-16}\)</span> is the smallest positive number that can be stored in the floating points system. If conducting the analysis at confidence level 0.05, the critical value is 3.860467. </span></p>
+<pre class="r"><code>qf(0.95,1,nrow(cofi)-2)</code></pre>
+<pre><code>[1] 3.860467</code></pre>
+<p><span style="color:red"> (5) Compare the p-value with 0.05, since the pval (&lt;<span class="math inline">\(2.2\times 10^{-16}\)</span>) is much smaller than 0.05, we reject the null hypothesis and conclude <span class="math inline">\(\beta_1\neq0\)</span>. That is there’s significant linear relationship between salinity and temperature. (Or we can also compare the test statistic with critical value. Since 2820.9 is much larger than critical value 3.860467, we reject the null hypothesis and conclude <span class="math inline">\(\beta_1\neq0\)</span>. That is there’s significant linear relationship between salinity and temperature. ) </span></p>
+</div>
+<div id="q5-1pt-compute-confidence-intervals-for-regression-parameters-beta_0-beta_1.-use-alpha0.1." class="section level4">
+<h4>Q5 (1pt) Compute confidence intervals for regression parameters (<span class="math inline">\(\beta_0\)</span> &amp; <span class="math inline">\(\beta_1\)</span>). Use <span class="math inline">\(\alpha\)</span>=0.1.</h4>
+<pre class="r"><code>confint(cofi.fit,,0.9)</code></pre>
+<pre><code>                   5 %       95 %
+(Intercept) 34.9711048 35.0630731
+temp        -0.1830875 -0.1720677</code></pre>
+</div>
+<div id="q6-1pt-compute-confidence-intervals-for-mean-of-salinity-when-temperature-x_h-3.8-4.2-5.5-9.6-10-and-11.2.-use-alpha0.1." class="section level4">
+<h4>Q6 (1pt) Compute confidence intervals for mean of “salinity” when temperature (<span class="math inline">\(X_h\)</span>) = 3.8, 4.2, 5.5, 9.6, 10 and 11.2. Use <span class="math inline">\(\alpha\)</span>=0.1.</h4>
+<pre class="r"><code>xh &lt;- data.frame(temp=c(3.8, 4.2, 5.5, 9.6, 10, 11.2))
+confb &lt;-predict(cofi.fit, xh, interval=&quot;confidence&quot;, level=0.9)
+confb</code></pre>
+<pre><code>       fit      lwr      upr
+1 34.34229 34.31494 34.36965
+2 34.27126 34.24566 34.29687
+3 34.04041 34.01989 34.06093
+4 33.31234 33.29354 33.33114
+5 33.24131 33.22128 33.26135
+6 33.02822 33.00364 33.05279</code></pre>
+</div>
+<div id="q7-1pt-compute-prediction-intervals-for-new-salinity-observations-when-temperature-x_h--3--1.2-0-1.8-4.5-12.5-and-14.9.-use-alpha0.1." class="section level4">
+<h4>Q7 (1pt) Compute prediction intervals for new salinity observations when temperature (<span class="math inline">\(X_h\)</span>) = -3, -1.2, 0, 1.8, 4.5, 12.5 and 14.9. Use <span class="math inline">\(\alpha\)</span>=0.1.</h4>
+<pre class="r"><code>xhnew &lt;- data.frame(temp=c(-3,-1.2, 0, 1.8, 4.5, 12.5, 14.9))
+predb &lt;- predict(cofi.fit, xhnew, interval=&quot;prediction&quot;, level=0.9)
+pred.df &lt;- cbind(xhnew, predb)</code></pre>
+</div>
+<div id="q8-1pt-compute-90-point-wise-confidence-prediction-bands-and-plot-them-using-ggplot.-add-a-scatter-plot-of-salinity-vs-temperature-the-fitted-line-predicted-values-from-q7-as-well." class="section level4">
+<h4>Q8 (1pt) Compute 90% point-wise confidence &amp; prediction bands and plot them using ggplot(). (Add a scatter plot of Salinity vs Temperature, the fitted line, predicted values from Q7 as well.)</h4>
+<pre class="r"><code>library(ggplot2)
+conf.band &lt;- predict(cofi.fit, interval=&quot;confidence&quot;, level=0.9)
+pred.band &lt;- predict(cofi.fit, interval=&quot;prediction&quot;, level=0.9)</code></pre>
+<pre><code>Warning in predict.lm(cofi.fit, interval = &quot;prediction&quot;, level = 0.9): predictions on current data refer to _future_ responses</code></pre>
+<pre class="r"><code>colnames(conf.band) &lt;- c(&quot;conf.fit&quot;,&quot;conf.lwr&quot;,&quot;conf.upr&quot;)
+colnames(pred.band) &lt;- c(&quot;pred.fit&quot;,&quot;pred.lwr&quot;,&quot;pred.upr&quot;)
+
+ggplot(cbind(cofi,conf.band, pred.band)) +
+  geom_point(aes(x=temp, y=sal)) +
+  geom_smooth(method=lm, se=TRUE, aes(x=temp, y=sal), level=0.9) +
+  geom_point(data=pred.df, aes(x=temp, y=fit), col=&quot;red&quot;, shape=8, size=2) + 
+  geom_line(aes(x=temp, y=pred.lwr), col=&quot;red&quot;, linetype=&quot;dashed&quot;) + 
+  geom_line(aes(x=temp, y=pred.upr), col=&quot;red&quot;, linetype=&quot;dashed&quot;) </code></pre>
+<p><img src="figure/lab_hw3_sol.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## OR
+
+ggplot(cbind(cofi,conf.band, pred.band)) +
+  geom_point(aes(x=temp, y=sal)) +
+  geom_point(data=pred.df, aes(x=temp, y=fit), col=&quot;red&quot;, shape=8, size=2) + 
+  geom_line(aes(x=temp, y=conf.lwr), col=&quot;blue&quot;, linetype=&quot;dashed&quot;) +  ## this is also OK.
+  geom_line(aes(x=temp, y=conf.upr), col=&quot;blue&quot;, linetype=&quot;dashed&quot;) +  
+  geom_line(aes(x=temp, y=pred.lwr), col=&quot;red&quot;, linetype=&quot;dashed&quot;) + 
+  geom_line(aes(x=temp, y=pred.upr), col=&quot;red&quot;, linetype=&quot;dashed&quot;)</code></pre>
+<p><img src="figure/lab_hw3_sol.Rmd/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## OR
+
+ggplot(cbind(cofi,conf.band, pred.band)) +
+  geom_point(aes(x=temp, y=sal)) +
+  geom_smooth(method=lm, se=TRUE, aes(x=temp, y=sal), level=0.9) +
+  geom_point(data=pred.df, aes(x=temp, y=fit), col=&quot;red&quot;, shape=8, size=2) + 
+  geom_line(data=pred.df, aes(x=temp, y=lwr), col=&quot;red&quot;, linetype=&quot;dashed&quot;) + 
+  geom_line(data=pred.df, aes(x=temp, y=upr), col=&quot;red&quot;, linetype=&quot;dashed&quot;)</code></pre>
+<p><img src="figure/lab_hw3_sol.Rmd/unnamed-chunk-6-3.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.6.1 (2019-07-05)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS Mojave 10.14.6
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] ggplot2_3.2.1
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.2       knitr_1.24       whisker_0.3-2    magrittr_1.5    
+ [5] workflowr_1.4.0  tidyselect_0.2.5 munsell_0.5.0    colorspace_1.4-1
+ [9] R6_2.4.0         rlang_0.4.0      dplyr_0.8.3      stringr_1.4.0   
+[13] tools_3.6.1      grid_3.6.1       gtable_0.3.0     xfun_0.9        
+[17] withr_2.1.2      git2r_0.26.1     htmltools_0.3.6  assertthat_0.2.1
+[21] yaml_2.2.0       lazyeval_0.2.2   rprojroot_1.3-2  digest_0.6.20   
+[25] tibble_2.1.3     crayon_1.3.4     purrr_0.3.2      fs_1.3.1        
+[29] glue_1.3.1       evaluate_0.14    rmarkdown_1.15   labeling_0.3    
+[33] stringi_1.4.3    pillar_1.4.2     compiler_3.6.1   scales_1.0.0    
+[37] backports_1.1.4  pkgconfig_2.0.2 </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
