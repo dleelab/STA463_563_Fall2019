@@ -123,3 +123,95 @@ lm(income~factor(group),data=mydata2)
 ```
 
 
+#### 5. Different ways to code interaction term
+Note: A:B in model output just means the interaciton of A and B.
+
+##### (1) 2 predictor variables, main effect+2way interaction
+```{r}
+library(car)
+#?Prestige#If you don't have the car package, download it from canvas. 
+#Or search for "Prestige data R download",run the code on the first part.
+mydata=Prestige[!is.na(Prestige$type), ]#remove the observations with missing values for "type"
+
+fit1=lm(income~education+type+education*type,data=mydata)
+fit2=lm(income~education*type,data=mydata)#easier way to fit main effect+two way interactions.
+
+summary(fit1)
+summary(fit2)
+anova(fit1)
+anova(fit2)
+```
+
+##### (2) 3 variables, main effect+2-way interaction+3way interaction
+```{r}
+fit3=lm(income~education*prestige*type,data=mydata)
+summary(fit3)
+anova(fit3)
+```
+
+##### (3) More variables, main effect model
+```{r}
+colnames(mydata)
+fit4=lm(income~education+women+prestige+census+type,data=mydata)
+fit5=lm(income~., data=mydata)
+summary(fit4)
+summary(fit5)
+
+anova(fit4)
+anova(fit5)
+```
+
+##### (4) More variables, main effect+2way interactions. use a subset, just to read it clearly.
+```{r}
+test=mydata[,c(1,2,3,6)]
+colnames(test)
+fit6=lm(income~education+women+type+education*women+education*type+women*type,data=test)
+fit7=lm(income~.*.,data=test)
+summary(fit6)
+summary(fit7)
+
+anova(fit6)
+anova(fit7)
+
+formula(fit7)#use this funciton to know what kind fo model you're fitting.
+```
+
+#### 6. Compute the F statistic based on the ANOVA table.
+Use the result of fit7 as an example.
+```{r}
+names(anova(fit7))
+SSvec=anova(fit7)$"Sum Sq"
+SSR=sum(SSvec[1:6])
+#SSR=sum(SSvec[-7])
+SSE=SSvec[7]
+dfvec=anova(fit7)$Df
+dfR=sum(dfvec[1:6])
+#dfR=sum(dfvec[-7])
+dfE=dfvec[7]
+Fstat=(SSR/dfR)/(SSE/dfE)
+Fstat
+dfR
+dfE
+pval=1-pf(Fstat,dfR,dfE)
+pval
+
+#If alpha=0.05, the critical value can also be computed.
+alpha=0.05
+qf((1-alpha),dfR,dfE)
+```
+
+
+#### 7. Comment about the commen steps to work on multivariate data. Use two predictor variables as an example.
+##### (1) Do explorative data analysis. For example draw scatter plot, compute correlation matrix
+##### (2) Most of the time, start with fitting a full interaction model.
+##### (3) Test the interaction terms first. 
+* If the the interaction term(s) is/are insignificant, delete them and fit an "equal slopes” model.
+* If the interaction term(s) is are significant, the model cannot be further simplified, even though the main effects are not significant.
+
+##### (4) If there is/are insignificant predictor(s) in an equal slope model, we may drop them.
+```{r}
+fit=lm(income~.*.,data=mydata[1:49,c(2,4,5)])
+summary(fit)
+anova(fit)
+```
+
