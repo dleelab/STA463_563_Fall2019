@@ -37,3 +37,8 @@ editor_options:
 
 #### Lab 8: Transformation
 * [Transformation](transform.html)
+
+#### Lab 9
+* [Simultaneouse CI/PIs and RTTO models](sim_CI_PI_RTTO.html)
+* [Fit multiple regression model](fit_mr.html)
+
