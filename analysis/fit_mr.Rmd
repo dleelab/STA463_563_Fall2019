@@ -1,0 +1,125 @@
+---
+title: "Multiple Regression Model"
+author: "Donghyung Lee"
+date: "`r Sys.Date()`"
+output: 
+  workflowr::wflow_html:
+    code_folding: show
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Fit model with transformed predictor/response
+Plastic hardness data, fit $Y=\beta_0+\beta_1X+\epsilon$. 
+
+```{r}
+plastic=read.table("http://users.stat.ufl.edu/~rrandles/sta4210/Rclassnotes/data/textdatasets/KutnerData/Chapter%20%201%20Data%20Sets/CH01PR22.txt")
+colnames(plastic)=c("Y","X")
+lm(Y~X,data=plastic)
+lm(Y~X^2,data=plastic)
+```
+What's wrong with the above result?
+
+Solutions:
+```{r}
+Y2=(plastic$Y)^2
+X2=(plastic$X)^2
+lm(Y~X2,data=plastic)
+lm(Y~I(X^2),data=plastic)
+```
+
+
+### Multiple Regression Fit (Lecture 13)
+
+#### 1. Data: The Prestige data frame is the Prestige of Canadian Occupations. It has 102 rows and 6 columns. The observations are occupations. First of all, we remove all observations that have missing values for varaible ``type''.
+```{r}
+#install.packages("car")
+library(car)
+#?Prestige
+mydata=Prestige[!is.na(Prestige$type), ]#remove the observations with missing values for "type"
+unique(mydata$type)
+```
+
+To have an idea about the predictor variable and the response, we can view the **enhanced scatterplot**.
+
+```{r}
+scatterplot(income~education|type, data=mydata,ylab="Income",
+            xlab="Education",main="Income vs Education")
+```
+Based on the plot, maybe there's linear relationsihp between education and income. It seems the intercept of bc and prof are similar, different from that of the wc. We also want know whether the slope of the three groups are different (whether interaction term is necessary).
+
+Alternative method using the ggplot:
+```{r}
+library(ggplot2)
+ggplot(data=mydata, aes(x=education, y=income)) + 
+  geom_point(aes(colour = factor(type))) +
+  geom_smooth(aes(colour = factor(type)))
+```
+
+
+
+#### 2. Generate the design matrix
+```{r}
+X=model.matrix(~type,data=mydata)
+#X
+Y=as.matrix(mydata$income)
+solve(t(X)%*%X)%*%t(X)%*%Y
+lm(income~type,data=mydata)#automatically, bc is the reference group.
+```
+
+
+#### 3. Mix continuous and categorical variable.
+##### (1) Use income as response, education and type as predictor.
+```{r}
+X=model.matrix(~education+type,data=mydata)
+#X
+Y=as.matrix(mydata$income)
+solve(t(X)%*%X)%*%t(X)%*%Y
+lm(income~education+type,data=mydata)
+#If the data is in letters, R recognize it as a categorical factor.
+```
+
+##### (2) If you don't like bc be reference group, change it to wc.
+```{r}
+new=relevel(mydata$type,ref="wc")
+X=model.matrix(~education+new,data=mydata)
+Y=as.matrix(mydata$income)
+solve(t(X)%*%X)%*%t(X)%*%Y
+lm(income~education+new,data=mydata)
+```
+
+##### (3) Like constructing a linear regression model, you may also include interaction terms
+```{r}
+X=model.matrix(~education+type+education*type,data=mydata)
+Y=as.matrix(mydata$income)
+solve(t(X)%*%X)%*%t(X)%*%Y
+lm(income~education+type+education*type,data=mydata)
+```
+
+#### 4. What if you want a categorical variable, but it's coded in 1,2,3, etc. 
+##### (1) Directly use it, R will recognize it as numeric variable.
+```{r}
+mydata2=cbind(mydata,c(rep(1,40),rep(2,38),rep(3,20)))
+colnames(mydata2)[7]=c("group")
+#mydata2
+lm(income~group,data=mydata2)
+```
+
+##### (2) We can manually let R know it's a categorical variable.
+```{r}
+mydata2$group=factor(mydata2$group)
+lm(income~group,data=mydata2)
+
+#alternative way
+groupf=factor(mydata2$group)
+lm(income~groupf,data=mydata2)
+
+#alternative way
+lm(income~factor(group),data=mydata2)
+```
+
+
