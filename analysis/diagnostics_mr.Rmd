@@ -1,0 +1,121 @@
+---
+title: "Diagnostics for Multiple Regression Model"
+author: "Donghyung Lee"
+date: "`r Sys.Date()`"
+output: 
+  workflowr::wflow_html:
+    code_folding: show
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Part 1. Check the Linearity Assumption of a Multiple Regression Model
+##1. Plot against each of X's separately (We did in lecture 11)
+Recall the simple linear regression model, we plot Y versus X and see if there's a linear trend. Or plot the residuals against fitted values, look for curvature.
+
+For multiple regression, we can also plot Y versus **each of X separately** and see if there's a linear trend. Or plot residuals versus **each of X separately** or fitted values, see if there's unexplained trend in the plots. (We may also plot residuals against other variables/interaction terms to see if we want to include more predictor variables)
+```{r}
+tfit1=lm(Volume~Girth+Height,data=trees)
+plot(tfit1,which=1)
+plot(tfit1$residuals~Girth,data=trees)
+plot(tfit1$residuals~Height,data=trees)
+int=trees$Girth*trees$Height
+plot(tfit1$residuals~int,data=trees)#maybe we don't need to include the interaction term.
+```
+
+There's curve/clear quadratic trend in the residual vs fitted value plot and also the residual vs each predictor variables plot. There's violation of linearity assumption.
+
+## 2. Cons of Making Individual Scatter Plots.
+* Individual scatter plots do not take into account the effect of the other
+predictor variables in the model.
+* The relationship between the response and a predictor might change
+after adjusting for other predictors.
+
+## 3. Added Variable Plot (Partial Regression Plot).
+```{r}
+library(car)
+avPlots(tfit1)
+```
+Based on the plot, we find the added variable plot for Girth shows a linear trend, and the dots are very close to the regression line. This indicates a linear term of Girth maybe a helpful addition to the regression model already containing the variable Height.
+
+On the other hand, although the added variable plot for Height also shows a linear trend, but since the dots show more variation, the effect of adding linear term Height into the model when Girth is already included maybe not as strong as the previous one.
+
+
+If the added variable plot shows some curvilinear trend, we may also try different ways to add functions of predictors into the model, when other predictors are already included.
+
+Note: added-variable plots need to be used with caution for identifying the nature of the marginal effect of a predictor variable. The plots may not show the proper form of the marginal effect of a predictor variable if the functional relations for some or all the predictor variables already in the regression model are misspecified. e.g. if $X_2$ and $X_3$ are related in a curvilinear fasion to the response, but the regression model uses linear terms only, the added-variable plots for $X_2$ and $X_3$ may not show the proper relationship to the response variable. Especially if variables are correlated.
+
+
+## 4. Component+Residual (Partial Residual) plots.
+We can use the crPlot function in the package "car", and see whether there's any non linear trend. If the solid smoother is close to the straight dashed line, then the linearity condition is met. (dashed line is the least squares line, solid smoother is based on nonparametric regression lines.)
+```{r}
+library(car)
+crPlots(tfit1)
+```
+
+Both of predictors have a quadratic trend with the residuals. So we can add one quadratic term at a time.
+
+### (1). Add Girth^2 to the model
+```{r}
+tfit2=lm(Volume~Girth+Height+I(Girth^2),data=trees)
+crPlots(tfit2)
+plot(tfit2,which=1)
+```
+
+After adding the quadratic term of Girth, the shape of the component+residual plots changed. Better than the previous plots. And the residual vs fitted value plot also shows a linear trend.
+
+### (2). Add Height^2 to the model
+```{r}
+tfit3=lm(Volume~Girth+Height+I(Height^2),data=trees)
+crPlots(tfit3)
+plot(tfit3,which=1)
+```
+
+After adding the quadratic term of Height, the shape of the component+residual plots also changes. But the residual vs fitted value plot still shows a quadratic trend. Lineartiy assumption still not met.
+
+## 5. Steps to check/remediate the linearity assumption using component+residual plot.
+* Check the Residuals vs Fitted plot  first. 
+* Also draw Component $+$ residual plots. 
+* If you find a nonlinear  trend between predictors and the response variable, then add polynomial terms or transform predictors in the model.
+
+
+# Part 2. Check Unusual Observations
+## 1. Outliers (Use studentized or studentized deleted residuals)
+An observation is an outlier if the absolute value of the studentized or studentized deleted residuals is greater than 3.
+
+## 2. High leverage point
+An observation has high leverage if $h_{ii}>\frac{2p}{n}$
+
+## 3. Influential point 
+The points that are both outlying and have high leverage. Use Cook's distance. 
+```{r}
+library(car)
+mydata=Prestige[!is.na(Prestige$type), ]#remove the observations with missing values for "type"
+n=nrow(mydata)
+p=ncol(mydata)
+criteria_leverage=2*p/n
+criteria_cook=qf(0.5,p,n-p)
+criteria_cook2=4/(n-p)
+
+fit=lm(income~.,data=mydata)
+#Graphically detect influential points using cook's distance
+plot(fit,which=4)
+abline(h=criteria_cook2,col="blue")
+plot(fit,which=5,cook.levels = criteria_cook2)
+abline(h=c(-3,3),col="blue")
+abline(v=criteria_leverage,col="green")
+```
+
+## 4. Identify the unusual points.
+we can use the funciton: identify(x,y) to detect unusual observations based on the plot. Click on the suspicious point, then click finish.
+```{r}
+#identify(hatvalues(fit),rstandard(fit))
+```
+For example, the following are the observations 
+mydata[c(11,17,20,2,24,92),]
+pilots: seems they have a very large census code, maybe we can also delete this part from the model.
+
