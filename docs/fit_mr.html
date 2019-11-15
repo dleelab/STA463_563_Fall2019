@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019tree2bac0d3c0b5c3055c02c19cc2aefd63a9a1c7edctargetblank2bac0d3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dleelab/STA463_563_Fall2019/tree/2bac0d3c0b5c3055c02c19cc2aefd63a9a1c7edc" target="_blank">2bac0d3</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019treed3d57a48a8ba84947988f6c7a9a0aa1516f35c72targetblankd3d57a4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dleelab/STA463_563_Fall2019/tree/d3d57a48a8ba84947988f6c7a9a0aa1516f35c72" target="_blank">d3d57a4</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019tree2bac0d3c0b5c3055c02c19cc2aefd63a9a1c7edctargetblank2bac0d3a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdleelabSTA463563Fall2019treed3d57a48a8ba84947988f6c7a9a0aa1516f35c72targetblankd3d57a4a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -448,9 +448,6 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
-
-Untracked files:
-    Untracked:  docs/figure/fit_mr.Rmd/
 
 </code></pre>
 <p>
@@ -489,6 +486,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/d3d57a48a8ba84947988f6c7a9a0aa1516f35c72/analysis/fit_mr.Rmd" target="_blank">d3d57a4</a>
+</td>
+<td>
+dleelab
+</td>
+<td>
+2019-11-15
+</td>
+<td>
+added
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/dleelab/STA463_563_Fall2019/2f6bbe8988e2bcd423702376c925d5d2681fc47d/docs/fit_mr.html" target="_blank">2f6bbe8</a>
+</td>
+<td>
+dleelab
+</td>
+<td>
+2019-11-15
+</td>
+<td>
+created
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -570,7 +601,45 @@ Levels: bc prof wc</code></pre>
 <p>To have an idea about the predictor variable and the response, we can view the <strong>enhanced scatterplot</strong>.</p>
 <pre class="r"><code>scatterplot(income~education|type, data=mydata,ylab=&quot;Income&quot;,
             xlab=&quot;Education&quot;,main=&quot;Income vs Education&quot;)</code></pre>
-<p><img src="figure/fit_mr.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /> Based on the plot, maybe there’s linear relationsihp between education and income. It seems the intercept of bc and prof are similar, different from that of the wc. We also want know whether the slope of the three groups are different (whether interaction term is necessary).</p>
+<p><img src="figure/fit_mr.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/2f6bbe8988e2bcd423702376c925d5d2681fc47d/docs/figure/fit_mr.Rmd/unnamed-chunk-4-1.png" target="_blank">2f6bbe8</a>
+</td>
+<td>
+dleelab
+</td>
+<td>
+2019-11-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Based on the plot, maybe there’s linear relationsihp between education and income. It seems the intercept of bc and prof are similar, different from that of the wc. We also want know whether the slope of the three groups are different (whether interaction term is necessary).</p>
 <p>Alternative method using the ggplot:</p>
 <pre class="r"><code>library(ggplot2)
 ggplot(data=mydata, aes(x=education, y=income)) + 
@@ -578,6 +647,43 @@ ggplot(data=mydata, aes(x=education, y=income)) +
   geom_smooth(aes(colour = factor(type)))</code></pre>
 <pre><code>`geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="figure/fit_mr.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/dleelab/STA463_563_Fall2019/blob/2f6bbe8988e2bcd423702376c925d5d2681fc47d/docs/figure/fit_mr.Rmd/unnamed-chunk-5-1.png" target="_blank">2f6bbe8</a>
+</td>
+<td>
+dleelab
+</td>
+<td>
+2019-11-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="generate-the-design-matrix" class="section level4">
 <h4>2. Generate the design matrix</h4>
@@ -711,6 +817,390 @@ lm(formula = income ~ factor(group), data = mydata2)
 Coefficients:
    (Intercept)  factor(group)2  factor(group)3  
           8891           -3643           -2641  </code></pre>
+</div>
+</div>
+<div id="different-ways-to-code-interaction-term" class="section level4">
+<h4>5. Different ways to code interaction term</h4>
+<p>Note: A:B in model output just means the interaciton of A and B.</p>
+<div id="predictor-variables-main-effect2way-interaction" class="section level5">
+<h5>(1) 2 predictor variables, main effect+2way interaction</h5>
+<pre class="r"><code>library(car)
+#?Prestige#If you don&#39;t have the car package, download it from canvas. 
+#Or search for &quot;Prestige data R download&quot;,run the code on the first part.
+mydata=Prestige[!is.na(Prestige$type), ]#remove the observations with missing values for &quot;type&quot;
+
+fit1=lm(income~education+type+education*type,data=mydata)
+fit2=lm(income~education*type,data=mydata)#easier way to fit main effect+two way interactions.
+
+summary(fit1)</code></pre>
+<pre><code>
+Call:
+lm(formula = income ~ education + type + education * type, data = mydata)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-6330.8 -1769.2  -356.8  1166.5 17326.2 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)         -1865.0     3682.3  -0.506   0.6137  
+education             866.0      436.4   1.984   0.0502 .
+typeprof            -3068.4     7191.8  -0.427   0.6706  
+typewc               3646.5     9274.0   0.393   0.6951  
+education:typeprof    234.0      617.3   0.379   0.7055  
+education:typewc     -569.2      884.8  -0.643   0.5216  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 3333 on 92 degrees of freedom
+Multiple R-squared:  0.4105,    Adjusted R-squared:  0.3785 
+F-statistic: 12.81 on 5 and 92 DF,  p-value: 1.856e-09</code></pre>
+<pre class="r"><code>summary(fit2)</code></pre>
+<pre><code>
+Call:
+lm(formula = income ~ education * type, data = mydata)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-6330.8 -1769.2  -356.8  1166.5 17326.2 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)         -1865.0     3682.3  -0.506   0.6137  
+education             866.0      436.4   1.984   0.0502 .
+typeprof            -3068.4     7191.8  -0.427   0.6706  
+typewc               3646.5     9274.0   0.393   0.6951  
+education:typeprof    234.0      617.3   0.379   0.7055  
+education:typewc     -569.2      884.8  -0.643   0.5216  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 3333 on 92 degrees of freedom
+Multiple R-squared:  0.4105,    Adjusted R-squared:  0.3785 
+F-statistic: 12.81 on 5 and 92 DF,  p-value: 1.856e-09</code></pre>
+<pre class="r"><code>anova(fit1)</code></pre>
+<pre><code>Analysis of Variance Table
+
+Response: income
+               Df     Sum Sq   Mean Sq F value    Pr(&gt;F)    
+education       1  571532362 571532362 51.4405 1.824e-10 ***
+type            2  131170201  65585100  5.9030  0.003873 ** 
+education:type  2    9204946   4602473  0.4142  0.662067    
+Residuals      92 1022171653  11110561                      
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>anova(fit2)</code></pre>
+<pre><code>Analysis of Variance Table
+
+Response: income
+               Df     Sum Sq   Mean Sq F value    Pr(&gt;F)    
+education       1  571532362 571532362 51.4405 1.824e-10 ***
+type            2  131170201  65585100  5.9030  0.003873 ** 
+education:type  2    9204946   4602473  0.4142  0.662067    
+Residuals      92 1022171653  11110561                      
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="variables-main-effect2-way-interaction3way-interaction" class="section level5">
+<h5>(2) 3 variables, main effect+2-way interaction+3way interaction</h5>
+<pre class="r"><code>fit3=lm(income~education*prestige*type,data=mydata)
+summary(fit3)</code></pre>
+<pre><code>
+Call:
+lm(formula = income ~ education * prestige * type, data = mydata)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7308.5 -1298.8   -43.7  1042.7 14931.1 
+
+Coefficients:
+                             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)                  1271.267  13648.811   0.093    0.926
+education                    -153.036   1649.057  -0.093    0.926
+prestige                       83.903    365.031   0.230    0.819
+typeprof                    15065.227  52790.498   0.285    0.776
+typewc                      -7791.876  32929.831  -0.237    0.814
+education:prestige              7.917     42.197   0.188    0.852
+education:typeprof          -1855.988   3812.498  -0.487    0.628
+education:typewc              770.944   3094.399   0.249    0.804
+prestige:typeprof            -144.986    878.148  -0.165    0.869
+prestige:typewc               298.456    831.765   0.359    0.721
+education:prestige:typeprof    19.779     67.857   0.291    0.771
+education:prestige:typewc     -32.107     75.827  -0.423    0.673
+
+Residual standard error: 2973 on 86 degrees of freedom
+Multiple R-squared:  0.5617,    Adjusted R-squared:  0.5056 
+F-statistic: 10.02 on 11 and 86 DF,  p-value: 1.811e-11</code></pre>
+<pre class="r"><code>anova(fit3)</code></pre>
+<pre><code>Analysis of Variance Table
+
+Response: income
+                        Df    Sum Sq   Mean Sq F value    Pr(&gt;F)    
+education                1 571532362 571532362 64.6635 4.364e-12 ***
+prestige                 1 294893058 294893058 33.3644 1.192e-07 ***
+type                     2  26517925  13258962  1.5001   0.22888    
+education:prestige       1  28765753  28765753  3.2546   0.07473 .  
+education:type           2  22885604  11442802  1.2946   0.27928    
+prestige:type            2  25857546  12928773  1.4628   0.23730    
+education:prestige:type  2   3510967   1755483  0.1986   0.82024    
+Residuals               86 760115948   8838558                      
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="more-variables-main-effect-model" class="section level5">
+<h5>(3) More variables, main effect model</h5>
+<pre class="r"><code>colnames(mydata)</code></pre>
+<pre><code>[1] &quot;education&quot; &quot;income&quot;    &quot;women&quot;     &quot;prestige&quot;  &quot;census&quot;    &quot;type&quot;     </code></pre>
+<pre class="r"><code>fit4=lm(income~education+women+prestige+census+type,data=mydata)
+fit5=lm(income~., data=mydata)
+summary(fit4)</code></pre>
+<pre><code>
+Call:
+lm(formula = income ~ education + women + prestige + census + 
+    type, data = mydata)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7752.4  -954.6  -331.2   742.6 14301.3 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    7.32053 3037.27048   0.002  0.99808    
+education    131.18372  288.74961   0.454  0.65068    
+women        -53.23480    9.83107  -5.415 4.96e-07 ***
+prestige     139.20912   36.40239   3.824  0.00024 ***
+census         0.04209    0.23568   0.179  0.85865    
+typeprof     509.15150 1798.87914   0.283  0.77779    
+typewc       347.99010 1173.89384   0.296  0.76757    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 2633 on 91 degrees of freedom
+Multiple R-squared:  0.6363,    Adjusted R-squared:  0.6123 
+F-statistic: 26.54 on 6 and 91 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>summary(fit5)</code></pre>
+<pre><code>
+Call:
+lm(formula = income ~ ., data = mydata)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7752.4  -954.6  -331.2   742.6 14301.3 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    7.32053 3037.27048   0.002  0.99808    
+education    131.18372  288.74961   0.454  0.65068    
+women        -53.23480    9.83107  -5.415 4.96e-07 ***
+prestige     139.20912   36.40239   3.824  0.00024 ***
+census         0.04209    0.23568   0.179  0.85865    
+typeprof     509.15150 1798.87914   0.283  0.77779    
+typewc       347.99010 1173.89384   0.296  0.76757    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 2633 on 91 degrees of freedom
+Multiple R-squared:  0.6363,    Adjusted R-squared:  0.6123 
+F-statistic: 26.54 on 6 and 91 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>anova(fit4)</code></pre>
+<pre><code>Analysis of Variance Table
+
+Response: income
+          Df    Sum Sq   Mean Sq F value    Pr(&gt;F)    
+education  1 571532362 571532362 82.4671 2.136e-14 ***
+women      1 406580350 406580350 58.6660 1.932e-11 ***
+prestige   1 124639280 124639280 17.9844 5.342e-05 ***
+census     1        43        43  0.0000    0.9980    
+type       2    658471    329235  0.0475    0.9536    
+Residuals 91 630668656   6930425                      
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>anova(fit5)</code></pre>
+<pre><code>Analysis of Variance Table
+
+Response: income
+          Df    Sum Sq   Mean Sq F value    Pr(&gt;F)    
+education  1 571532362 571532362 82.4671 2.136e-14 ***
+women      1 406580350 406580350 58.6660 1.932e-11 ***
+prestige   1 124639280 124639280 17.9844 5.342e-05 ***
+census     1        43        43  0.0000    0.9980    
+type       2    658471    329235  0.0475    0.9536    
+Residuals 91 630668656   6930425                      
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="more-variables-main-effect2way-interactions.-use-a-subset-just-to-read-it-clearly." class="section level5">
+<h5>(4) More variables, main effect+2way interactions. use a subset, just to read it clearly.</h5>
+<pre class="r"><code>test=mydata[,c(1,2,3,6)]
+colnames(test)</code></pre>
+<pre><code>[1] &quot;education&quot; &quot;income&quot;    &quot;women&quot;     &quot;type&quot;     </code></pre>
+<pre class="r"><code>fit6=lm(income~education+women+type+education*women+education*type+women*type,data=test)
+fit7=lm(income~.*.,data=test)
+summary(fit6)</code></pre>
+<pre><code>
+Call:
+lm(formula = income ~ education + women + type + education * 
+    women + education * type + women * type, data = test)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-8370.8  -967.7    38.1   641.3 15133.4 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)          301.455   3607.274   0.084   0.9336  
+education            700.898    415.143   1.688   0.0949 .
+women                 23.746     83.827   0.283   0.7776  
+typeprof           -2347.177   6296.157  -0.373   0.7102  
+typewc             -4494.487   8394.279  -0.535   0.5937  
+education:women       -8.276     10.302  -0.803   0.4240  
+education:typeprof   369.593    532.130   0.695   0.4892  
+education:typewc     406.283    800.590   0.507   0.6131  
+women:typeprof        -5.102     63.458  -0.080   0.9361  
+women:typewc          12.666     40.847   0.310   0.7572  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 2797 on 88 degrees of freedom
+Multiple R-squared:  0.603, Adjusted R-squared:  0.5623 
+F-statistic: 14.85 on 9 and 88 DF,  p-value: 2.314e-14</code></pre>
+<pre class="r"><code>summary(fit7)</code></pre>
+<pre><code>
+Call:
+lm(formula = income ~ . * ., data = test)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-8370.8  -967.7    38.1   641.3 15133.4 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)          301.455   3607.274   0.084   0.9336  
+education            700.898    415.143   1.688   0.0949 .
+women                 23.746     83.827   0.283   0.7776  
+typeprof           -2347.177   6296.157  -0.373   0.7102  
+typewc             -4494.487   8394.279  -0.535   0.5937  
+education:women       -8.276     10.302  -0.803   0.4240  
+education:typeprof   369.593    532.130   0.695   0.4892  
+education:typewc     406.283    800.590   0.507   0.6131  
+women:typeprof        -5.102     63.458  -0.080   0.9361  
+women:typewc          12.666     40.847   0.310   0.7572  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 2797 on 88 degrees of freedom
+Multiple R-squared:  0.603, Adjusted R-squared:  0.5623 
+F-statistic: 14.85 on 9 and 88 DF,  p-value: 2.314e-14</code></pre>
+<pre class="r"><code>anova(fit6)</code></pre>
+<pre><code>Analysis of Variance Table
+
+Response: income
+                Df    Sum Sq   Mean Sq F value    Pr(&gt;F)    
+education        1 571532362 571532362 73.0486 3.513e-13 ***
+women            1 406580350 406580350 51.9658 1.854e-10 ***
+type             2  16680220   8340110  1.0660   0.34880    
+education:women  1  42063438  42063438  5.3762   0.02273 *  
+education:type   2   4984218   2492109  0.3185   0.72806    
+women:type       2   3726476   1863238  0.2381   0.78860    
+Residuals       88 688512099   7824001                      
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>anova(fit7)</code></pre>
+<pre><code>Analysis of Variance Table
+
+Response: income
+                Df    Sum Sq   Mean Sq F value    Pr(&gt;F)    
+education        1 571532362 571532362 73.0486 3.513e-13 ***
+women            1 406580350 406580350 51.9658 1.854e-10 ***
+type             2  16680220   8340110  1.0660   0.34880    
+education:women  1  42063438  42063438  5.3762   0.02273 *  
+education:type   2   4984218   2492109  0.3185   0.72806    
+women:type       2   3726476   1863238  0.2381   0.78860    
+Residuals       88 688512099   7824001                      
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>formula(fit7)#use this funciton to know what kind fo model you&#39;re fitting.</code></pre>
+<pre><code>income ~ (education + women + type) * (education + women + type)</code></pre>
+</div>
+</div>
+<div id="compute-the-f-statistic-based-on-the-anova-table." class="section level4">
+<h4>6. Compute the F statistic based on the ANOVA table.</h4>
+<p>Use the result of fit7 as an example.</p>
+<pre class="r"><code>names(anova(fit7))</code></pre>
+<pre><code>[1] &quot;Df&quot;      &quot;Sum Sq&quot;  &quot;Mean Sq&quot; &quot;F value&quot; &quot;Pr(&gt;F)&quot; </code></pre>
+<pre class="r"><code>SSvec=anova(fit7)$&quot;Sum Sq&quot;
+SSR=sum(SSvec[1:6])
+#SSR=sum(SSvec[-7])
+SSE=SSvec[7]
+dfvec=anova(fit7)$Df
+dfR=sum(dfvec[1:6])
+#dfR=sum(dfvec[-7])
+dfE=dfvec[7]
+Fstat=(SSR/dfR)/(SSE/dfE)
+Fstat</code></pre>
+<pre><code>[1] 14.84843</code></pre>
+<pre class="r"><code>dfR</code></pre>
+<pre><code>[1] 9</code></pre>
+<pre class="r"><code>dfE</code></pre>
+<pre><code>[1] 88</code></pre>
+<pre class="r"><code>pval=1-pf(Fstat,dfR,dfE)
+pval</code></pre>
+<pre><code>[1] 2.309264e-14</code></pre>
+<pre class="r"><code>#If alpha=0.05, the critical value can also be computed.
+alpha=0.05
+qf((1-alpha),dfR,dfE)</code></pre>
+<pre><code>[1] 1.988048</code></pre>
+</div>
+<div id="comment-about-the-commen-steps-to-work-on-multivariate-data.-use-two-predictor-variables-as-an-example." class="section level4">
+<h4>7. Comment about the commen steps to work on multivariate data. Use two predictor variables as an example.</h4>
+<div id="do-explorative-data-analysis.-for-example-draw-scatter-plot-compute-correlation-matrix" class="section level5">
+<h5>(1) Do explorative data analysis. For example draw scatter plot, compute correlation matrix</h5>
+</div>
+<div id="most-of-the-time-start-with-fitting-a-full-interaction-model." class="section level5">
+<h5>(2) Most of the time, start with fitting a full interaction model.</h5>
+</div>
+<div id="test-the-interaction-terms-first." class="section level5">
+<h5>(3) Test the interaction terms first.</h5>
+<ul>
+<li>If the the interaction term(s) is/are insignificant, delete them and fit an “equal slopes” model.</li>
+<li>If the interaction term(s) is are significant, the model cannot be further simplified, even though the main effects are not significant.</li>
+</ul>
+</div>
+<div id="if-there-isare-insignificant-predictors-in-an-equal-slope-model-we-may-drop-them." class="section level5">
+<h5>(4) If there is/are insignificant predictor(s) in an equal slope model, we may drop them.</h5>
+<pre class="r"><code>fit=lm(income~.*.,data=mydata[1:49,c(2,4,5)])
+summary(fit)</code></pre>
+<pre><code>
+Call:
+lm(formula = income ~ . * ., data = mydata[1:49, c(2, 4, 5)])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-6954.4 -1343.4  -659.7  1360.6 12551.3 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)     -2.609e+04  1.261e+04  -2.069  0.04436 * 
+prestige         6.035e+02  2.017e+02   2.992  0.00449 **
+census           6.358e+00  3.412e+00   1.863  0.06895 . 
+prestige:census -1.213e-01  5.915e-02  -2.050  0.04617 * 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 3844 on 45 degrees of freedom
+Multiple R-squared:  0.4966,    Adjusted R-squared:  0.463 
+F-statistic: 14.79 on 3 and 45 DF,  p-value: 7.704e-07</code></pre>
+<pre class="r"><code>anova(fit)</code></pre>
+<pre><code>Analysis of Variance Table
+
+Response: income
+                Df    Sum Sq   Mean Sq F value    Pr(&gt;F)    
+prestige         1 588423430 588423430 39.8284 1.077e-07 ***
+census           1   5185606   5185606  0.3510   0.55652    
+prestige:census  1  62117352  62117352  4.2045   0.04617 *  
+Residuals       45 664827836  14773952                      
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
