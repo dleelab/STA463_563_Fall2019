@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Part 1. Check the Linearity Assumption of a Multiple Regression Model
-##1. Plot against each of X's separately (We did in lecture 11)
+## 1. Plot against each of X's separately (We did in lecture 11)
 Recall the simple linear regression model, we plot Y versus X and see if there's a linear trend. Or plot the residuals against fitted values, look for curvature.
 
 For multiple regression, we can also plot Y versus **each of X separately** and see if there's a linear trend. Or plot residuals versus **each of X separately** or fitted values, see if there's unexplained trend in the plots. (We may also plot residuals against other variables/interaction terms to see if we want to include more predictor variables)
