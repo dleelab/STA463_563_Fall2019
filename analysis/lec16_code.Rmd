@@ -1,0 +1,91 @@
+---
+title: "Lecture Note 16 Code"
+author: "Donghyung Lee"
+date: "`r Sys.Date()`"
+output: 
+  workflowr::wflow_html:
+    code_folding: show
+editor_options:
+  chunk_output_type: console
+---
+
+### Prep data
+```{r}
+bodyfat=read.table("http://users.stat.ufl.edu/~rrandles/sta4210/Rclassnotes/data/textdatasets/KutnerData/Chapter%20%207%20Data%20Sets/CH07TA01.txt")
+colnames(bodyfat)=c("X1","X2","X3","Y")
+head(bodyfat)
+```
+
+### Fit models
+```{r}
+fit1=lm(Y~X1,data=bodyfat)
+fit2=lm(Y~X1+X2,data=bodyfat)
+fit3=lm(Y~X1+X2+X3,data=bodyfat)
+```
+
+### anova
+```{r}
+anova(fit1)
+anova(fit2)
+anova(fit3)
+```
+
+### Y~X1+X2 vs. Y~X1+X2+X3
+#### Option 1, directly use SSR(X3|X1,X2)=SSE(X1,X2)-SSE(X1,X2,X3)
+```{r}
+n=nrow(bodyfat)
+p=4
+q=3
+#SSE(X1,X2)
+SSE_X12=anova(fit2)$"Sum Sq"[3]
+#SSE(X1,X2,X3)
+SSE_X123=anova(fit3)$"Sum Sq"[4]
+Fstar=(SSE_X12-SSE_X123)/(p-q)/((SSE_X123)/(n-p))
+Fstar
+1-pf(Fstar,(p-q),(n-p))
+```
+
+#### Option 2,read anova table directly.
+```{r}
+anova(fit3)
+```
+
+#### Option 3, use anova(fit1, fit2) to conduct the hypothesis test.
+```{r}
+#fit1: reduced model, fit2: full model
+anova(fit2,fit3)
+```
+
+### Y~X1 vs. Y~X1+X2+X3 
+##### Option 1:calculate directly use formula for F star
+```{r}
+SSE_X1=anova(fit1)$"Sum Sq"[2]
+Fstar2=(SSE_X1-SSE_X123)/(4-2)/(SSE_X123/(n-4))
+Fstar2
+1-pf(Fstar2,2,(n-4))
+```
+##### Option 2
+```{r}
+anova(fit1,fit3)
+```
+
+
+### Compute VIF
+```{r}
+library(fmsb)
+library(car)
+vif(fit3)
+cor(bodyfat)
+summary(fit3)
+fit4=lm(Y~X2+X3,data=bodyfat)
+summary(fit4)
+vif(fit4)
+```
+
+##### verify vif function result
+```{r}
+fitvif1=lm(X1~X2+X3,data=bodyfat)
+1/(1-summary(fitvif1)$r.squared)
+```
+
+
