@@ -1,0 +1,68 @@
+---
+title: "Lecture Note 17 Code"
+author: "Donghyung Lee"
+date: "`r Sys.Date()`"
+output: 
+  workflowr::wflow_html:
+    code_folding: show
+editor_options:
+  chunk_output_type: console
+---
+
+## Prep data
+```{r}
+bodyfat=read.table("https://raw.githubusercontent.com/dleelab/STA463_563_Fall2019/master/data/bodyfat.txt")
+bodyfat1=bodyfat[-c(39,42,86,31,182),]
+```
+
+## Fit model
+```{r}
+fit=lm(bodyfat.pct~., data=bodyfat1)
+summary(fit)
+```
+
+## Backward selection
+### AIC backward
+```{r}
+AICb=step(fit,direction="backward")
+summary(AICb)
+par(mfrow=c(2,2))
+plot(AICb,add.smooth=FALSE)
+```
+
+### BIC backward Sometimes BIC loves a simple model (too much)
+```{r}
+n=nrow(bodyfat1)
+BICb=step(fit,direction="backward",k=log(n))
+summary(BICb)
+par(mfrow=c(2,2))
+plot(BICb,add.smooth=FALSE)
+```
+
+## Forward selection
+```{r}
+null=lm(bodyfat.pct~1, data=bodyfat1)
+full=lm(bodyfat.pct~.,data=bodyfat1)
+```
+### AIC forward
+```{r}
+AICf=step(null, direction="forward",scope=list(upper=full))
+summary(AICf)
+```
+### BIC forward
+```{r}
+BICf=step(null, direction="forward", scope=list(upper=full),k=log(n))
+summary(BICf)
+```
+
+## Stepwise
+### AIC both
+```{r}
+AICs=step(null, direction="both",scope=list(upper=full))
+summary(AICs)
+```
+### BIC both
+```{r}
+BICs=step(null, direction="both", scope=list(upper=full),k=log(n))
+summary(BICs)
+```
