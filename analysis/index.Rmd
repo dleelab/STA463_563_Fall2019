@@ -43,4 +43,10 @@ editor_options:
 * [Multiple regression model](fit_mr.html)
 
 #### Lab 10
-* [Diagnostics for mutiple regression model](diagnostics_mr.html)
+* [Diagnostics for multiple regression model](diagnostics_mr.html)
+* [Diagnostics 2](diagnostics_mr2.html)
+
+#### Lab 11
+* [Lecture Note 16 Code](lec16_code.html)
+* [Lecture Note 17 Code](lec17_code.html)
+
